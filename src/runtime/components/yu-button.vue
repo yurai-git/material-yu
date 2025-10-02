@@ -1,5 +1,8 @@
 <template>
-  <button class="yu-button" type="button">
+  <button
+    class="yu-button"
+    type="button"
+  >
     <slot />
   </button>
 </template>

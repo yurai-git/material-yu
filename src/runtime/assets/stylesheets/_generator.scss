@@ -1,0 +1,5 @@
+@mixin generate-token($map, $purpose) {
+  @each $key, $value in $map {
+    --md-sys-#{$purpose}-#{$key}: #{$value};
+  }
+}

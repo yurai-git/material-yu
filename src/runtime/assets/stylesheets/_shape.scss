@@ -1,0 +1,36 @@
+@use 'generator';
+
+$shape-corner: (
+  full: 1000px,
+  extra-large-top: 28px 28px 0 0,
+  extra-large: 28px,
+  large-top: 16px 16px 0 0,
+  large-end: 0 16px 16px 0,
+  large-start: 16px 0 0 16px,
+  large: 16px,
+  medium: 12px,
+  small: 8px,
+  extra-small-top: 4px 4px 0 0,
+  extra-small: 4px,
+  none: 0,
+  large-increased: 20px,
+  extra-large-increased: 32px,
+  extra-extra-large: 48px
+);
+
+$shape-corner-value: (
+  none: 0,
+  extra-small: 4px,
+  small: 8px,
+  medium: 12px,
+  large: 16px,
+  large-increased: 20px,
+  extra-large: 28px,
+  extra-large-increased: 32px,
+  extra-extra-large: 48px
+);
+
+:root {
+  @include generator.generate-token($shape-corner, shape-corner);
+  @include generator.generate-token($shape-corner-value, shape-corner-value);
+}

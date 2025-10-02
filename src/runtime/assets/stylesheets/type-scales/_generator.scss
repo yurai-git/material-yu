@@ -1,0 +1,18 @@
+@use 'sass:map';
+
+@mixin generate-type-styles($typescale, $prefix: null) {
+  @each $name, $sizes in $typescale {
+    @each $size, $value in $sizes {
+      $class-name: if($prefix, '#{$prefix}-#{$name}-#{$size}', '#{$name}-#{$size}');
+      $style-map: map.get($typescale, $name, $size);
+
+      .#{$class-name} {
+        font-family: map.get($style-map, font);
+        font-weight: map.get($style-map, weight);
+        font-size: map.get($style-map, size);
+        letter-spacing: map.get($style-map, tracking);
+        line-height: map.get($style-map, line-height);
+      }
+    }
+  }
+}

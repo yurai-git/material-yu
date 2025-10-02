@@ -1,6 +1,6 @@
-import { defineNuxtModule, createResolver, addComponentsDir, addImportsDir } from '@nuxt/kit';
-import { defaultOptions } from './defaults';
-import { name, version } from '../package.json';
+import { defineNuxtModule, createResolver, addComponentsDir, addImportsDir } from '@nuxt/kit'
+import { defaultOptions } from './defaults'
+import { name, version } from '../package.json'
 
 type ColorSchemeValue = 'system' | 'light' | 'dark'
 type ContrastValue = 'standard' | 'medium' | 'high'
@@ -19,7 +19,7 @@ export interface ModuleOptions {
    * @defaultValue `0x6750A4`
    */
   sourceColor?: number
-  
+
   /**
    * Define the default color scheme.
    * @defaultValue `'system'`
@@ -104,6 +104,8 @@ export default defineNuxtModule<ModuleOptions>({
   async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
 
+    nuxt.options.css.push(resolve('./runtime/assets/stylesheets/material-tokens.scss'))
+
     const yuIconStyle = options.components?.yuIcon?.style || defaultOptions.components?.yuIcon?.style
     const associateYuIconStyle = (style: string) => {
       switch (style) {
@@ -122,7 +124,7 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.app.head.link = nuxt.options.app.head.link || []
     nuxt.options.app.head.link.push({
       rel: 'stylesheet',
-      href: yuIconUrl
+      href: yuIconUrl,
     })
 
     nuxt.options.runtimeConfig.public.materialYu = {
@@ -133,14 +135,13 @@ export default defineNuxtModule<ModuleOptions>({
         ...options.components,
         yuIcon: {
           ...defaultOptions.components.yuIcon,
-          ...options.components?.yuIcon
-        }
-      }
+          ...options.components?.yuIcon,
+        },
+      },
     }
 
     addComponentsDir({
       path: resolve('./runtime/components'),
-      prefix: 'yu',
     })
 
     addImportsDir(resolve('./runtime/composables'))

@@ -1,0 +1,56 @@
+@use 'sass:map';
+@use '../palettes/baseline';
+@use '../generator';
+
+$color-scheme: (
+  primary: map.get(baseline.$primary, 90),
+  on-primary: map.get(baseline.$primary, 10),
+  primary-container: map.get(baseline.$primary, 60),
+  on-primary-container: map.get(baseline.$primary, 0),
+  secondary: map.get(baseline.$secondary, 90),
+  on-secondary: map.get(baseline.$secondary, 10),
+  secondary-container: map.get(baseline.$secondary, 60),
+  on-secondary-container: map.get(baseline.$secondary, 0),
+  tertiary: map.get(baseline.$tertiary, 90),
+  on-tertiary: map.get(baseline.$tertiary, 10),
+  tertiary-container: map.get(baseline.$tertiary, 60),
+  on-tertiary-container: map.get(baseline.$tertiary, 0),
+  error: map.get(baseline.$error, 90),
+  on-error: map.get(baseline.$error, 10),
+  error-container: map.get(baseline.$error, 60),
+  on-error-container: map.get(baseline.$error, 0),
+  surface: map.get(baseline.$neutral, 6),
+  on-surface: map.get(baseline.$neutral, 100),
+  surface-variant: map.get(baseline.$neutral-variant, 30),
+  on-surface-variant: map.get(baseline.$neutral-variant, 90),
+  surface-container-highest: map.get(baseline.$neutral, 22),
+  surface-container-high: map.get(baseline.$neutral, 17),
+  surface-container: map.get(baseline.$neutral, 12),
+  surface-container-low: map.get(baseline.$neutral, 10),
+  surface-container-lowest: map.get(baseline.$neutral, 4),
+  inverse-surface: map.get(baseline.$neutral, 90),
+  inverse-on-surface: map.get(baseline.$neutral, 10),
+  outline: map.get(baseline.$neutral-variant, 70),
+  outline-variant: map.get(baseline.$neutral-variant, 60),
+  primary-fixed: map.get(baseline.$primary, 90),
+  on-primary-fixed: map.get(baseline.$primary, 0),
+  primary-fixed-dim: map.get(baseline.$primary, 80),
+  on-primary-fixed-variant: map.get(baseline.$primary, 20),
+  inverse-primary: map.get(baseline.$primary, 30),
+  secondary-fixed: map.get(baseline.$secondary, 90),
+  on-secondary-fixed: map.get(baseline.$secondary, 0),
+  secondary-fixed-dim: map.get(baseline.$secondary, 80),
+  on-secondary-fixed-variant: map.get(baseline.$secondary, 20),
+  tertiary-fixed: map.get(baseline.$tertiary, 90),
+  on-tertiary-fixed: map.get(baseline.$tertiary, 0),
+  tertiary-fixed-dim: map.get(baseline.$tertiary, 80),
+  on-tertiary-fixed-variant: map.get(baseline.$tertiary, 20),
+  surface-bright: map.get(baseline.$neutral, 24),
+  surface-dim: map.get(baseline.$neutral, 6),
+  scrim: map.get(baseline.$neutral, 0),
+  shadow: map.get(baseline.$neutral, 0)
+);
+
+.dark-medium-contrast {
+  @include generator.generate-token($color-scheme, color);
+}

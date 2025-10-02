@@ -14,7 +14,7 @@ export const defaultOptions = {
       weight: 400,
       fill: false,
       emphasis: false,
-      size: 24
-    }
-  }
+      size: 24,
+    },
+  },
 } satisfies ModuleOptions

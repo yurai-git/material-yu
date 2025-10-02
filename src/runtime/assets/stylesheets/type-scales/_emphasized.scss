@@ -1,0 +1,123 @@
+@use 'sass:map';
+@use '../typeface';
+@use 'generator';
+
+$typescale-emphasized: (
+  display: (
+    large: (
+      font: map.get(typeface.$typeface, brand),
+      line-height: 64pt,
+      size: 57pt,
+      weight: map.get(typeface.$typeface, weight-medium),
+      tracking: -0.25pt
+    ),
+    medium: (
+      font: map.get(typeface.$typeface, brand),
+      line-height: 52pt,
+      size: 45pt,
+      weight: map.get(typeface.$typeface, weight-medium),
+      tracking: 0
+    ),
+    small: (
+      font: map.get(typeface.$typeface, brand),
+      line-height: 44pt,
+      size: 36pt,
+      weight: map.get(typeface.$typeface, weight-medium),
+      tracking: 0
+    )
+  ),
+  headline: (
+    large: (
+      font: map.get(typeface.$typeface, brand),
+      line-height: 40pt,
+      size: 32pt,
+      weight: map.get(typeface.$typeface, weight-medium),
+      tracking: 0
+    ),
+    medium: (
+      font: map.get(typeface.$typeface, brand),
+      line-height: 36pt,
+      size: 28pt,
+      weight: map.get(typeface.$typeface, weight-medium),
+      tracking: 0
+    ),
+    small: (
+      font: map.get(typeface.$typeface, brand),
+      line-height: 32pt,
+      size: 24pt,
+      weight: map.get(typeface.$typeface, weight-medium),
+      tracking: 0
+    )
+  ),
+  title: (
+    large: (
+      font: map.get(typeface.$typeface, brand),
+      line-height: 28pt,
+      size: 22pt,
+      weight: map.get(typeface.$typeface, weight-medium),
+      tracking: 0
+    ),
+    medium: (
+      font: map.get(typeface.$typeface, plain),
+      line-height: 24pt,
+      size: 16pt,
+      weight: map.get(typeface.$typeface, weight-bold),
+      tracking: 0.15pt
+    ),
+    small: (
+      font: map.get(typeface.$typeface, plain),
+      line-height: 20pt,
+      size: 14pt,
+      weight: map.get(typeface.$typeface, weight-bold),
+      tracking: 0.1pt
+    )
+  ),
+  body: (
+    large: (
+      font: map.get(typeface.$typeface, plain),
+      line-height: 24pt,
+      size: 16pt,
+      weight: map.get(typeface.$typeface, weight-medium),
+      tracking: 0.5pt
+    ),
+    medium: (
+      font: map.get(typeface.$typeface, plain),
+      line-height: 20pt,
+      size: 14pt,
+      weight: map.get(typeface.$typeface, weight-medium),
+      tracking: 0.25pt
+    ),
+    small: (
+      font: map.get(typeface.$typeface, plain),
+      line-height: 16pt,
+      size: 12pt,
+      weight: map.get(typeface.$typeface, weight-medium),
+      tracking: 0.4pt
+    )
+  ),
+  label: (
+    large: (
+      font: map.get(typeface.$typeface, plain),
+      line-height: 20pt,
+      size: 14pt,
+      weight: map.get(typeface.$typeface, weight-bold),
+      tracking: 0.1pt
+    ),
+    medium: (
+      font: map.get(typeface.$typeface, plain),
+      line-height: 16pt,
+      size: 12pt,
+      weight: map.get(typeface.$typeface, weight-bold),
+      tracking: 0.5pt
+    ),
+    small: (
+      font: map.get(typeface.$typeface, plain),
+      line-height: 16pt,
+      size: 11pt,
+      weight: map.get(typeface.$typeface, weight-bold),
+      tracking: 0.5pt
+    )
+  )
+);
+
+@include generator.generate-type-styles($typescale-emphasized, 'emphasized');

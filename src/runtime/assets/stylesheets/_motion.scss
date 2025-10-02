@@ -1,0 +1,20 @@
+@use 'generator';
+
+$motion: (
+  expressive-fast-spatial: 350ms cubic-bezier(.42, 1.67, .21, .9),
+  expressive-default-spatial: 500ms cubic-bezier(.38, 1.21, .22, 1),
+  expressive-slow-spatial: 650ms cubic-bezier(.39, 1.29, .35, .98),
+  expressive-fast-effects: 150ms cubic-bezier(.31, .94, .34, 1),
+  expressive-default-effects: 200ms cubic-bezier(.34, .8, .34, 1),
+  expressive-slow-effects: 300ms cubic-bezier(.34, .88, .34, 1),
+  standard-fast-spatial: 350ms cubic-bezier(.27, 1.06, .18, 1),
+  standard-default-spatial: 500ms cubic-bezier(.27, 1.06, .18, 1),
+  standard-slow-spatial: 750ms cubic-bezier(.27, 1.06, .18, 1),
+  standard-fast-effects: 150ms cubic-bezier(.31, .94, .34, 1),
+  standard-default-effects: 200ms cubic-bezier(.34, .8, .34, 1),
+  standard-slow-effects: 300ms cubic-bezier(.34, .88, .34, 1)
+);
+
+:root {
+  @include generator.generate-token($motion, motion);
+}
