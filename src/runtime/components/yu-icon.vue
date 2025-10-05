@@ -14,7 +14,7 @@ import { useHead, useRuntimeConfig } from '#app'
 import { computed } from 'vue'
 
 /**
- * Utility functions.
+ * Utility functions
  */
 
 const clamp = (num: number, min: number, max: number) =>
@@ -41,10 +41,10 @@ const buildFontUrl = (
   `https://fonts.googleapis.com/css2?family=Material+Symbols+${styleName}:opsz,wght,FILL,GRAD@${opsz},${wght},${fill},${grad}`
 
 /**
- * Properties and states.
+ * Properties and states
  */
 
-const defaultConfig = useRuntimeConfig().public.materialYu?.components?.yuIcon || {}
+const defaultConfig = useRuntimeConfig().public.materialYu.components.yuIcon
 
 const props = defineProps<{
   yuStyle?: 'outlined' | 'rounded' | 'sharp'
@@ -56,21 +56,21 @@ const props = defineProps<{
   ariaLabel?: string
 }>()
 
-const finalStyle = computed(() => props.yuStyle || defaultConfig?.style)
-const finalWeight = computed(() => Number(props.yuWeight || defaultConfig?.weight))
+const finalStyle = computed(() => props.yuStyle ?? defaultConfig.style)
+const finalWeight = computed(() => Number(props.yuWeight ?? defaultConfig.weight))
 const finalFill = computed(() => {
-  const fill = props.yuFill ?? defaultConfig?.fill
+  const fill = props.yuFill ?? defaultConfig.fill
   return fill === 'true' || fill === '' || fill === true
 })
 const finalEmphasis = computed(() => {
-  const emphasis = props.yuEmphasis ?? defaultConfig?.emphasis
+  const emphasis = props.yuEmphasis ?? defaultConfig.emphasis
   return emphasis === 'true' || emphasis === '' || emphasis === true
 })
-const finalSize = computed(() => Number(props.yuSize || defaultConfig?.size))
-const finalIconName = computed(() => props.yuIconName || 'search')
+const finalSize = computed(() => Number(props.yuSize ?? defaultConfig.size))
+const finalIconName = computed(() => props.yuIconName ?? 'search')
 
 /**
- * Font variations.
+ * Font variations
  */
 
 const opsz = computed(() => clamp(finalSize.value, 20, 48))
@@ -83,18 +83,18 @@ const fontName = computed(() => getFontName(finalStyle.value))
 const styleValue = computed(() => `'Material Symbols ${fontName.value}'`)
 
 /**
- * WAI-ARIA attributes.
+ * WAI-ARIA attributes
  */
 
 const finalAriaHidden = computed(() => !props.ariaLabel ? 'true' : undefined)
 const finalRole = computed(() => props.ariaLabel ? 'img' : undefined)
 
 /**
- * Dynamic font loading.
+ * Dynamic font loading
  */
 
 useHead(computed(() => {
-  const isAdditionalStyle = props.yuStyle && props.yuStyle !== (defaultConfig?.style)
+  const isAdditionalStyle = props.yuStyle && props.yuStyle !== (defaultConfig.style)
   if (!isAdditionalStyle) {
     return {}
   }
@@ -138,6 +138,7 @@ useHead(computed(() => {
   justify-content: center;
   overflow: hidden;
 }
+
 @media (prefers-color-scheme: dark) {
   .yu-icon {
     --md-comp-icon-grade: v-bind(gradDark);

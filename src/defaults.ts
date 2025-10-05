@@ -2,9 +2,8 @@ import type { ModuleOptions } from './module'
 
 export const defaultOptions = {
   image: true,
-  sourceColor: 0x6750A4,
   colorScheme: 'system',
-  contrast: 'standard',
+  contrast: 'system',
   reduceMotion: false,
   motionScheme: 'expressive',
   colorSchemePath: undefined,
@@ -15,6 +14,10 @@ export const defaultOptions = {
       fill: false,
       emphasis: false,
       size: 24,
+    },
+    yuLayout: {
+      paneColor: 'md.sys.color.surface',
+      windowColor: 'md.sys.color.surface-container',
     },
   },
 } satisfies ModuleOptions

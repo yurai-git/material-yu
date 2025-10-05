@@ -3,15 +3,32 @@ import type { ModuleOptions } from '../../module'
 
 export const useMaterialYu = () => {
   const config = useRuntimeConfig().public.materialYu as ModuleOptions
-  const myGlobalState = useState('material-yu:my-global-state', () => 'default value')
+  const colorScheme = useState('material-yu:color-scheme', () => config.colorScheme)
+  const contrast = useState('material-yu:contrast', () => config.contrast)
 
-  const setMyGlobalState = (value: string) => {
-    myGlobalState.value = value
+  const setColorScheme = (value: 'system' | 'light' | 'dark') => {
+    colorScheme.value = value
+  }
+
+  const setContrast = (value: 'system' | 'default' | 'medium' | 'high') => {
+    contrast.value = value
+  }
+
+  const toToken = (systemToken: string, componentToken?: string) => {
+    if (componentToken) {
+      return `var(--${componentToken.replace(/\./g, '-')}, var(--${systemToken.replace(/\./g, '-')}))`
+    }
+    else {
+      return `var(--${systemToken.replace(/\./g, '-')})`
+    }
   }
 
   return {
     config,
-    myGlobalState,
-    setMyGlobalState,
+    colorScheme,
+    setColorScheme,
+    contrast,
+    setContrast,
+    toToken,
   }
 }

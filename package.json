@@ -1,7 +1,7 @@
 {
   "name": "@yurai/material-yu",
   "version": "1.0.0",
-  "description": "Material Design for Nuxt.",
+  "description": "Material 3 components for Nuxt.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yurai-git/material-yu.git"
@@ -27,11 +27,13 @@
   ],
   "scripts": {
     "prepack": "nuxt-module-build build",
-    "dev": "npm run dev:prepare && nuxi dev playground",
+    "dev": "pnpm run dev:prepare && nuxi dev playground",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
-    "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
-    "lint": "eslint .",
+    "release": "pnpm run lint && pnpm run test && pnpm run prepack && changelogen --release && pnpm publish && git push --follow-tags",
+    "lint": "pnpm run lint:es && pnpm run lint:style",
+    "lint:es": "eslint .",
+    "lint:style": "stylelint \"**/*.{css,scss,vue}\"",
     "test": "vitest run",
     "test:watch": "vitest watch",
     "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
@@ -50,6 +52,10 @@
     "changelogen": "^0.6.2",
     "eslint": "^9.35.0",
     "nuxt": "^4.1.2",
+    "postcss-html": "^1.8.0",
+    "stylelint": "^16.24.0",
+    "stylelint-config-standard": "^39.0.0",
+    "stylelint-scss": "^6.12.1",
     "typescript": "~5.9.2",
     "vitest": "^3.2.4",
     "vue-tsc": "^3.0.6"

@@ -1,26 +1,26 @@
 @use 'sass:map';
-@use '../typeface';
+@use '../typeface' as *;
 @use 'generator';
 
 $typescale: (
   display: (
     large: (
-      font: map.get(typeface.$typeface, brand),
-      weight: map.get(typeface.$typeface, weight-regular),
+      font: map.get($typeface, brand),
+      weight: map.get($typeface, weight-regular),
       size: 57pt,
       tracking: -0.25pt,
       line-height: 64pt
     ),
     medium: (
-      font: map.get(typeface.$typeface, brand),
-      weight: map.get(typeface.$typeface, weight-regular),
+      font: map.get($typeface, brand),
+      weight: map.get($typeface, weight-regular),
       size: 45pt,
       tracking: 0,
       line-height: 52pt
     ),
     small: (
-      font: map.get(typeface.$typeface, brand),
-      weight: map.get(typeface.$typeface, weight-regular),
+      font: map.get($typeface, brand),
+      weight: map.get($typeface, weight-regular),
       size: 36pt,
       tracking: 0,
       line-height: 44pt
@@ -28,22 +28,22 @@ $typescale: (
   ),
   headline: (
     large: (
-      font: map.get(typeface.$typeface, brand),
-      weight: map.get(typeface.$typeface, weight-regular),
+      font: map.get($typeface, brand),
+      weight: map.get($typeface, weight-regular),
       size: 32pt,
       tracking: 0,
       line-height: 40pt
     ),
     medium: (
-      font: map.get(typeface.$typeface, brand),
-      weight: map.get(typeface.$typeface, weight-regular),
+      font: map.get($typeface, brand),
+      weight: map.get($typeface, weight-regular),
       size: 28pt,
       tracking: 0,
       line-height: 36pt
     ),
     small: (
-      font: map.get(typeface.$typeface, brand),
-      weight: map.get(typeface.$typeface, weight-regular),
+      font: map.get($typeface, brand),
+      weight: map.get($typeface, weight-regular),
       size: 24pt,
       tracking: 0,
       line-height: 32pt
@@ -51,22 +51,22 @@ $typescale: (
   ),
   title: (
     large: (
-      font: map.get(typeface.$typeface, brand),
-      weight: map.get(typeface.$typeface, weight-regular),
+      font: map.get($typeface, brand),
+      weight: map.get($typeface, weight-regular),
       size: 22pt,
       tracking: 0,
       line-height: 28pt
     ),
     medium: (
-      font: map.get(typeface.$typeface, plain),
-      weight: map.get(typeface.$typeface, weight-medium),
+      font: map.get($typeface, plain),
+      weight: map.get($typeface, weight-medium),
       size: 16pt,
       tracking: 0.15pt,
       line-height: 24pt
     ),
     small: (
-      font: map.get(typeface.$typeface, plain),
-      weight: map.get(typeface.$typeface, weight-medium),
+      font: map.get($typeface, plain),
+      weight: map.get($typeface, weight-medium),
       size: 14pt,
       tracking: 0.1pt,
       line-height: 20pt
@@ -74,22 +74,22 @@ $typescale: (
   ),
   body: (
     large: (
-      font: map.get(typeface.$typeface, plain),
-      weight: map.get(typeface.$typeface, weight-regular),
+      font: map.get($typeface, plain),
+      weight: map.get($typeface, weight-regular),
       size: 16pt,
       tracking: 0.5pt,
       line-height: 24pt
     ),
     medium: (
-      font: map.get(typeface.$typeface, plain),
-      weight: map.get(typeface.$typeface, weight-regular),
+      font: map.get($typeface, plain),
+      weight: map.get($typeface, weight-regular),
       size: 14pt,
       tracking: 0.25pt,
       line-height: 20pt
     ),
     small: (
-      font: map.get(typeface.$typeface, plain),
-      weight: map.get(typeface.$typeface, weight-regular),
+      font: map.get($typeface, plain),
+      weight: map.get($typeface, weight-regular),
       size: 12pt,
       tracking: 0.4pt,
       line-height: 16pt
@@ -97,22 +97,22 @@ $typescale: (
   ),
   label: (
     large: (
-      font: map.get(typeface.$typeface, plain),
-      weight: map.get(typeface.$typeface, weight-medium),
+      font: map.get($typeface, plain),
+      weight: map.get($typeface, weight-medium),
       size: 14pt,
       tracking: 0.1pt,
       line-height: 20pt
     ),
     medium: (
-      font: map.get(typeface.$typeface, plain),
-      weight: map.get(typeface.$typeface, weight-medium),
+      font: map.get($typeface, plain),
+      weight: map.get($typeface, weight-medium),
       size: 12pt,
       tracking: 0.5pt,
       line-height: 16pt
     ),
     small: (
-      font: map.get(typeface.$typeface, plain),
-      weight: map.get(typeface.$typeface, weight-medium),
+      font: map.get($typeface, plain),
+      weight: map.get($typeface, weight-medium),
       size: 11pt,
       tracking: 0.5pt,
       line-height: 16pt

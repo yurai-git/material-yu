@@ -1,92 +1,102 @@
-import { defineNuxtModule, createResolver, addComponentsDir, addImportsDir } from '@nuxt/kit'
+import { defineNuxtModule, createResolver, addPlugin, addComponentsDir, addImportsDir } from '@nuxt/kit'
 import { defaultOptions } from './defaults'
 import { name, version } from '../package.json'
 
 type ColorSchemeValue = 'system' | 'light' | 'dark'
-type ContrastValue = 'standard' | 'medium' | 'high'
+type ContrastValue = 'system' | 'default' | 'medium' | 'high'
 type MotionSchemeValue = 'standard' | 'expressive'
 type YuIconStyleValue = 'outlined' | 'rounded' | 'sharp'
 
 export interface ModuleOptions {
   /**
-   * Turn on or off the `@nuxt/image` module.
+   * Turn on or off the `@nuxt/image` module
    * @defaultValue `true`
    */
   image?: boolean
 
   /**
-   * Define the source color of the color system.
-   * @defaultValue `0x6750A4`
-   */
-  sourceColor?: number
-
-  /**
-   * Define the default color scheme.
+   * Define the default color scheme
    * @defaultValue `'system'`
    */
   colorScheme?: ColorSchemeValue
 
   /**
-   * Define the default contrast.
-   * @defaultValue `'standard'`
+   * Define the default contrast
+   * @defaultValue `'system'`
    */
   contrast?: ContrastValue
 
   /**
-   * Turn on or off motion reduction.
+   * Turn on or off motion reduction
    * @defaultValue `false`
    */
   reduceMotion?: boolean
 
   /**
-   * Define the default motion scheme.
+   * Define the default motion scheme
    * @defaultValue `'expressive'`
    */
   motionScheme?: MotionSchemeValue
 
   /**
-   * Path to the directory where the Material color schemes are stored.
+   * Path to the directory where the Material color schemes are stored
    * @defaultValue `undefined`
    */
   colorSchemePath?: string
 
   /**
-   * Component configurations.
+   * Component configurations
    */
   components?: {
     /**
-     * Configurations for the `YuIcon` component.
+     * Configurations for the `yuIcon` component
      */
     yuIcon?: {
       /**
-       * Define the default style of Material Symbols.
+       * Define the default style of Material Symbols
        * @defaultValue `'outlined'`
        */
       style?: YuIconStyleValue
 
       /**
-       * Define the default `yu-weight`.
+       * Define the default `yuWeight`
        * @defaultValue `400`
        */
       weight?: number
 
       /**
-       * Define the default `yu-fill`.
+       * Define the default `yuFill`
        * @defaultValue `false`
        */
       fill?: boolean
 
       /**
-       * Define the default `yu-emphasis`.
+       * Define the default `yuEmphasis`
        * @defaultValue `false`
        */
       emphasis?: boolean
 
       /**
-       * Define the default `yu-size`.
+       * Define the default `yuSize`
        * @defaultValue `24`
        */
       size?: number
+    }
+    /**
+     * Configurations for the `yuLayout` component
+     */
+    yuLayout?: {
+      /**
+       * Define the default `yuPaneColor`
+       * @defaultValue `'md.sys.color.surface'`
+       */
+      paneColor?: string
+
+      /**
+       * Define the default `yuWindowColor`
+       * @defaultValue `'md.sys.color.surface-container'`
+       */
+      windowColor?: string
     }
   }
 }
@@ -137,8 +147,14 @@ export default defineNuxtModule<ModuleOptions>({
           ...defaultOptions.components.yuIcon,
           ...options.components?.yuIcon,
         },
+        yuLayout: {
+          ...defaultOptions.components.yuLayout,
+          ...options.components?.yuLayout,
+        },
       },
     }
+
+    addPlugin(resolve('./runtime/plugin'))
 
     addComponentsDir({
       path: resolve('./runtime/components'),

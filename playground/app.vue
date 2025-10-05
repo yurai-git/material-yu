@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <YuLayout>
     <h1>Nuxt module playground!</h1>
     <h2>Global state management</h2>
     <p>Current value: <strong>{{ myGlobalState }}</strong></p>
@@ -34,7 +34,7 @@
     </YuIcon>
     <h2>Buttons</h2>
     <YuButton>Click me</YuButton>
-  </div>
+  </YuLayout>
 </template>
 
 <script setup>
