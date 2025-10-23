@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "my-module-playground",
+  "name": "@yurai/material-yu-playground",
   "type": "module",
   "scripts": {
     "dev": "nuxi dev",

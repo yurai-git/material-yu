@@ -1,13 +1,14 @@
-import { useRuntimeConfig, useState } from '#app'
+import { useRuntimeConfig } from '#app'
+import { useStorage } from '@vueuse/core'
 import type { ModuleOptions } from '../../module'
 
 export const useMaterialYu = () => {
   const config = useRuntimeConfig().public.materialYu as ModuleOptions
-  const colorScheme = useState('material-yu:color-scheme', () => config.colorScheme)
-  const contrast = useState('material-yu:contrast', () => config.contrast)
+  const theme = useStorage('material-yu:theme', () => config.theme)
+  const contrast = useStorage('material-yu:contrast', () => config.contrast)
 
   const setColorScheme = (value: 'system' | 'light' | 'dark') => {
-    colorScheme.value = value
+    theme.value = value
   }
 
   const setContrast = (value: 'system' | 'default' | 'medium' | 'high') => {
@@ -25,7 +26,7 @@ export const useMaterialYu = () => {
 
   return {
     config,
-    colorScheme,
+    theme,
     setColorScheme,
     contrast,
     setContrast,

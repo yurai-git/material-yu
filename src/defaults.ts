@@ -1,12 +1,12 @@
-import type { ModuleOptions } from './module'
+import type { ModuleOptions, DeepRequired } from './module'
 
 export const defaultOptions = {
+  prefix: 'yu',
+  fonts: true,
   image: true,
-  colorScheme: 'system',
+  theme: 'system',
   contrast: 'system',
-  reduceMotion: false,
   motionScheme: 'expressive',
-  colorSchemePath: undefined,
   components: {
     yuIcon: {
       style: 'outlined',
@@ -19,5 +19,11 @@ export const defaultOptions = {
       paneColor: 'md.sys.color.surface',
       windowColor: 'md.sys.color.surface-container',
     },
+    yuButton: {
+      type: 'default',
+      size: 'small',
+      shape: 'round',
+      color: 'elevated',
+    },
   },
-} satisfies ModuleOptions
+} satisfies DeepRequired<ModuleOptions>

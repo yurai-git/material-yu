@@ -1,13 +1,30 @@
 import { defineNuxtModule, createResolver, addPlugin, addComponentsDir, addImportsDir } from '@nuxt/kit'
 import { defaultOptions } from './defaults'
 import { name, version } from '../package.json'
+import type { MotionSchemeValue, YuIconStyleValue, YuButtonTypeValue, YuButtonSizeValue, YuButtonShapeValue, YuButtonColorValue, MdSysColor } from './runtime/types'
 
-type ColorSchemeValue = 'system' | 'light' | 'dark'
+type ThemeValue = 'system' | 'light' | 'dark'
 type ContrastValue = 'system' | 'default' | 'medium' | 'high'
-type MotionSchemeValue = 'standard' | 'expressive'
-type YuIconStyleValue = 'outlined' | 'rounded' | 'sharp'
+
+export type DeepRequired<T> = T extends (...args: unknown[]) => unknown
+  ? T
+  : T extends object
+    ? { [P in keyof T]-?: DeepRequired<T[P]> }
+    : T
 
 export interface ModuleOptions {
+  /**
+   * Define the prefix for components
+   * @defaultValue `'yu'`
+   */
+  prefix?: string
+
+  /**
+   * Turn on or off the `@nuxt/fonts` module
+   * @defaultValue `true`
+   */
+  fonts?: boolean
+
   /**
    * Turn on or off the `@nuxt/image` module
    * @defaultValue `true`
@@ -15,22 +32,16 @@ export interface ModuleOptions {
   image?: boolean
 
   /**
-   * Define the default color scheme
+   * Define the default theme
    * @defaultValue `'system'`
    */
-  colorScheme?: ColorSchemeValue
+  theme?: ThemeValue
 
   /**
-   * Define the default contrast
+   * Define the default contrast preference
    * @defaultValue `'system'`
    */
   contrast?: ContrastValue
-
-  /**
-   * Turn on or off motion reduction
-   * @defaultValue `false`
-   */
-  reduceMotion?: boolean
 
   /**
    * Define the default motion scheme
@@ -39,17 +50,11 @@ export interface ModuleOptions {
   motionScheme?: MotionSchemeValue
 
   /**
-   * Path to the directory where the Material color schemes are stored
-   * @defaultValue `undefined`
-   */
-  colorSchemePath?: string
-
-  /**
    * Component configurations
    */
   components?: {
     /**
-     * Configurations for the `yuIcon` component
+     * Configurations for the `YuIcon` component
      */
     yuIcon?: {
       /**
@@ -83,20 +88,48 @@ export interface ModuleOptions {
       size?: number
     }
     /**
-     * Configurations for the `yuLayout` component
+     * Configurations for the `YuLayout` component
      */
     yuLayout?: {
       /**
        * Define the default `yuPaneColor`
        * @defaultValue `'md.sys.color.surface'`
        */
-      paneColor?: string
+      paneColor?: MdSysColor
 
       /**
        * Define the default `yuWindowColor`
        * @defaultValue `'md.sys.color.surface-container'`
        */
-      windowColor?: string
+      windowColor?: MdSysColor
+    }
+    /**
+     * Configurations for the `YuButton` component
+     */
+    yuButton?: {
+      /**
+       * Define the default `yuType`
+       * @defaultValue `'default'`
+       */
+      type?: YuButtonTypeValue
+
+      /**
+       * Define the default `yuSize`
+       * @defaultValue `'small'`
+       */
+      size?: YuButtonSizeValue
+
+      /**
+       * Define the default `yuShape`
+       * @defaultValue `'round'`
+       */
+      shape?: YuButtonShapeValue
+
+      /**
+       * Define the default `yuColor`
+       * @defaultValue `'elevated'`
+       */
+      color?: YuButtonColorValue
     }
   }
 }
@@ -116,20 +149,15 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.options.css.push(resolve('./runtime/assets/stylesheets/material-tokens.scss'))
 
-    const yuIconStyle = options.components?.yuIcon?.style || defaultOptions.components?.yuIcon?.style
-    const associateYuIconStyle = (style: string) => {
+    const yuIconStyle = options.components?.yuIcon?.style || defaultOptions.components.yuIcon.style
+    const mapStyleToName = (style: string) => {
       switch (style) {
-        case 'outlined':
-          return 'Outlined'
-        case 'rounded':
-          return 'Rounded'
-        case 'sharp':
-          return 'Sharp'
-        default:
-          return 'Outlined'
+        case 'rounded': return 'Rounded'
+        case 'sharp': return 'Sharp'
+        default: return 'Outlined'
       }
     }
-    const yuIconUrl = `https://fonts.googleapis.com/css2?family=Material+Symbols+${associateYuIconStyle(yuIconStyle)}:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200`
+    const yuIconUrl = `https://fonts.googleapis.com/css2?family=Material+Symbols+${mapStyleToName(yuIconStyle)}:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200`
 
     nuxt.options.app.head.link = nuxt.options.app.head.link || []
     nuxt.options.app.head.link.push({
@@ -151,15 +179,19 @@ export default defineNuxtModule<ModuleOptions>({
           ...defaultOptions.components.yuLayout,
           ...options.components?.yuLayout,
         },
+        yuButton: {
+          ...defaultOptions.components.yuButton,
+          ...options.components?.yuButton,
+        },
       },
     }
 
     addPlugin(resolve('./runtime/plugin'))
-
     addComponentsDir({
       path: resolve('./runtime/components'),
+      prefix: options.prefix || defaultOptions.prefix,
+      pathPrefix: false,
     })
-
     addImportsDir(resolve('./runtime/composables'))
   },
 })

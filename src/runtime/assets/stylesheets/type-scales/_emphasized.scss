@@ -1,27 +1,26 @@
 @use 'sass:map';
 @use '../typeface' as *;
-@use 'generator';
 
 $typescale-emphasized: (
   display: (
     large: (
       font: map.get($typeface, brand),
-      line-height: 64pt,
-      size: 57pt,
+      line-height: 64px,
+      size: 57px,
       weight: map.get($typeface, weight-medium),
-      tracking: -0.25pt
+      tracking: -0.25px
     ),
     medium: (
       font: map.get($typeface, brand),
-      line-height: 52pt,
-      size: 45pt,
+      line-height: 52px,
+      size: 45px,
       weight: map.get($typeface, weight-medium),
       tracking: 0
     ),
     small: (
       font: map.get($typeface, brand),
-      line-height: 44pt,
-      size: 36pt,
+      line-height: 44px,
+      size: 36px,
       weight: map.get($typeface, weight-medium),
       tracking: 0
     )
@@ -29,22 +28,22 @@ $typescale-emphasized: (
   headline: (
     large: (
       font: map.get($typeface, brand),
-      line-height: 40pt,
-      size: 32pt,
+      line-height: 40px,
+      size: 32px,
       weight: map.get($typeface, weight-medium),
       tracking: 0
     ),
     medium: (
       font: map.get($typeface, brand),
-      line-height: 36pt,
-      size: 28pt,
+      line-height: 36px,
+      size: 28px,
       weight: map.get($typeface, weight-medium),
       tracking: 0
     ),
     small: (
       font: map.get($typeface, brand),
-      line-height: 32pt,
-      size: 24pt,
+      line-height: 32px,
+      size: 24px,
       weight: map.get($typeface, weight-medium),
       tracking: 0
     )
@@ -52,72 +51,84 @@ $typescale-emphasized: (
   title: (
     large: (
       font: map.get($typeface, brand),
-      line-height: 28pt,
-      size: 22pt,
+      line-height: 28px,
+      size: 22px,
       weight: map.get($typeface, weight-medium),
       tracking: 0
     ),
     medium: (
       font: map.get($typeface, plain),
-      line-height: 24pt,
-      size: 16pt,
+      line-height: 24px,
+      size: 16px,
       weight: map.get($typeface, weight-bold),
-      tracking: 0.15pt
+      tracking: 0.15px
     ),
     small: (
       font: map.get($typeface, plain),
-      line-height: 20pt,
-      size: 14pt,
+      line-height: 20px,
+      size: 14px,
       weight: map.get($typeface, weight-bold),
-      tracking: 0.1pt
+      tracking: 0.1px
     )
   ),
   body: (
     large: (
       font: map.get($typeface, plain),
-      line-height: 24pt,
-      size: 16pt,
+      line-height: 24px,
+      size: 16px,
       weight: map.get($typeface, weight-medium),
-      tracking: 0.5pt
+      tracking: 0.5px
     ),
     medium: (
       font: map.get($typeface, plain),
-      line-height: 20pt,
-      size: 14pt,
+      line-height: 20px,
+      size: 14px,
       weight: map.get($typeface, weight-medium),
-      tracking: 0.25pt
+      tracking: 0.25px
     ),
     small: (
       font: map.get($typeface, plain),
-      line-height: 16pt,
-      size: 12pt,
+      line-height: 16px,
+      size: 12px,
       weight: map.get($typeface, weight-medium),
-      tracking: 0.4pt
+      tracking: 0.4px
     )
   ),
   label: (
     large: (
       font: map.get($typeface, plain),
-      line-height: 20pt,
-      size: 14pt,
+      line-height: 20px,
+      size: 14px,
       weight: map.get($typeface, weight-bold),
-      tracking: 0.1pt
+      tracking: 0.1px
     ),
     medium: (
       font: map.get($typeface, plain),
-      line-height: 16pt,
-      size: 12pt,
+      line-height: 16px,
+      size: 12px,
       weight: map.get($typeface, weight-bold),
-      tracking: 0.5pt
+      tracking: 0.5px
     ),
     small: (
       font: map.get($typeface, plain),
-      line-height: 16pt,
-      size: 11pt,
+      line-height: 16px,
+      size: 11px,
       weight: map.get($typeface, weight-bold),
-      tracking: 0.5pt
+      tracking: 0.5px
     )
   )
 );
 
-@include generator.generate-type-styles($typescale-emphasized, 'emphasized');
+@mixin typescale($name, $size) {
+  @if map.has-key($typescale-emphasized, $name, $size) {
+    $style-map: map.get($typescale-emphasized, $name, $size);
+
+    font-family: map.get($style-map, font);
+    font-weight: map.get($style-map, weight);
+    font-size: map.get($style-map, size);
+    letter-spacing: map.get($style-map, tracking);
+    line-height: map.get($style-map, line-height);
+  } @else {
+    @error "Invalid type scale: #{$name}-#{$size}";
+  }
+}

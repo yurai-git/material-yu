@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use 'generator';
 
 @function shadow-color($alpha) {
@@ -13,6 +14,10 @@ $elevation: (
   level0: none
 );
 
-:root {
-  @include generator.generate-token($elevation, elevation);
+@function elevation($level) {
+  @if map.has-key($elevation, level#{$level}) {
+    @return map.get($elevation, level#{$level});
+  } @else {
+    @error "Invalid elevation level: #{$level}";
+  }
 }

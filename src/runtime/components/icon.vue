@@ -1,6 +1,6 @@
 <template>
   <span
-    class="yu-icon"
+    class="yu-icon yu-component"
     :aria-hidden="finalAriaHidden"
     :aria-label="ariaLabel"
     :role="finalRole"
@@ -12,6 +12,7 @@
 <script lang="ts" setup>
 import { useHead, useRuntimeConfig } from '#app'
 import { computed } from 'vue'
+import type { YuIconStyleValue } from '../types'
 
 /**
  * Utility functions
@@ -47,26 +48,20 @@ const buildFontUrl = (
 const defaultConfig = useRuntimeConfig().public.materialYu.components.yuIcon
 
 const props = defineProps<{
-  yuStyle?: 'outlined' | 'rounded' | 'sharp'
-  yuWeight?: number | string
-  yuFill?: boolean | string
-  yuEmphasis?: boolean | string
-  yuSize?: number | string
+  yuStyle?: YuIconStyleValue
+  yuWeight?: number
+  yuFill?: boolean
+  yuEmphasis?: boolean
+  yuSize?: number
   yuIconName?: string
   ariaLabel?: string
 }>()
 
 const finalStyle = computed(() => props.yuStyle ?? defaultConfig.style)
-const finalWeight = computed(() => Number(props.yuWeight ?? defaultConfig.weight))
-const finalFill = computed(() => {
-  const fill = props.yuFill ?? defaultConfig.fill
-  return fill === 'true' || fill === '' || fill === true
-})
-const finalEmphasis = computed(() => {
-  const emphasis = props.yuEmphasis ?? defaultConfig.emphasis
-  return emphasis === 'true' || emphasis === '' || emphasis === true
-})
-const finalSize = computed(() => Number(props.yuSize ?? defaultConfig.size))
+const finalWeight = computed(() => props.yuWeight ?? defaultConfig.weight)
+const finalFill = computed(() => props.yuFill ?? defaultConfig.fill)
+const finalEmphasis = computed(() => props.yuEmphasis ?? defaultConfig.emphasis)
+const finalSize = computed(() => props.yuSize ?? defaultConfig.size)
 const finalIconName = computed(() => props.yuIconName ?? 'search')
 
 /**
@@ -137,6 +132,7 @@ useHead(computed(() => {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  transition: font-variation-settings var(--md-sys-motion-expressive-fast-effects);
 }
 
 @media (prefers-color-scheme: dark) {
