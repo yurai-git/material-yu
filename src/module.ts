@@ -56,7 +56,7 @@ export interface ModuleOptions {
     /**
      * Configurations for the `YuIcon` component
      */
-    yuIcon?: {
+    icon?: {
       /**
        * Define the default style of Material Symbols
        * @defaultValue `'outlined'`
@@ -90,7 +90,7 @@ export interface ModuleOptions {
     /**
      * Configurations for the `YuLayout` component
      */
-    yuLayout?: {
+    layout?: {
       /**
        * Define the default `yuPaneColor`
        * @defaultValue `'md.sys.color.surface'`
@@ -106,7 +106,7 @@ export interface ModuleOptions {
     /**
      * Configurations for the `YuButton` component
      */
-    yuButton?: {
+    button?: {
       /**
        * Define the default `yuType`
        * @defaultValue `'default'`
@@ -131,6 +131,97 @@ export interface ModuleOptions {
        */
       color?: YuButtonColorValue
     }
+    /**
+     * Configurations for the `YuInteractive` component
+     */
+    interactive?: {
+      /**
+       * Define the default `yuRippleBehavior`
+       */
+      rippleBehavior?: {
+        /**
+         * Define the default ripple fade-in duration
+         * @defaultValue `'450ms'`
+         */
+        fadeInDuration?: string
+
+        /**
+         * Define the default ripple fade-in timing function
+         * @defaultValue `'cubic-bezier(.2, 0, 0, 1)'`
+         */
+        fadeInTimingFunction?: string
+
+        /**
+         * Define the default ripple expand duration
+         * @defaultValue `'450ms'`
+         */
+        expandDuration?: string
+
+        /**
+         * Define the default ripple expand timing function
+         * @defaultValue `'cubic-bezier(.2, 0, 0, 1)'`
+         */
+        expandTimingFunction?: string
+
+        /**
+         * Define the default ripple fade-out duration
+         * @defaultValue `'375ms'`
+         */
+        fadeOutDuration?: string
+
+        /**
+         * Define the default ripple fade-out timing function
+         * @defaultValue `'linear'`
+         */
+        fadeOutTimingFunction?: string
+
+        /**
+         * Define the default ripple opacity
+         * @defaultValue `'var(--md-sys-state-pressed-state-layer-opacity)'`
+         */
+        opacity?: string
+      }
+      /**
+       * Define the default `yuStateLayerBehavior`
+       */
+      stateLayerBehavior?: {
+        /**
+         * Define the default state layer fade-in duration
+         * @defaultValue `'150ms'`
+         */
+        fadeInDuration: string
+
+        /**
+         * Define the default state layer fade-in timing function
+         * @defaultValue `'linear'`
+         */
+        fadeInTimingFunction: string
+
+        /**
+         * Define the default state layer fade-out duration
+         * @defaultValue `'150ms'`
+         */
+        fadeOutDuration: string
+
+        /**
+         * Define the default state layer fade-out timing function
+         * @defaultValue `'linear'`
+         */
+        fadeOutTimingFunction: string
+
+        /**
+         * Define the default state layer opacity
+         * @defaultValue `'var(--md-sys-state-hover-state-layer-opacity)'`
+         */
+        opacity: string
+
+        /**
+         * Define the default focus state layer opacity
+         * @defaultValue `'var(--md-sys-state-focus-state-layer-opacity)'`
+         */
+        focusOpacity: string
+      }
+    }
   }
 }
 
@@ -149,7 +240,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.options.css.push(resolve('./runtime/assets/stylesheets/material-tokens.scss'))
 
-    const yuIconStyle = options.components?.yuIcon?.style || defaultOptions.components.yuIcon.style
+    const yuIconStyle = options.components?.icon?.style || defaultOptions.components.icon.style
     const mapStyleToName = (style: string) => {
       switch (style) {
         case 'rounded': return 'Rounded'
@@ -171,17 +262,29 @@ export default defineNuxtModule<ModuleOptions>({
       components: {
         ...defaultOptions.components,
         ...options.components,
-        yuIcon: {
-          ...defaultOptions.components.yuIcon,
-          ...options.components?.yuIcon,
+        icon: {
+          ...defaultOptions.components.icon,
+          ...options.components?.icon,
         },
-        yuLayout: {
-          ...defaultOptions.components.yuLayout,
-          ...options.components?.yuLayout,
+        layout: {
+          ...defaultOptions.components.layout,
+          ...options.components?.layout,
         },
-        yuButton: {
-          ...defaultOptions.components.yuButton,
-          ...options.components?.yuButton,
+        button: {
+          ...defaultOptions.components.button,
+          ...options.components?.button,
+        },
+        interactive: {
+          ...defaultOptions.components.interactive,
+          ...options.components?.interactive,
+          rippleBehavior: {
+            ...defaultOptions.components.interactive.rippleBehavior,
+            ...options.components?.interactive?.rippleBehavior,
+          },
+          stateLayerBehavior: {
+            ...defaultOptions.components.interactive.stateLayerBehavior,
+            ...options.components?.interactive?.stateLayerBehavior,
+          },
         },
       },
     }

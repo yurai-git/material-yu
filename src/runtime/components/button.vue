@@ -7,6 +7,7 @@
     <YuInteractive
       :yu-focus-ring="true"
       :yu-ripple="true"
+      :yu-state-layer="true"
     />
   </button>
 </template>
@@ -23,7 +24,7 @@ import { useMotion } from '../composables/use-motion'
 
 const runtimePublic = useRuntimeConfig().public
 const materialYu = runtimePublic.materialYu
-const defaultConfig = materialYu.components.yuButton
+const defaultConfig = materialYu.components.button
 
 const props = defineProps<{
   yuMotionScheme?: MotionSchemeValue
@@ -55,7 +56,6 @@ const borderRadiusMotion = useMotion(finalMotionScheme.value, {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  outline: none;
   background-color: var(--md-comp-button-container-color, var(--md-sys-color-primary));
   box-shadow: elevation.elevation(0);
   color: var(--md-comp-button-label-color, var(--md-sys-color-on-primary));

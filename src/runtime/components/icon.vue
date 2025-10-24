@@ -45,7 +45,7 @@ const buildFontUrl = (
  * Properties and states
  */
 
-const defaultConfig = useRuntimeConfig().public.materialYu.components.yuIcon
+const defaultConfig = useRuntimeConfig().public.materialYu.components.icon
 
 const props = defineProps<{
   yuStyle?: YuIconStyleValue
