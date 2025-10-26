@@ -9,6 +9,11 @@ export default defineNuxtConfig({
     },
   },
   compatibilityDate: '2025-09-22',
+  vite: {
+    server: {
+      allowedHosts: [],
+    },
+  },
   materialYu: {
     theme: 'system',
     contrast: 'system',

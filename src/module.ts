@@ -1,4 +1,5 @@
 import { defineNuxtModule, createResolver, addPlugin, addComponentsDir, addImportsDir } from '@nuxt/kit'
+import { defu } from 'defu'
 import { defaultOptions } from './defaults'
 import { name, version } from '../package.json'
 import type { MotionSchemeValue, YuIconStyleValue, YuButtonTypeValue, YuButtonSizeValue, YuButtonShapeValue, YuButtonColorValue, MdSysColor } from './runtime/types'
@@ -136,6 +137,23 @@ export interface ModuleOptions {
      */
     interactive?: {
       /**
+       * Define the default `yuFocusRing`
+       * @defaultValue `true`
+       */
+      focusRing?: boolean
+
+      /**
+       * Define the default `yuRipple`
+       * @defaultValue `true`
+       */
+      ripple?: boolean
+
+      /**
+       * Define the default `yuStateLayer`
+       * @defaultValue `true`
+       */
+      stateLayer?: boolean
+      /**
        * Define the default `yuRippleBehavior`
        */
       rippleBehavior?: {
@@ -256,38 +274,7 @@ export default defineNuxtModule<ModuleOptions>({
       href: yuIconUrl,
     })
 
-    nuxt.options.runtimeConfig.public.materialYu = {
-      ...defaultOptions,
-      ...options,
-      components: {
-        ...defaultOptions.components,
-        ...options.components,
-        icon: {
-          ...defaultOptions.components.icon,
-          ...options.components?.icon,
-        },
-        layout: {
-          ...defaultOptions.components.layout,
-          ...options.components?.layout,
-        },
-        button: {
-          ...defaultOptions.components.button,
-          ...options.components?.button,
-        },
-        interactive: {
-          ...defaultOptions.components.interactive,
-          ...options.components?.interactive,
-          rippleBehavior: {
-            ...defaultOptions.components.interactive.rippleBehavior,
-            ...options.components?.interactive?.rippleBehavior,
-          },
-          stateLayerBehavior: {
-            ...defaultOptions.components.interactive.stateLayerBehavior,
-            ...options.components?.interactive?.stateLayerBehavior,
-          },
-        },
-      },
-    }
+    nuxt.options.runtimeConfig.public.materialYu = defu(options, defaultOptions)
 
     addPlugin(resolve('./runtime/plugin'))
     addComponentsDir({

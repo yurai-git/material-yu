@@ -47,15 +47,36 @@ const buildFontUrl = (
 
 const defaultConfig = useRuntimeConfig().public.materialYu.components.icon
 
-const props = defineProps<{
-  yuStyle?: YuIconStyleValue
-  yuWeight?: number
-  yuFill?: boolean
-  yuEmphasis?: boolean
-  yuSize?: number
-  yuIconName?: string
-  ariaLabel?: string
-}>()
+const props = defineProps({
+  yuStyle: {
+    type: String as () => YuIconStyleValue,
+    default: undefined,
+  },
+  yuWeight: {
+    type: Number,
+    default: undefined,
+  },
+  yuFill: {
+    type: Boolean,
+    default: undefined,
+  },
+  yuEmphasis: {
+    type: Boolean,
+    default: undefined,
+  },
+  yuSize: {
+    type: Number,
+    default: undefined,
+  },
+  yuIconName: {
+    type: String,
+    default: undefined,
+  },
+  ariaLabel: {
+    type: String,
+    default: undefined,
+  },
+})
 
 const finalStyle = computed(() => props.yuStyle ?? defaultConfig.style)
 const finalWeight = computed(() => props.yuWeight ?? defaultConfig.weight)

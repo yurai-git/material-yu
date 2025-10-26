@@ -20,10 +20,16 @@ const { toToken } = useMaterialYu()
 
 const defaultConfig = useRuntimeConfig().public.materialYu.components.layout
 
-const props = defineProps<{
-  yuPaneColor?: string
-  yuWindowColor?: string
-}>()
+const props = defineProps({
+  yuPaneColor: {
+    type: String,
+    default: undefined,
+  },
+  yuWindowColor: {
+    type: String,
+    default: undefined,
+  },
+})
 
 const _finalPaneColor = computed(() => {
   const token = props.yuPaneColor ?? defaultConfig.paneColor

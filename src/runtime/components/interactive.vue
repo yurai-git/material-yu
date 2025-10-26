@@ -1,49 +1,80 @@
 <template>
   <div
     ref="root"
-    class="yu-interactive yu-component"
+    :class="[
+      'yu-interactive yu-component',
+      { 'yu-focus-ring': finalFocusRing },
+      { 'yu-ripple': finalRipple },
+      { 'yu-state-layer': finalStateLayer },
+    ]"
   />
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, type PropType } from 'vue'
 import { useRuntimeConfig } from '#app'
 
 /**
  * Properties and states
  */
+const parseDuration = (duration: string | number): number => {
+  if (typeof duration === 'number') return duration
+  const match = duration.match(/^(\d+)(ms|s)$/)
+  if (!match) return 0
+  const [, value, unit] = match
+  return unit === 's' ? Number.parseInt(value as string) * 1000 : Number.parseInt(value as string)
+}
 
 const runtimePublic = useRuntimeConfig().public
 const materialYu = runtimePublic.materialYu
 const defaultConfig = materialYu.components.interactive
 
 interface RippleBehavior {
-  fadeInDuration?: number
+  fadeInDuration?: string
   fadeInTimingFunction?: string
-  expandDuration?: number
+  expandDuration?: string
   expandTimingFunction?: string
-  fadeOutDuration?: number
+  fadeOutDuration?: string
   fadeOutTimingFunction?: string
-  opacity?: number
+  opacity?: string
+  debug?: boolean
 }
 
 interface StateLayerBehavior {
-  fadeInDuration?: number
+  fadeInDuration?: string
   fadeInTimingFunction?: string
-  fadeOutDuration?: number
+  fadeOutDuration?: string
   fadeOutTimingFunction?: string
-  opacity?: number
-  focusOpacity?: number
+  opacity?: string
+  focusOpacity?: string
 }
 
-const props = defineProps<{
-  yuFocusRing: boolean
-  yuRipple: boolean
-  yuStateLayer: boolean
-  yuRippleBehavior?: RippleBehavior
-  yuStateLayerBehavior?: StateLayerBehavior
-  yuLayerColor?: string
-}>()
+const props = defineProps({
+  yuFocusRing: {
+    type: Boolean,
+    default: undefined,
+  },
+  yuRipple: {
+    type: Boolean,
+    default: undefined,
+  },
+  yuStateLayer: {
+    type: Boolean,
+    default: undefined,
+  },
+  yuRippleBehavior: {
+    type: Object as PropType<RippleBehavior>,
+    default: undefined,
+  },
+  yuStateLayerBehavior: {
+    type: Object as PropType<StateLayerBehavior>,
+    default: undefined,
+  },
+  yuLayerColor: {
+    type: String,
+    default: undefined,
+  },
+})
 
 const root = ref<HTMLElement | null>(null)
 
@@ -51,22 +82,26 @@ const root = ref<HTMLElement | null>(null)
  * Computed final values
  */
 
-const finalRipple = computed(() => ({
+const finalFocusRing = computed(() => props.yuFocusRing ?? defaultConfig.focusRing)
+const finalRipple = computed(() => props.yuRipple ?? defaultConfig.ripple)
+const finalStateLayer = computed(() => props.yuStateLayer ?? defaultConfig.stateLayer)
+const finalRippleBehavior = computed(() => ({
   fadeInDuration: props.yuRippleBehavior?.fadeInDuration ?? defaultConfig.rippleBehavior.fadeInDuration,
   fadeInTimingFunction: props.yuRippleBehavior?.fadeInTimingFunction ?? defaultConfig.rippleBehavior.fadeInTimingFunction,
   expandDuration: props.yuRippleBehavior?.expandDuration ?? defaultConfig.rippleBehavior.expandDuration,
   expandTimingFunction: props.yuRippleBehavior?.expandTimingFunction ?? defaultConfig.rippleBehavior.expandTimingFunction,
   fadeOutDuration: props.yuRippleBehavior?.fadeOutDuration ?? defaultConfig.rippleBehavior.fadeOutDuration,
   fadeOutTimingFunction: props.yuRippleBehavior?.fadeOutTimingFunction ?? defaultConfig.rippleBehavior.fadeOutTimingFunction,
-  opacity: props.yuRippleBehavior?.opacity ?? defaultConfig.rippleBehavior.opacity
+  opacity: props.yuRippleBehavior?.opacity ?? defaultConfig.rippleBehavior.opacity,
+  debug: props.yuRippleBehavior?.debug ?? false,
 }))
-const finalStateLayer = computed(() => ({
+const finalStateLayerBehavior = computed(() => ({
   fadeInDuration: props.yuStateLayerBehavior?.fadeInDuration ?? defaultConfig.stateLayerBehavior.fadeInDuration,
   fadeInTimingFunction: props.yuStateLayerBehavior?.fadeInTimingFunction ?? defaultConfig.stateLayerBehavior.fadeInTimingFunction,
   fadeOutDuration: props.yuStateLayerBehavior?.fadeOutDuration ?? defaultConfig.stateLayerBehavior.fadeOutDuration,
   fadeOutTimingFunction: props.yuStateLayerBehavior?.fadeOutTimingFunction ?? defaultConfig.stateLayerBehavior.fadeOutTimingFunction,
   opacity: props.yuStateLayerBehavior?.opacity ?? defaultConfig.stateLayerBehavior.opacity,
-  focusOpacity: props.yuStateLayerBehavior?.focusOpacity ?? defaultConfig.stateLayerBehavior.focusOpacity
+  focusOpacity: props.yuStateLayerBehavior?.focusOpacity ?? defaultConfig.stateLayerBehavior.focusOpacity,
 }))
 const parentColor = ref('var(--md-sys-color-surface)')
 const finalLayerColor = computed(() => props.yuLayerColor ?? parentColor.value)
@@ -79,16 +114,6 @@ onMounted(() => {
   const el = root.value
   if (!el) return
 
-  if (props.yuFocusRing) {
-    el.classList.add('yu-focus-ring')
-  }
-  if (props.yuRipple) {
-    el.classList.add('yu-ripple')
-  }
-  if (props.yuStateLayer) {
-    el.classList.add('yu-state-layer')
-  }
-
   const parent = el.parentElement
   if (!parent) return
 
@@ -99,22 +124,25 @@ onMounted(() => {
     parent.style.position = 'relative'
   }
 
-  if (props.yuFocusRing) {
+  if (finalFocusRing.value) {
     parent.style.outline = 'none'
   }
 
   /**
    * Ripple implementation
-  **/
+   */
 
-  if (props.yuRipple) {
-    let ripples: HTMLElement[] = []
+  if (finalRipple.value) {
+    interface RippleElement extends HTMLElement {
+      __rippleExpandTimeout?: number
+    }
+    let ripples: RippleElement[] = []
 
-    const beginFade = (ripple: HTMLElement) => {
-      const t = (ripple as any).__rippleExpandTimeout
+    const beginFade = (ripple: RippleElement) => {
+      const t = ripple.__rippleExpandTimeout
       if (typeof t === 'number') {
         clearTimeout(t)
-        delete (ripple as any).__rippleExpandTimeout
+        delete ripple.__rippleExpandTimeout
       }
 
       ripple.classList.add('yu-ripple-leaving')
@@ -123,14 +151,28 @@ onMounted(() => {
       }, { once: true })
     }
 
-    const createRipple = (event: MouseEvent) => {
+    const removeRipplesInstantly = () => {
+      if (!el) return
+      for (const ripple of ripples) {
+        const t = ripple.__rippleExpandTimeout
+        if (typeof t === 'number') {
+          clearTimeout(t)
+        }
+        if (el.contains(ripple)) {
+          el.removeChild(ripple)
+        }
+      }
+      ripples = []
+    }
+
+    const createRipple = (event?: PointerEvent): RippleElement | undefined => {
       if (!el) return
       const rect = el.getBoundingClientRect()
       const size = Math.sqrt(rect.width ** 2 + rect.height ** 2) * 2
-      const x = event.clientX - rect.left - size / 2
-      const y = event.clientY - rect.top - size / 2
+      const x = event ? event.clientX - rect.left - size / 2 : rect.width / 2 - size / 2
+      const y = event ? event.clientY - rect.top - size / 2 : rect.height / 2 - size / 2
 
-      const ripple = document.createElement('div')
+      const ripple = document.createElement('div') as RippleElement
       ripple.classList.add('yu-ripple-effect')
       ripple.style.width = ripple.style.height = `${size}px`
       ripple.style.left = `${x}px`
@@ -140,31 +182,33 @@ onMounted(() => {
         if (ev.animationName !== 'ripple-expand') return
         ripple.dataset.expanded = 'true'
         ripple.classList.remove('yu-ripple-animating')
-        const t = (ripple as any).__rippleExpandTimeout
+        const t = ripple.__rippleExpandTimeout
         if (typeof t === 'number') clearTimeout(t)
         if (ripple.dataset.removeRequested === 'true') beginFade(ripple)
       }
       ripple.addEventListener('animationend', onExpandEnd, { once: true })
 
-      ripple.offsetHeight
+      void ripple.offsetHeight
       ripple.classList.add('yu-ripple-animating')
 
-      ;(ripple as any).__rippleExpandTimeout = window.setTimeout(() => {
+      ripple.__rippleExpandTimeout = window.setTimeout(() => {
         ripple.dataset.expanded = 'true'
         ripple.classList.remove('yu-ripple-animating')
-        delete (ripple as any).__rippleExpandTimeout
+        delete ripple.__rippleExpandTimeout
         if (ripple.dataset.removeRequested === 'true') beginFade(ripple)
-      }, props.yuRippleBehavior?.expandDuration ?? 450)
+      }, parseDuration(finalRippleBehavior.value.expandDuration))
 
       el.appendChild(ripple)
       ripples.push(ripple)
+      return ripple
     }
 
     const removeRipples = () => {
       for (const ripple of ripples) {
         if (ripple.dataset.expanded === 'true') {
           beginFade(ripple)
-        } else {
+        }
+        else {
           ripple.dataset.removeRequested = 'true'
           const onAnimEnd = (ev: AnimationEvent) => {
             if (ev.animationName !== 'ripple-expand') return
@@ -177,24 +221,57 @@ onMounted(() => {
       ripples = []
     }
 
-    const onMouseDown = (e: Event) => createRipple(e as MouseEvent)
-    const onMouseUp = () => removeRipples()
-    const onMouseLeave = () => removeRipples()
+    const onPointerDown = (e: Event) => createRipple(e as PointerEvent)
+    const onPointerUp = () => removeRipples()
+    const onPointerLeave = () => removeRipples()
 
-    parent.addEventListener('mousedown', onMouseDown)
-    parent.addEventListener('mouseup', onMouseUp)
-    parent.addEventListener('mouseleave', onMouseLeave)
+    const pulsingKeys = ['Enter']
+    const holdingKeys = [' ']
+    let isHolding = false
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (pulsingKeys.includes(e.key)) {
+        removeRipplesInstantly()
+        createRipple()
+      }
+      else if (holdingKeys.includes(e.key)) {
+        if (!isHolding && !e.repeat) {
+          isHolding = true
+          createRipple()
+        }
+      }
+    }
+
+    const onKeyUp = (e: KeyboardEvent) => {
+      if (pulsingKeys.includes(e.key)) {
+        removeRipples()
+      }
+      else if (holdingKeys.includes(e.key)) {
+        if (isHolding) {
+          isHolding = false
+          removeRipples()
+        }
+      }
+    }
+
+    parent.addEventListener('pointerdown', onPointerDown)
+    parent.addEventListener('pointerup', onPointerUp)
+    parent.addEventListener('pointerleave', onPointerLeave)
+    parent.addEventListener('keydown', onKeyDown)
+    parent.addEventListener('keyup', onKeyUp)
 
     const cleanup = () => {
-      parent.removeEventListener('mousedown', onMouseDown)
-      parent.removeEventListener('mouseup', onMouseUp)
-      parent.removeEventListener('mouseleave', onMouseLeave)
+      parent.removeEventListener('pointerdown', onPointerDown)
+      parent.removeEventListener('pointerup', onPointerUp)
+      parent.removeEventListener('pointerleave', onPointerLeave)
+      parent.removeEventListener('keydown', onKeyDown)
+      parent.removeEventListener('keyup', onKeyUp)
 
       for (const r of ripples) {
-        const t = (r as any).__rippleExpandTimeout
+        const t = r.__rippleExpandTimeout
         if (typeof t === 'number') {
           clearTimeout(t)
-          delete (r as any).__rippleExpandTimeout
+          delete r.__rippleExpandTimeout
         }
       }
       ripples = []
@@ -211,7 +288,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 /**
- * Component's main style
+ * Main style
  */
 
 .yu-interactive {
@@ -221,7 +298,7 @@ onMounted(() => {
   pointer-events: none;
 }
 .yu-ripple {
-  overflow: hidden;
+  overflow: v-bind('finalRippleBehavior.debug ? "visible" : "hidden"');
 }
 
 /**
@@ -236,20 +313,20 @@ onMounted(() => {
   background-color: v-bind('finalLayerColor');
   opacity: 0;
   transition-property: opacity;
-  transition-duration: v-bind('finalStateLayer.fadeInDuration');
-  transition-timing-function: v-bind('finalStateLayer.fadeInTimingFunction');
+  transition-duration: v-bind('finalStateLayerBehavior.fadeOutDuration');
+  transition-timing-function: v-bind('finalStateLayerBehavior.fadeOutTimingFunction');
 }
-:global(*:hover > .yu-state-layer::after) {
-  opacity: v-bind('finalStateLayer.opacity');
+:global(:hover > .yu-state-layer::after) {
+  opacity: v-bind('finalStateLayerBehavior.opacity');
   transition-property: opacity;
-  transition-duration: v-bind('finalStateLayer.fadeOutDuration');
-  transition-timing-function: v-bind('finalStateLayer.fadeOutTimingFunction');
+  transition-duration: v-bind('finalStateLayerBehavior.fadeInDuration');
+  transition-timing-function: v-bind('finalStateLayerBehavior.fadeInTimingFunction');
 }
-:global(*:focus-visible > .yu-state-layer::after) {
-  opacity: v-bind('finalStateLayer.focusOpacity');
+:global(:focus-visible > .yu-state-layer::after) {
+  opacity: v-bind('finalStateLayerBehavior.focusOpacity');
   transition-property: opacity;
-  transition-duration: v-bind('finalStateLayer.fadeOutDuration');
-  transition-timing-function: v-bind('finalStateLayer.fadeOutTimingFunction');
+  transition-duration: v-bind('finalStateLayerBehavior.fadeInDuration');
+  transition-timing-function: v-bind('finalStateLayerBehavior.fadeInTimingFunction');
 }
 
 /**
@@ -261,22 +338,22 @@ onMounted(() => {
   pointer-events: none;
   border-radius: 50%;
   background-color: v-bind('finalLayerColor');
-  opacity: v-bind('finalRipple.opacity');
+  opacity: v-bind('finalRippleBehavior.opacity');
   transform: scale(1);
   will-change: transform;
   animation: none;
 }
 :global(.yu-ripple-effect.yu-ripple-animating) {
   animation-name: ripple-expand;
-  animation-duration: v-bind('finalRipple.expandDuration');
-  animation-timing-function: v-bind('finalRipple.expandTimingFunction');
+  animation-duration: v-bind('finalRippleBehavior.expandDuration');
+  animation-timing-function: v-bind('finalRippleBehavior.expandTimingFunction');
   animation-fill-mode: forwards;
 }
 :global(.yu-ripple-leaving) {
   opacity: 0;
   transition-property: opacity;
-  transition-duration: v-bind('finalRipple.fadeOutDuration');
-  transition-timing-function: v-bind('finalRipple.fadeOutTimingFunction');
+  transition-duration: v-bind('finalRippleBehavior.fadeOutDuration');
+  transition-timing-function: v-bind('finalRippleBehavior.fadeOutTimingFunction');
 }
 
 /**

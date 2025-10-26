@@ -4,11 +4,7 @@
     type="button"
   >
     <slot />
-    <YuInteractive
-      :yu-focus-ring="true"
-      :yu-ripple="true"
-      :yu-state-layer="true"
-    />
+    <YuInteractive />
   </button>
 </template>
 
@@ -26,10 +22,16 @@ const runtimePublic = useRuntimeConfig().public
 const materialYu = runtimePublic.materialYu
 const defaultConfig = materialYu.components.button
 
-const props = defineProps<{
-  yuMotionScheme?: MotionSchemeValue
-  yuShape?: YuButtonShapeValue
-}>()
+const props = defineProps({
+  yuMotionScheme: {
+    type: String as () => MotionSchemeValue,
+    default: undefined,
+  },
+  yuShape: {
+    type: String as () => YuButtonShapeValue,
+    default: undefined,
+  },
+})
 
 const finalMotionScheme = computed<MotionSchemeValue>(() => props.yuMotionScheme ?? (materialYu.motionScheme as MotionSchemeValue))
 const finalShape = computed(() => props.yuShape ?? defaultConfig.shape)

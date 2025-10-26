@@ -26,6 +26,9 @@ export const defaultOptions = {
       color: 'elevated',
     },
     interactive: {
+      focusRing: true,
+      ripple: true,
+      stateLayer: true,
       rippleBehavior: {
         fadeInDuration: '450ms',
         fadeInTimingFunction: 'cubic-bezier(.2, 0, 0, 1)',
@@ -42,7 +45,7 @@ export const defaultOptions = {
         fadeOutTimingFunction: 'linear',
         opacity: 'var(--md-sys-state-hover-state-layer-opacity)',
         focusOpacity: 'var(--md-sys-state-focus-state-layer-opacity)',
-      }
-    }
+      },
+    },
   },
 } satisfies DeepRequired<ModuleOptions>

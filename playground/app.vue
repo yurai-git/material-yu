@@ -5,31 +5,33 @@
         <h1>Nuxt module playground!</h1>
         <h2>Choose theme</h2>
         <p>Current theme: <strong>{{ theme }}</strong></p>
-        <div>
-          <button @click="setColorScheme('system')">
+        <div style="display: flex; gap: 1rem;">
+          <YuButton @click="setColorScheme('system')">
             System default
-          </button>
-          <button @click="setColorScheme('light')">
+          </YuButton>
+          <YuButton @click="setColorScheme('light')">
             Light
-          </button>
-          <button @click="setColorScheme('dark')">
+          </YuButton>
+          <YuButton @click="setColorScheme('dark')">
             Dark
-          </button>
+          </YuButton>
         </div>
         <h2>Choose contrast</h2>
         <p>Current contrast: <strong>{{ contrast }}</strong></p>
-        <button @click="setContrast('system')">
-          System defualt
-        </button>
-        <button @click="setContrast('default')">
-          Default
-        </button>
-        <button @click="setContrast('medium')">
-          Medium
-        </button>
-        <button @click="setContrast('high')">
-          High
-        </button>
+        <div style="display: flex; gap: 1rem;">
+          <YuButton @click="setContrast('system')">
+            System defualt
+          </YuButton>
+          <YuButton @click="setContrast('default')">
+            Default
+          </YuButton>
+          <YuButton @click="setContrast('medium')">
+            Medium
+          </YuButton>
+          <YuButton @click="setContrast('high')">
+            High
+          </YuButton>
+        </div>
         <h2>Icons</h2>
         <!-- Using an icon name -->
         <YuIcon yu-icon-name="home" />
@@ -59,14 +61,13 @@
         <YuIcon />
         <h2>Buttons</h2>
         <YuButton>Click me</YuButton>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <h2>Focus ring, ripples, and state layers</h2>
+        <div
+          tabindex="0"
+          style="height: 20rem; width: 20rem; border: var(--md-sys-color-outline-variant) 1px solid;"
+        >
+          <YuInteractive />
+        </div>
       </YuPane>
     </template>
   </YuLayout>

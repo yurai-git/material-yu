@@ -12,10 +12,16 @@ import { ref, onMounted } from 'vue'
  * Properties and states
  */
 
-const props = defineProps<{
-  yuBadge: boolean
-  yuTooltip: boolean
-}>()
+const props = defineProps({
+  yuBadge: {
+    type: Boolean,
+    default: undefined,
+  },
+  yuTooltip: {
+    type: Boolean,
+    default: undefined,
+  },
+})
 
 const root = ref<HTMLElement | null>(null)
 
