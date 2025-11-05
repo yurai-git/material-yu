@@ -12,7 +12,7 @@
 <script lang="ts" setup>
 import { useHead, useRuntimeConfig } from '#app'
 import { computed } from 'vue'
-import type { YuIconStyleValue } from '../types'
+import type { IconStyleValue } from '../types'
 
 /**
  * Utility functions
@@ -23,12 +23,9 @@ const clamp = (num: number, min: number, max: number) =>
 
 const getFontName = (style: string) => {
   switch (style) {
-    case 'rounded':
-      return 'Rounded'
-    case 'sharp':
-      return 'Sharp'
-    default:
-      return 'Outlined'
+    case 'rounded': return 'Rounded'
+    case 'sharp': return 'Sharp'
+    default: return 'Outlined'
   }
 }
 
@@ -49,7 +46,7 @@ const defaultConfig = useRuntimeConfig().public.materialYu.components.icon
 
 const props = defineProps({
   yuStyle: {
-    type: String as () => YuIconStyleValue,
+    type: String as () => IconStyleValue,
     default: undefined,
   },
   yuWeight: {

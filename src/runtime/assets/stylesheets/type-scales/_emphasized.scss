@@ -119,7 +119,7 @@ $typescale-emphasized: (
   )
 );
 
-@mixin typescale($name, $size) {
+@mixin typescale-emphasized($name, $size) {
   @if map.has-key($typescale-emphasized, $name, $size) {
     $style-map: map.get($typescale-emphasized, $name, $size);
 
@@ -128,7 +128,13 @@ $typescale-emphasized: (
     font-size: map.get($style-map, size);
     letter-spacing: map.get($style-map, tracking);
     line-height: map.get($style-map, line-height);
-  } @else {
-    @error "Invalid type scale: #{$name}-#{$size}";
+  }
+}
+
+@each $name, $sizes in $typescale-emphasized {
+  @each $size, $value in $sizes {
+    .yu-typescale-emphasized-#{$name}-#{$size} {
+      @include typescale-emphasized($name, $size);
+    }
   }
 }

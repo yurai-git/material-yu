@@ -1,7 +1,7 @@
 import type { ModuleOptions, DeepRequired } from './module'
 
 export const defaultOptions = {
-  prefix: 'yu',
+  // prefix: 'yu',
   fonts: true,
   image: true,
   theme: 'system',
@@ -23,7 +23,7 @@ export const defaultOptions = {
       type: 'default',
       size: 'small',
       shape: 'round',
-      color: 'elevated',
+      color: 'filled',
     },
     interactive: {
       focusRing: true,

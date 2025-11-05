@@ -128,7 +128,13 @@ $typescale: (
     font-size: map.get($style-map, size);
     letter-spacing: map.get($style-map, tracking);
     line-height: map.get($style-map, line-height);
-  } @else {
-    @error "Invalid type scale: #{$name}-#{$size}";
+  }
+}
+
+@each $name, $sizes in $typescale {
+  @each $size, $value in $sizes {
+    .yu-typescale-#{$name}-#{$size} {
+      @include typescale($name, $size);
+    }
   }
 }

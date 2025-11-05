@@ -14,10 +14,8 @@ $elevation: (
   level0: none
 );
 
-@function elevation($level) {
-  @if map.has-key($elevation, level#{$level}) {
-    @return map.get($elevation, level#{$level});
-  } @else {
-    @error "Invalid elevation level: #{$level}";
+:root {
+  @each $name, $value in $elevation {
+    --md-sys-elevation-#{$name}: #{$value};
   }
 }

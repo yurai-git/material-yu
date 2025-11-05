@@ -2,7 +2,7 @@ import { defineNuxtModule, createResolver, addPlugin, addComponentsDir, addImpor
 import { defu } from 'defu'
 import { defaultOptions } from './defaults'
 import { name, version } from '../package.json'
-import type { MotionSchemeValue, YuIconStyleValue, YuButtonTypeValue, YuButtonSizeValue, YuButtonShapeValue, YuButtonColorValue, MdSysColor } from './runtime/types'
+import type { MotionSchemeValue, IconStyleValue, ButtonTypeValue, ButtonSizeValue, ButtonShapeValue, ButtonColorValue, MdSysColor } from './runtime/types'
 
 type ThemeValue = 'system' | 'light' | 'dark'
 type ContrastValue = 'system' | 'default' | 'medium' | 'high'
@@ -18,7 +18,7 @@ export interface ModuleOptions {
    * Define the prefix for components
    * @defaultValue `'yu'`
    */
-  prefix?: string
+  // prefix?: string
 
   /**
    * Turn on or off the `@nuxt/fonts` module
@@ -62,7 +62,7 @@ export interface ModuleOptions {
        * Define the default style of Material Symbols
        * @defaultValue `'outlined'`
        */
-      style?: YuIconStyleValue
+      style?: IconStyleValue
 
       /**
        * Define the default `yuWeight`
@@ -112,25 +112,25 @@ export interface ModuleOptions {
        * Define the default `yuType`
        * @defaultValue `'default'`
        */
-      type?: YuButtonTypeValue
+      type?: ButtonTypeValue
 
       /**
        * Define the default `yuSize`
        * @defaultValue `'small'`
        */
-      size?: YuButtonSizeValue
+      size?: ButtonSizeValue
 
       /**
        * Define the default `yuShape`
        * @defaultValue `'round'`
        */
-      shape?: YuButtonShapeValue
+      shape?: ButtonShapeValue
 
       /**
        * Define the default `yuColor`
-       * @defaultValue `'elevated'`
+       * @defaultValue `'filled'`
        */
-      color?: YuButtonColorValue
+      color?: ButtonColorValue
     }
     /**
      * Configurations for the `YuInteractive` component
@@ -256,9 +256,11 @@ export default defineNuxtModule<ModuleOptions>({
   async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
 
+    nuxt.options.alias['@material-yu/styles'] = resolve('./runtime/assets/stylesheets')
+
     nuxt.options.css.push(resolve('./runtime/assets/stylesheets/material-tokens.scss'))
 
-    const yuIconStyle = options.components?.icon?.style || defaultOptions.components.icon.style
+    const iconStyle = options.components?.icon?.style || defaultOptions.components.icon.style
     const mapStyleToName = (style: string) => {
       switch (style) {
         case 'rounded': return 'Rounded'
@@ -266,12 +268,12 @@ export default defineNuxtModule<ModuleOptions>({
         default: return 'Outlined'
       }
     }
-    const yuIconUrl = `https://fonts.googleapis.com/css2?family=Material+Symbols+${mapStyleToName(yuIconStyle)}:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200`
+    const iconUrl = `https://fonts.googleapis.com/css2?family=Material+Symbols+${mapStyleToName(iconStyle)}:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200`
 
     nuxt.options.app.head.link = nuxt.options.app.head.link || []
     nuxt.options.app.head.link.push({
       rel: 'stylesheet',
-      href: yuIconUrl,
+      href: iconUrl,
     })
 
     nuxt.options.runtimeConfig.public.materialYu = defu(options, defaultOptions)
@@ -279,7 +281,7 @@ export default defineNuxtModule<ModuleOptions>({
     addPlugin(resolve('./runtime/plugin'))
     addComponentsDir({
       path: resolve('./runtime/components'),
-      prefix: options.prefix || defaultOptions.prefix,
+      prefix: 'yu',
       pathPrefix: false,
     })
     addImportsDir(resolve('./runtime/composables'))

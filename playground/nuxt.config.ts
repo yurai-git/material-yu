@@ -6,6 +6,7 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'en',
       },
+      title: 'Material Yu playground',
     },
   },
   compatibilityDate: '2025-09-22',

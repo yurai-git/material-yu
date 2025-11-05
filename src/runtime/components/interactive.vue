@@ -103,7 +103,7 @@ const finalStateLayerBehavior = computed(() => ({
   opacity: props.yuStateLayerBehavior?.opacity ?? defaultConfig.stateLayerBehavior.opacity,
   focusOpacity: props.yuStateLayerBehavior?.focusOpacity ?? defaultConfig.stateLayerBehavior.focusOpacity,
 }))
-const parentColor = ref('var(--md-sys-color-surface)')
+const parentColor = ref('currentColor')
 const finalLayerColor = computed(() => props.yuLayerColor ?? parentColor.value)
 
 /**
@@ -114,18 +114,34 @@ onMounted(() => {
   const el = root.value
   if (!el) return
 
-  const parent = el.parentElement
-  if (!parent) return
+  const host = el.parentElement
+  if (!host) return
 
-  parentColor.value = window.getComputedStyle(parent).color
+  const container = el.parentElement
+  if (!container) return
 
-  const prevPosition = parent.style.position
+  const onFocusIn = (e: Event) => {
+    if ((e.target as HTMLElement).matches(':focus-visible')) {
+      el.classList.add('is-focused')
+    }
+  }
+  const onFocusOut = () => el.classList.remove('is-focused')
+
+  host.addEventListener('focusin', onFocusIn)
+  host.addEventListener('focusout', onFocusOut)
+
+  onUnmounted(() => {
+    host.removeEventListener('focusin', onFocusIn)
+    host.removeEventListener('focusout', onFocusOut)
+  })
+
+  const prevPosition = container.style.position
   if (!prevPosition || prevPosition === 'static') {
-    parent.style.position = 'relative'
+    container.style.position = 'relative'
   }
 
   if (finalFocusRing.value) {
-    parent.style.outline = 'none'
+    host.style.outline = 'none'
   }
 
   /**
@@ -254,18 +270,18 @@ onMounted(() => {
       }
     }
 
-    parent.addEventListener('pointerdown', onPointerDown)
-    parent.addEventListener('pointerup', onPointerUp)
-    parent.addEventListener('pointerleave', onPointerLeave)
-    parent.addEventListener('keydown', onKeyDown)
-    parent.addEventListener('keyup', onKeyUp)
+    host.addEventListener('pointerdown', onPointerDown)
+    host.addEventListener('pointerup', onPointerUp)
+    host.addEventListener('pointerleave', onPointerLeave)
+    host.addEventListener('keydown', onKeyDown)
+    host.addEventListener('keyup', onKeyUp)
 
     const cleanup = () => {
-      parent.removeEventListener('pointerdown', onPointerDown)
-      parent.removeEventListener('pointerup', onPointerUp)
-      parent.removeEventListener('pointerleave', onPointerLeave)
-      parent.removeEventListener('keydown', onKeyDown)
-      parent.removeEventListener('keyup', onKeyUp)
+      host.removeEventListener('pointerdown', onPointerDown)
+      host.removeEventListener('pointerup', onPointerUp)
+      host.removeEventListener('pointerleave', onPointerLeave)
+      host.removeEventListener('keydown', onKeyDown)
+      host.removeEventListener('keyup', onKeyUp)
 
       for (const r of ripples) {
         const t = r.__rippleExpandTimeout
@@ -277,7 +293,7 @@ onMounted(() => {
       ripples = []
 
       if (!prevPosition || prevPosition === 'static') {
-        parent.style.position = prevPosition
+        container.style.position = prevPosition
       }
     }
 
@@ -316,13 +332,14 @@ onMounted(() => {
   transition-duration: v-bind('finalStateLayerBehavior.fadeOutDuration');
   transition-timing-function: v-bind('finalStateLayerBehavior.fadeOutTimingFunction');
 }
+.yu-state-layer.is-hovered::after,
 :global(:hover > .yu-state-layer::after) {
   opacity: v-bind('finalStateLayerBehavior.opacity');
   transition-property: opacity;
   transition-duration: v-bind('finalStateLayerBehavior.fadeInDuration');
   transition-timing-function: v-bind('finalStateLayerBehavior.fadeInTimingFunction');
 }
-:global(:focus-visible > .yu-state-layer::after) {
+.yu-state-layer.is-focused::after {
   opacity: v-bind('finalStateLayerBehavior.focusOpacity');
   transition-property: opacity;
   transition-duration: v-bind('finalStateLayerBehavior.fadeInDuration');
@@ -366,7 +383,7 @@ onMounted(() => {
   animation-duration: 150ms, 450ms;
   animation-timing-function: cubic-bezier(.2, 0, 0, 1);
 }
-:global(:focus-visible > .yu-focus-ring) {
+.yu-focus-ring.is-focused {
   outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
   outline-offset: var(--md-sys-state-focus-indicator-outer-offset);
   animation-name: outward-grow, outward-shrink;
