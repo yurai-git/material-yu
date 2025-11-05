@@ -6,7 +6,17 @@ Material Yu provides Material 3 components for Nuxt.
 
 - [ ] App bar
 - [ ] Badge
-- [x] Button
+- [ ] Button
+    - [x] Button
+    - [x] Toggle button
+    - [ ] Icon button
+    - [ ] Toggle icon button
+    - [ ] Split button
+    - [ ] Standard button group
+    - [ ] Connected button group
+    - [ ] Floating action button (FAB)
+    - [ ] Extended FAB
+    - [ ] FAB menu
 - [ ] Card
 - [ ] Carousel
 - [ ] Checkbox
