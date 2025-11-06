@@ -22,15 +22,23 @@ Material Yu provides Material 3 components for Nuxt.
 - [ ] Checkbox
 - [ ] Chip
 - [ ] Date & time picker
+    - [ ] Date picker
+    - [ ] Time picker
 - [ ] Dialog
 - [ ] Divider
 - [ ] List
 - [ ] Loading & progress
+    - [ ] Loading indicator
+    - [ ] Progress indicator
 - [ ] Menu
 - [ ] Navigation
+    - [ ] Navigation bar
+    - [ ] Navigation rail
 - [ ] Radio Button
 - [ ] Search
 - [ ] Sheet
+    - [ ] Bottom sheet
+    - [ ] Side sheet
 - [ ] Slider
 - [ ] Snackbar
 - [ ] Switch

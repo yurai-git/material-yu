@@ -53,7 +53,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref, resolveComponent, nextTick } from 'vue'
+import { computed, onMounted, ref, resolveComponent, nextTick, type ComponentPublicInstance } from 'vue'
 import type { ButtonShapeValue, MotionSchemeValue, ButtonColorValue, ButtonSizeValue, MotionDuration, MotionTarget, ButtonTypeValue, TypescaleRole, TypescaleSize, TypescaleTone } from '../types'
 import { useRuntimeConfig } from '#app'
 import { useMotion } from '../composables/use-motion'
@@ -218,11 +218,12 @@ const motion = (duration: MotionDuration, target: MotionTarget) => {
   }).value
 }
 
-const root = ref<HTMLElement | null>(null)
+const root = ref<ComponentPublicInstance | HTMLElement | null>(null)
 
 onMounted(() => {
   nextTick(() => {
-    const el = root.value
+    if (!root.value) return
+    const el = ('$el' in root.value ? root.value.$el : root.value) as HTMLElement
     if (!el) return
 
     switch (finalSize.value) {
@@ -568,7 +569,7 @@ onMounted(() => {
   &:active:not(.yu-button-disabled) {
     border-radius: var(--md-comp-button-xsmall-shape-pressed-morph, var(--md-sys-shape-corner-small));
   }
-  &:has(:checked):not(:active) {
+  &:has(:checked):not(:active), &:has(:checked).yu-button-disabled {
     &.yu-button-shape-round {
       border-radius: var(--md-comp-button-xsmall-selected-container-shape-round, var(--md-sys-shape-corner-medium));
     }
@@ -593,10 +594,12 @@ onMounted(() => {
   &.yu-button-shape-square {
     border-radius: var(--md-comp-button-small-shape-square, var(--md-sys-shape-corner-medium));
   }
-  &:active:not(.yu-button-disabled), &:has(:active):not(.yu-button-disabled) {
+  &:active:not(.yu-button-disabled),
+  &:has(:active):not(.yu-button-disabled) {
     border-radius: var(--md-comp-button-small-shape-pressed-morph, var(--md-sys-shape-corner-small));
   }
-  &:has(:checked):not(:active) {
+  &:has(:checked):not(:active),
+  &:has(:checked).yu-button-disabled {
     &.yu-button-shape-round {
       border-radius: var(--md-comp-button-small-selected-container-shape-round, var(--md-sys-shape-corner-medium));
     }
@@ -621,10 +624,12 @@ onMounted(() => {
   &.yu-button-shape-square {
     border-radius: var(--md-comp-button-medium-shape-square, var(--md-sys-shape-corner-large));
   }
-  &:active:not(.yu-button-disabled), &:has(:active):not(.yu-button-disabled) {
+  &:active:not(.yu-button-disabled),
+  &:has(:active):not(.yu-button-disabled) {
     border-radius: var(--md-comp-button-medium-shape-pressed-morph, var(--md-sys-shape-corner-medium));
   }
-  &:has(:checked):not(:active) {
+  &:has(:checked):not(:active),
+  &:has(:checked).yu-button-disabled {
     &.yu-button-shape-round {
       border-radius: var(--md-comp-button-medium-selected-container-shape-round, var(--md-sys-shape-corner-large));
     }
@@ -649,10 +654,12 @@ onMounted(() => {
   &.yu-button-shape-square {
     border-radius: var(--md-comp-button-large-shape-square, var(--md-sys-shape-corner-extra-large));
   }
-  &:active:not(.yu-button-disabled), &:has(:active):not(.yu-button-disabled) {
+  &:active:not(.yu-button-disabled),
+  &:has(:active):not(.yu-button-disabled) {
     border-radius: var(--md-comp-button-large-shape-pressed-morph, var(--md-sys-shape-corner-large));
   }
-  &:has(:checked):not(:active) {
+  &:has(:checked):not(:active),
+  &:has(:checked).yu-button-disabled {
     &.yu-button-shape-round {
       border-radius: var(--md-comp-button-large-selected-container-shape-round, var(--md-sys-shape-corner-extra-large));
     }
@@ -677,10 +684,12 @@ onMounted(() => {
   &.yu-button-shape-square {
     border-radius: var(--md-comp-button-xlarge-shape-square, var(--md-sys-shape-corner-extra-large));
   }
-  &:active:not(.yu-button-disabled), &:has(:active):not(.yu-button-disabled) {
+  &:active:not(.yu-button-disabled),
+  &:has(:active):not(.yu-button-disabled) {
     border-radius: var(--md-comp-button-xlarge-shape-pressed-morph, var(--md-sys-shape-corner-large));
   }
-  &:has(:checked):not(:active) {
+  &:has(:checked):not(:active),
+  &:has(:checked).yu-button-disabled {
     &.yu-button-shape-round {
       border-radius: var(--md-comp-button-xlarge-selected-container-shape-round, var(--md-sys-shape-corner-extra-large));
     }

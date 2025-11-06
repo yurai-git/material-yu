@@ -408,13 +408,15 @@
           </div>
         </div>
         <h3>Link</h3>
-        <YuButton
-          href="https://m3.material.io/"
-          target="_blank"
-        >
-          <YuIcon yu-icon-name="edit" />
-          Button
-        </YuButton>
+        <div class="row">
+          <YuButton
+            href="https://m3.material.io/"
+            target="_blank"
+          >
+            <YuIcon yu-icon-name="edit" />
+            Button
+          </YuButton>
+        </div>
         <h2>Focus rings, ripples, and state layers</h2>
         <div
           tabindex="0"
@@ -440,11 +442,13 @@ const toggled = ref(false)
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 .row {
   display: flex;
   align-items: center;
   flex-direction: row;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 </style>
