@@ -3,49 +3,49 @@
     <template #body>
       <YuPane>
         <h1>Material Yu playground</h1>
-        <h2>Choose theme</h2>
+        <h2>Theme</h2>
         <p>Current theme: <strong>{{ theme }}</strong></p>
         <div class="row">
-          <YuButton @click="setColorScheme('system')">
-            System default
-          </YuButton>
+          <YuButton
+            yu-icon="routine"
+            yu-text="System default"
+            @click="setColorScheme('system')"
+          />
           <YuButton
             yu-color="tonal"
+            yu-icon="light_mode"
+            yu-text="Light"
             @click="setColorScheme('light')"
-          >
-            Light
-          </YuButton>
+          />
           <YuButton
             yu-color="tonal"
+            yu-icon="dark_mode"
+            yu-text="Dark"
             @click="setColorScheme('dark')"
-          >
-            Dark
-          </YuButton>
+          />
         </div>
-        <h2>Choose contrast</h2>
+        <h2>Contrast</h2>
         <p>Current contrast: <strong>{{ contrast }}</strong></p>
         <div class="row">
-          <YuButton @click="setContrast('system')">
-            System defualt
-          </YuButton>
+          <YuButton
+            yu-text="System default"
+            @click="setContrast('system')"
+          />
           <YuButton
             yu-color="tonal"
+            yu-text="Default"
             @click="setContrast('default')"
-          >
-            Default
-          </YuButton>
+          />
           <YuButton
             yu-color="tonal"
+            yu-text="Medium"
             @click="setContrast('medium')"
-          >
-            Medium
-          </YuButton>
+          />
           <YuButton
             yu-color="tonal"
+            yu-text="High"
             @click="setContrast('high')"
-          >
-            High
-          </YuButton>
+          />
         </div>
         <h2>Icons</h2>
         <div class="row">
@@ -76,346 +76,174 @@
           </YuIcon>
         </div>
         <h2>Buttons</h2>
-        <h3>Toggle</h3>
-        <div class="row">
-          <YuButton
-            v-model:checked="toggled"
-            yu-type="toggle"
-          >
-            <YuIcon yu-icon-name="edit" />
-            Toggle button
-          </YuButton>
-          <p>
-            Button is <strong>{{ toggled ? 'checked' : 'unchecked' }}</strong>
-          </p>
-        </div>
-        <h3>Color</h3>
+        <h3>Styles</h3>
         <h4>Elevated</h4>
-        <div class="column">
-          <div class="row">
-            <YuButton yu-color="elevated">
-              <YuIcon yu-icon-name="edit" />
-              Button
-            </YuButton>
-            <YuButton
-              yu-color="elevated"
-              yu-shape="square"
-            >
-              Button
-            </YuButton>
-            <YuButton
-              disabled
-              yu-color="elevated"
-            >
-              Button
-            </YuButton>
-            <YuButton
-              disabled
-              yu-color="elevated"
-              yu-shape="square"
-            >
-              Button
-            </YuButton>
-          </div>
-          <div class="row">
-            <YuButton
-              yu-color="elevated"
-              yu-type="toggle"
-            >
-              <YuIcon yu-icon-name="edit" />
-              Button
-            </YuButton>
-            <YuButton
-              yu-color="elevated"
-              yu-shape="square"
-              yu-type="toggle"
-              checked
-            >
-              Button
-            </YuButton>
-            <YuButton
-              disabled
-              yu-color="elevated"
-              yu-type="toggle"
-            >
-              Button
-            </YuButton>
-            <YuButton
-              disabled
-              yu-color="elevated"
-              yu-shape="square"
-              yu-type="toggle"
-              checked
-            >
-              Button
-            </YuButton>
-          </div>
+        <div class="button-grid">
+          <YuButton
+            yu-color="elevated"
+            yu-text="Round"
+          />
+          <YuButton
+            yu-color="elevated"
+            yu-checkable
+            checked
+            yu-text="Checked"
+          />
+          <YuButton
+            yu-color="elevated"
+            yu-checkable
+            yu-text="Unchecked"
+          />
+          <YuButton
+            yu-color="elevated"
+            yu-shape="square"
+            yu-text="Square"
+          />
+          <YuButton
+            yu-color="elevated"
+            yu-shape="square"
+            yu-checkable
+            checked
+            yu-text="Checked"
+          />
+          <YuButton
+            yu-color="elevated"
+            yu-shape="square"
+            yu-checkable
+            yu-text="Unchecked"
+          />
         </div>
         <h4>Filled</h4>
-        <div class="column">
-          <div class="row">
-            <YuButton>
-              <YuIcon yu-icon-name="edit" />
-              Button
-            </YuButton>
-            <YuButton yu-shape="square">
-              Button
-            </YuButton>
-            <YuButton disabled>
-              Button
-            </YuButton>
-            <YuButton
-              yu-shape="square"
-              disabled
-            >
-              Button
-            </YuButton>
-          </div>
-          <div class="row">
-            <YuButton yu-type="toggle">
-              <YuIcon yu-icon-name="edit" />
-              Button
-            </YuButton>
-            <YuButton
-              yu-shape="square"
-              yu-type="toggle"
-              checked
-            >
-              Button
-            </YuButton>
-            <YuButton
-              disabled
-              yu-type="toggle"
-            >
-              Button
-            </YuButton>
-            <YuButton
-              yu-shape="square"
-              disabled
-              yu-type="toggle"
-              checked
-            >
-              Button
-            </YuButton>
-          </div>
+        <div class="button-grid">
+          <YuButton yu-text="Round" />
+          <YuButton
+            yu-checkable
+            checked
+            yu-text="Checked"
+          />
+          <YuButton
+            yu-checkable
+            yu-text="Unchecked"
+          />
+          <YuButton
+            yu-shape="square"
+            yu-text="Square"
+          />
+          <YuButton
+            yu-shape="square"
+            yu-checkable
+            checked
+            yu-text="Checked"
+          />
+          <YuButton
+            yu-shape="square"
+            yu-checkable
+            yu-text="Unchecked"
+          />
         </div>
         <h4>Tonal</h4>
-        <div class="column">
-          <div class="row">
-            <YuButton yu-color="tonal">
-              <YuIcon yu-icon-name="edit" />
-              Button
-            </YuButton>
-            <YuButton
-              yu-color="tonal"
-              yu-shape="square"
-            >
-              Button
-            </YuButton>
-            <YuButton
-              disabled
-              yu-color="tonal"
-            >
-              Button
-            </YuButton>
-            <YuButton
-              disabled
-              yu-color="tonal"
-              yu-shape="square"
-            >
-              Button
-            </YuButton>
-          </div>
-          <div class="row">
-            <YuButton
-              yu-color="tonal"
-              yu-type="toggle"
-            >
-              <YuIcon yu-icon-name="edit" />
-              Button
-            </YuButton>
-            <YuButton
-              yu-color="tonal"
-              yu-shape="square"
-              yu-type="toggle"
-              checked
-            >
-              Button
-            </YuButton>
-            <YuButton
-              disabled
-              yu-color="tonal"
-              yu-type="toggle"
-            >
-              Button
-            </YuButton>
-            <YuButton
-              disabled
-              yu-color="tonal"
-              yu-shape="square"
-              yu-type="toggle"
-              checked
-            >
-              Button
-            </YuButton>
-          </div>
+        <div class="button-grid">
+          <YuButton
+            yu-color="tonal"
+            yu-text="Round"
+          />
+          <YuButton
+            yu-color="tonal"
+            yu-checkable
+            checked
+            yu-text="Checked"
+          />
+          <YuButton
+            yu-color="tonal"
+            yu-checkable
+            yu-text="Unchecked"
+          />
+          <YuButton
+            yu-color="tonal"
+            yu-shape="square"
+            yu-text="Square"
+          />
+          <YuButton
+            yu-color="tonal"
+            yu-shape="square"
+            yu-checkable
+            checked
+            yu-text="Checked"
+          />
+          <YuButton
+            yu-color="tonal"
+            yu-shape="square"
+            yu-checkable
+            yu-text="Unchecked"
+          />
         </div>
         <h4>Outlined</h4>
-        <div class="column">
-          <div class="row">
-            <YuButton yu-color="outlined">
-              <YuIcon yu-icon-name="edit" />
-              Button
-            </YuButton>
-            <YuButton
-              yu-color="outlined"
-              yu-shape="square"
-            >
-              Button
-            </YuButton>
-            <YuButton
-              disabled
-              yu-color="outlined"
-            >
-              Button
-            </YuButton>
-            <YuButton
-              disabled
-              yu-color="outlined"
-              yu-shape="square"
-            >
-              Button
-            </YuButton>
-          </div>
-          <div class="row">
-            <YuButton
-              yu-color="outlined"
-              yu-type="toggle"
-            >
-              <YuIcon yu-icon-name="edit" />
-              Button
-            </YuButton>
-            <YuButton
-              yu-color="outlined"
-              yu-shape="square"
-              yu-type="toggle"
-              checked
-            >
-              Button
-            </YuButton>
-            <YuButton
-              disabled
-              yu-color="outlined"
-              yu-type="toggle"
-            >
-              Button
-            </YuButton>
-            <YuButton
-              disabled
-              yu-color="outlined"
-              yu-shape="square"
-              yu-type="toggle"
-              checked
-            >
-              Button
-            </YuButton>
-          </div>
+        <div class="button-grid">
+          <YuButton
+            yu-color="outlined"
+            yu-text="Round"
+          />
+          <YuButton
+            yu-color="outlined"
+            yu-checkable
+            checked
+            yu-text="Checked"
+          />
+          <YuButton
+            yu-color="outlined"
+            yu-checkable
+            yu-text="Unchecked"
+          />
+          <YuButton
+            yu-color="outlined"
+            yu-shape="square"
+            yu-text="Square"
+          />
+          <YuButton
+            yu-color="outlined"
+            yu-shape="square"
+            yu-checkable
+            checked
+            yu-text="Checked"
+          />
+          <YuButton
+            yu-color="outlined"
+            yu-shape="square"
+            yu-checkable
+            yu-text="Unchecked"
+          />
         </div>
         <h4>Text</h4>
-        <div class="row">
-          <YuButton yu-color="text">
-            <YuIcon yu-icon-name="edit" />
-            Button
-          </YuButton>
+        <div class="text-button-grid">
+          <YuButton
+            yu-color="text"
+            yu-text="Round"
+          />
           <YuButton
             yu-color="text"
             yu-shape="square"
-          >
-            Button
-          </YuButton>
-          <YuButton
-            disabled
-            yu-color="text"
-          >
-            Button
-          </YuButton>
-          <YuButton
-            disabled
-            yu-color="text"
-            yu-shape="square"
-          >
-            Button
-          </YuButton>
+            yu-text="Square"
+          />
         </div>
-        <h3>Size</h3>
-        <div class="column">
-          <div class="row">
-            <YuButton yu-size="xsmall">
-              <YuIcon yu-icon-name="edit" />
-              Xsmall
-            </YuButton>
-            <YuButton>
-              <YuIcon yu-icon-name="edit" />
-              Small
-            </YuButton>
-            <YuButton yu-size="medium">
-              <YuIcon yu-icon-name="edit" />
-              Medium
-            </YuButton>
-            <YuButton yu-size="large">
-              <YuIcon yu-icon-name="edit" />
-              Large
-            </YuButton>
-            <YuButton yu-size="xlarge">
-              <YuIcon yu-icon-name="edit" />
-              Xlarge
-            </YuButton>
-          </div>
-          <div class="row">
-            <YuButton
-              yu-size="xsmall"
-              yu-type="toggle"
-            >
-              <YuIcon yu-icon-name="edit" />
-              Xsmall
-            </YuButton>
-            <YuButton yu-type="toggle">
-              <YuIcon yu-icon-name="edit" />
-              Small
-            </YuButton>
-            <YuButton
-              yu-size="medium"
-              yu-type="toggle"
-            >
-              <YuIcon yu-icon-name="edit" />
-              Medium
-            </YuButton>
-            <YuButton
-              yu-size="large"
-              yu-type="toggle"
-            >
-              <YuIcon yu-icon-name="edit" />
-              Large
-            </YuButton>
-            <YuButton
-              yu-size="xlarge"
-              yu-type="toggle"
-              checked
-            >
-              <YuIcon yu-icon-name="edit" />
-              Xlarge
-            </YuButton>
-          </div>
-        </div>
-        <h3>Link</h3>
+        <h3>Sizes</h3>
         <div class="row">
           <YuButton
-            href="https://m3.material.io/"
-            target="_blank"
-          >
-            <YuIcon yu-icon-name="edit" />
-            Button
-          </YuButton>
+            yu-size="xsmall"
+            yu-text="Extra small"
+          />
+          <YuButton yu-text="Small" />
+          <YuButton
+            yu-size="medium"
+            yu-text="Medium"
+          />
+          <YuButton
+            yu-size="large"
+            yu-text="Large"
+          />
+          <YuButton
+            yu-size="xlarge"
+            yu-text="Extra large"
+          />
         </div>
         <h2>Focus rings, ripples, and state layers</h2>
         <div
@@ -430,14 +258,17 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import { useMaterialYu } from '#imports'
 
 const { theme, contrast, setColorScheme, setContrast } = useMaterialYu()
-const toggled = ref(false)
 </script>
 
 <style lang="scss">
+@use '@material-yu/styles/typescales';
+
+:root {
+  --md-ref-typeface-brand: 'Roboto Flex';
+}
 .column {
   display: flex;
   flex-direction: column;
@@ -450,5 +281,37 @@ const toggled = ref(false)
   flex-direction: row;
   gap: 1rem;
   flex-wrap: wrap;
+}
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(3, min-content);
+  gap: 1rem;
+  align-items: center;
+  justify-items: center;
+}
+.text-button-grid {
+  display: grid;
+  grid-template-columns: min-content;
+  gap: 1rem;
+  align-items: center;
+  justify-items: center;
+}
+h1 {
+  @include typescales.baseline('display', 'large');
+}
+h2 {
+  @include typescales.baseline('headline', 'large');
+}
+h3 {
+  @include typescales.baseline('headline', 'medium');
+}
+h4 {
+  @include typescales.baseline('headline', 'small');
+}
+p {
+  @include typescales.baseline('body', 'large');
+}
+strong {
+  font-weight: 600;
 }
 </style>

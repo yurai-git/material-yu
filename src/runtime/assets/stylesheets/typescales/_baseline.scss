@@ -1,0 +1,119 @@
+@use 'sass:map';
+
+$baseline: (
+  display: (
+    large: (
+      font: var(--md-sys-typescale-display-large-font),
+      weight: var(--md-sys-typescale-display-large-weight),
+      size: var(--md-sys-typescale-display-large-size),
+      tracking: var(--md-sys-typescale-display-large-tracking),
+      line-height: var(--md-sys-typescale-display-large-line-height),
+    ),
+    medium: (
+      font: var(--md-sys-typescale-display-medium-font),
+      weight: var(--md-sys-typescale-display-medium-weight),
+      size: var(--md-sys-typescale-display-medium-size),
+      tracking: var(--md-sys-typescale-display-medium-tracking),
+      line-height: var(--md-sys-typescale-display-medium-line-height),
+    ),
+    small: (
+      font: var(--md-sys-typescale-display-small-font),
+      weight: var(--md-sys-typescale-display-small-weight),
+      size: var(--md-sys-typescale-display-small-size),
+      tracking: var(--md-sys-typescale-display-small-tracking),
+      line-height: var(--md-sys-typescale-display-small-line-height),
+    ),
+  ),
+  headline: (
+    large: (
+      font: var(--md-sys-typescale-headline-large-font),
+      weight: var(--md-sys-typescale-headline-large-weight),
+      size: var(--md-sys-typescale-headline-large-size),
+      tracking: var(--md-sys-typescale-headline-large-tracking),
+      line-height: var(--md-sys-typescale-headline-large-line-height),
+    ),
+    medium: (
+      font: var(--md-sys-typescale-headline-medium-font),
+      weight: var(--md-sys-typescale-headline-medium-weight),
+      size: var(--md-sys-typescale-headline-medium-size),
+      tracking: var(--md-sys-typescale-headline-medium-tracking),
+      line-height: var(--md-sys-typescale-headline-medium-line-height),
+    ),
+    small: (
+      font: var(--md-sys-typescale-headline-small-font),
+      weight: var(--md-sys-typescale-headline-small-weight),
+      size: var(--md-sys-typescale-headline-small-size),
+      tracking: var(--md-sys-typescale-headline-small-tracking),
+      line-height: var(--md-sys-typescale-headline-small-line-height),
+    ),
+  ),
+  title: (
+    large: (
+      font: var(--md-sys-typescale-title-large-font),
+      weight: var(--md-sys-typescale-title-large-weight),
+      size: var(--md-sys-typescale-title-large-size),
+      tracking: var(--md-sys-typescale-title-large-tracking),
+      line-height: var(--md-sys-typescale-title-large-line-height),
+    ),
+    medium: (
+      font: var(--md-sys-typescale-title-medium-font),
+      weight: var(--md-sys-typescale-title-medium-weight),
+      size: var(--md-sys-typescale-title-medium-size),
+      tracking: var(--md-sys-typescale-title-medium-tracking),
+      line-height: var(--md-sys-typescale-title-medium-line-height),
+    ),
+    small: (
+      font: var(--md-sys-typescale-title-small-font),
+      weight: var(--md-sys-typescale-title-small-weight),
+      size: var(--md-sys-typescale-title-small-size),
+      tracking: var(--md-sys-typescale-title-small-tracking),
+      line-height: var(--md-sys-typescale-title-small-line-height),
+    ),
+  ),
+  body: (
+    large: (
+      font: var(--md-sys-typescale-body-large-font),
+      weight: var(--md-sys-typescale-body-large-weight),
+      size: var(--md-sys-typescale-body-large-size),
+      tracking: var(--md-sys-typescale-body-large-tracking),
+      line-height: var(--md-sys-typescale-body-large-line-height),
+    ),
+    medium: (
+      font: var(--md-sys-typescale-body-medium-font),
+      weight: var(--md-sys-typescale-body-medium-weight),
+      size: var(--md-sys-typescale-body-medium-size),
+      tracking: var(--md-sys-typescale-body-medium-tracking),
+      line-height: var(--md-sys-typescale-body-medium-line-height),
+    ),
+    small: (
+      font: var(--md-sys-typescale-body-small-font),
+      weight: var(--md-sys-typescale-body-small-weight),
+      size: var(--md-sys-typescale-body-small-size),
+      tracking: var(--md-sys-typescale-body-small-tracking),
+      line-height: var(--md-sys-typescale-body-small-line-height),
+    ),
+  ),
+  label: (
+    large: (
+      font: var(--md-sys-typescale-label-large-font),
+      weight: var(--md-sys-typescale-label-large-weight),
+      size: var(--md-sys-typescale-label-large-size),
+      tracking: var(--md-sys-typescale-label-large-tracking),
+      line-height: var(--md-sys-typescale-label-large-line-height),
+    ),
+    medium: (
+      font: var(--md-sys-typescale-label-medium-font),
+      weight: var(--md-sys-typescale-label-medium-weight),
+      size: var(--md-sys-typescale-label-medium-size),
+      tracking: var(--md-sys-typescale-label-medium-tracking),
+      line-height: var(--md-sys-typescale-label-medium-line-height),
+    ),
+    small: (
+      font: var(--md-sys-typescale-label-small-font),
+      weight: var(--md-sys-typescale-label-small-weight),
+      size: var(--md-sys-typescale-label-small-size),
+      tracking: var(--md-sys-typescale-label-small-tracking),
+      line-height: var(--md-sys-typescale-label-small-line-height),
+    ),
+  ),
+);

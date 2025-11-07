@@ -1,0 +1,28 @@
+@use 'baseline' as *;
+@use 'emphasized' as *;
+@use 'tokens';
+@use 'sass:map';
+
+@mixin baseline($name, $size) {
+  @if map.has-key($baseline, $name, $size) {
+    $style-map: map.get($baseline, $name, $size);
+
+    font-family: map.get($style-map, font);
+    font-weight: map.get($style-map, weight);
+    font-size: map.get($style-map, size);
+    letter-spacing: map.get($style-map, tracking);
+    line-height: map.get($style-map, line-height);
+  }
+}
+
+@mixin emphasized($name, $size) {
+  @if map.has-key($emphasized, $name, $size) {
+    $style-map: map.get($emphasized, $name, $size);
+
+    font-family: map.get($style-map, font);
+    font-weight: map.get($style-map, weight);
+    font-size: map.get($style-map, size);
+    letter-spacing: map.get($style-map, tracking);
+    line-height: map.get($style-map, line-height);
+  }
+}

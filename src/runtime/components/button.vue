@@ -1,7 +1,7 @@
 <template>
   <component
     :is="tag"
-    v-if="finalType == 'default'"
+    v-if="finalCheckable == false"
     ref="root"
     :class="[
       'yu-button',
@@ -15,14 +15,23 @@
     v-bind="defaultAttrs"
     @click="handleClick"
   >
+    <YuIcon
+      v-if="props.yuIcon"
+      :yu-icon-name="props.yuIcon"
+      class="yu-button-icon"
+    />
     <slot />
+    <span
+      v-if="props.yuText"
+      class="yu-button-label"
+    >{{ props.yuText }}</span>
     <YuInteractive
       :yu-ripple="!(props.disabled || props.softDisabled)"
       :yu-state-layer="!(props.disabled || props.softDisabled)"
     />
   </component>
   <label
-    v-else-if="finalType == 'toggle'"
+    v-else-if="finalCheckable == true"
     ref="root"
     :class="[
       'yu-button',
@@ -44,7 +53,16 @@
       class="yu-button-type-toggle-input"
       @change="emits('update:checked', ($event.target as HTMLInputElement).checked)"
     >
+    <YuIcon
+      v-if="props.yuIcon"
+      :yu-icon-name="props.yuIcon"
+      class="yu-button-icon"
+    />
     <slot />
+    <span
+      v-if="props.yuText"
+      class="yu-button-label"
+    >{{ props.yuText }}</span>
     <YuInteractive
       :yu-ripple="!(props.disabled || props.softDisabled)"
       :yu-state-layer="!(props.disabled || props.softDisabled)"
@@ -54,10 +72,9 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, ref, resolveComponent, nextTick, type ComponentPublicInstance } from 'vue'
-import type { ButtonShapeValue, MotionSchemeValue, ButtonColorValue, ButtonSizeValue, MotionDuration, MotionTarget, ButtonTypeValue, TypescaleRole, TypescaleSize, TypescaleTone } from '../types'
+import type { ButtonShapeValue, MotionSchemeValue, ButtonColorValue, ButtonSizeValue, MotionDuration, MotionTarget } from '../types'
 import { useRuntimeConfig } from '#app'
 import { useMotion } from '../composables/use-motion'
-import { useTypescale } from '../composables/use-typescale'
 import type { RouteLocationRaw } from 'vue-router'
 
 /**
@@ -73,22 +90,23 @@ const defaultConfig = materialYu.components.button
 const props = defineProps({
   /**
    * The motion scheme to use for the component.
+   * @values `'standard'`, `'expressive'`
    */
   yuMotionScheme: {
     type: String as () => MotionSchemeValue,
     default: undefined,
   },
   /**
-   * The type of the button.
-   * @values 'default', 'toggle'
+   * Whether the button is a toggle button.
+   * @values `true`, `false`
    */
-  yuType: {
-    type: String as () => ButtonTypeValue,
+  yuCheckable: {
+    type: Boolean,
     default: undefined,
   },
   /**
    * The size of the button.
-   * @values 'xsmall', 'small', 'medium', 'large', 'xlarge'
+   * @values `'xsmall'`, `'small'`, `'medium'`, `'large'`, `'xlarge'`
    */
   yuSize: {
     type: String as () => ButtonSizeValue,
@@ -96,7 +114,7 @@ const props = defineProps({
   },
   /**
    * The shape of the button.
-   * @values 'round', 'square'
+   * @values `'round'`, `'square'`
    */
   yuShape: {
     type: String as () => ButtonShapeValue,
@@ -104,14 +122,29 @@ const props = defineProps({
   },
   /**
    * The color of the button.
-   * @values 'elevated', 'filled', 'tonal', 'outlined', 'text'
+   * @values `'elevated'`, `'filled'`, `'tonal'`, `'outlined'`, `'text'`
    */
   yuColor: {
     type: String as () => ButtonColorValue,
     default: undefined,
   },
   /**
+   * The label of the button.
+   */
+  yuText: {
+    type: String,
+    default: undefined,
+  },
+  /**
+   * The icon of the button.
+   */
+  yuIcon: {
+    type: String,
+    default: undefined,
+  },
+  /**
    * Whether the button is disabled.
+   * @values `true`, `false`
    */
   disabled: {
     type: Boolean,
@@ -119,6 +152,7 @@ const props = defineProps({
   },
   /**
    * Whether the button is soft-disabled (visually disabled but still focusable).
+   * @values `true`, `false`
    */
   softDisabled: {
     type: Boolean,
@@ -140,6 +174,7 @@ const props = defineProps({
   },
   /**
    * Whether the toggle button is checked.
+   * @values `true`, `false`
    */
   checked: {
     type: Boolean,
@@ -193,24 +228,17 @@ const defaultAttrs = computed(() => props.href
 
 const finalMotionScheme = computed<MotionSchemeValue>(() => props.yuMotionScheme ?? (materialYu.motionScheme as MotionSchemeValue))
 const finalColor = computed(() => props.yuColor ?? defaultConfig.color)
-const finalType = computed(() => {
-  const type = props.yuType ?? defaultConfig.type
-  if (finalColor.value === 'text' && type === 'toggle') {
-    console.warn('[Material Yu warn]: `yuType` cannot be `\'toggle\'` when `yuColor` is `\'text\'` on `YuButton` component. Falling back to `\'default\'`.')
-    return 'default'
+const finalCheckable = computed(() => {
+  const checkable = props.yuCheckable ?? defaultConfig.checkable
+  if (finalColor.value === 'text' && checkable === true) {
+    console.warn('[Material Yu warn]: `yuCheckable` cannot be `true` when `yuColor` is `\'text\'` on `YuButton` component. Falling back to `false`.')
+    return false
   }
-  return type
+  return checkable
 })
 const finalSize = computed(() => props.yuSize ?? defaultConfig.size)
 const finalShape = computed(() => props.yuShape ?? defaultConfig.shape)
 
-const typescale = (role: TypescaleRole, size: TypescaleSize, tone: TypescaleTone) => {
-  return useTypescale({
-    role: role,
-    size: size,
-    tone: tone,
-  }).value
-}
 const motion = (duration: MotionDuration, target: MotionTarget) => {
   return useMotion(finalMotionScheme.value, {
     duration: duration,
@@ -225,28 +253,13 @@ onMounted(() => {
     if (!root.value) return
     const el = ('$el' in root.value ? root.value.$el : root.value) as HTMLElement
     if (!el) return
-
-    switch (finalSize.value) {
-      case 'xsmall':
-        el.classList.add(typescale('label', 'large', 'baseline'))
-        break
-      case 'medium':
-        el.classList.add(typescale('title', 'medium', 'baseline'))
-        break
-      case 'large':
-        el.classList.add(typescale('headline', 'small', 'baseline'))
-        break
-      case 'xlarge':
-        el.classList.add(typescale('headline', 'large', 'baseline'))
-        break
-      default:
-        el.classList.add(typescale('label', 'large', 'baseline'))
-    }
   })
 })
 </script>
 
 <style lang="scss" scoped>
+@use '@material-yu/styles/typescales';
+
 .yu-button {
   border: none;
   display: flex;
@@ -256,6 +269,7 @@ onMounted(() => {
   user-select: none;
   text-decoration: none;
   width: fit-content;
+  -webkit-tap-highlight-color: #fff0;
 }
 .yu-button-disabled {
   cursor: not-allowed;
@@ -552,6 +566,7 @@ onMounted(() => {
 }
 .yu-button-size-xsmall {
   height: var(--md-comp-button-xsmall-container-height, 32px);
+  @include typescales.baseline('label', 'large');
   --md-comp-icon-optical-size: var(--md-comp-button-xsmall-icon-size, 20px);
   padding-inline: var(--md-comp-button-xsmall-leading-space, 12px) var(--md-comp-button-xsmall-trailing-space, 12px);
   gap: var(--md-comp-button-xsmall-between-icon-label-space, 8px);
@@ -580,6 +595,7 @@ onMounted(() => {
 }
 .yu-button-size-small {
   height: var(--md-comp-button-small-container-height, 40px);
+  @include typescales.baseline('label', 'large');
   --md-comp-icon-optical-size: var(--md-comp-button-small-icon-size, 20px);
   padding-inline: var(--md-comp-button-small-leading-space, 16px) var(--md-comp-button-small-trailing-space, 16px);
   gap: var(--md-comp-button-small-between-icon-label-space, 8px);
@@ -610,6 +626,7 @@ onMounted(() => {
 }
 .yu-button-size-medium {
   height: var(--md-comp-button-medium-container-height, 56px);
+  @include typescales.baseline('title', 'medium');
   --md-comp-icon-optical-size: var(--md-comp-button-medium-icon-size, 24px);
   padding-inline: var(--md-comp-button-medium-leading-space, 24px) var(--md-comp-button-medium-trailing-space, 24px);
   gap: var(--md-comp-button-medium-between-icon-label-space, 8px);
@@ -640,6 +657,7 @@ onMounted(() => {
 }
 .yu-button-size-large {
   height: var(--md-comp-button-large-container-height, 96px);
+  @include typescales.baseline('headline', 'small');
   --md-comp-icon-optical-size: var(--md-comp-button-large-icon-size, 32px);
   padding-inline: var(--md-comp-button-large-leading-space, 48px) var(--md-comp-button-large-trailing-space, 48px);
   gap: var(--md-comp-button-large-between-icon-label-space, 12px);
@@ -670,6 +688,7 @@ onMounted(() => {
 }
 .yu-button-size-xlarge {
   height: var(--md-comp-button-xlarge-container-height, 136px);
+  @include typescales.baseline('headline', 'large');
   --md-comp-icon-optical-size: var(--md-comp-button-xlarge-icon-size, 40px);
   padding-inline: var(--md-comp-button-xlarge-leading-space, 64px) var(--md-comp-button-xlarge-trailing-space, 64px);
   gap: var(--md-comp-button-xlarge-between-icon-label-space, 16px);

@@ -20,7 +20,7 @@ export const defaultOptions = {
       windowColor: 'md.sys.color.surface-container',
     },
     button: {
-      type: 'default',
+      checkable: false,
       size: 'small',
       shape: 'round',
       color: 'filled',

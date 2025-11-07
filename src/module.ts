@@ -2,7 +2,7 @@ import { defineNuxtModule, createResolver, addPlugin, addComponentsDir, addImpor
 import { defu } from 'defu'
 import { defaultOptions } from './defaults'
 import { name, version } from '../package.json'
-import type { MotionSchemeValue, IconStyleValue, ButtonTypeValue, ButtonSizeValue, ButtonShapeValue, ButtonColorValue, MdSysColor } from './runtime/types'
+import type { MotionSchemeValue, IconStyleValue, ButtonSizeValue, ButtonShapeValue, ButtonColorValue, MdSysColor } from './runtime/types'
 
 type ThemeValue = 'system' | 'light' | 'dark'
 type ContrastValue = 'system' | 'default' | 'medium' | 'high'
@@ -110,9 +110,9 @@ export interface ModuleOptions {
     button?: {
       /**
        * Define the default `yuType`
-       * @defaultValue `'default'`
+       * @defaultValue `false`
        */
-      type?: ButtonTypeValue
+      checkable?: boolean
 
       /**
        * Define the default `yuSize`
