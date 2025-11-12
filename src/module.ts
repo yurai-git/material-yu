@@ -3,6 +3,7 @@ import { defu } from 'defu'
 import { defaultOptions } from './defaults'
 import { name, version } from '../package.json'
 import type { MotionSchemeValue, IconStyleValue, ButtonSizeValue, ButtonShapeValue, ButtonColorValue, MdSysColor } from './runtime/types'
+import { argbFromHex, themeFromSourceColor, applyTheme } from '@material/material-color-utilities'
 
 type ThemeValue = 'system' | 'light' | 'dark'
 type ContrastValue = 'system' | 'default' | 'medium' | 'high'
@@ -15,41 +16,87 @@ export type DeepRequired<T> = T extends (...args: unknown[]) => unknown
 
 export interface ModuleOptions {
   /**
-   * Define the prefix for components
-   * @defaultValue `'yu'`
-   */
-  // prefix?: string
-
-  /**
    * Turn on or off the `@nuxt/fonts` module
-   * @defaultValue `true`
+   * @default `true`
    */
   fonts?: boolean
 
   /**
    * Turn on or off the `@nuxt/image` module
-   * @defaultValue `true`
+   * @default `true`
    */
   image?: boolean
 
   /**
    * Define the default theme
-   * @defaultValue `'system'`
+   * @default `'system'`
    */
   theme?: ThemeValue
 
   /**
    * Define the default contrast preference
-   * @defaultValue `'system'`
+   * @default `'system'`
    */
   contrast?: ContrastValue
 
   /**
    * Define the default motion scheme
-   * @defaultValue `'expressive'`
+   * @default `'expressive'`
    */
   motionScheme?: MotionSchemeValue
 
+  /**
+   * Define the style of Material Symbols
+   * @default `'outlined'`
+   */
+  iconStyle?: IconStyleValue
+
+  reference?: {
+    /**
+     * Color configurations
+     */
+    color?: {
+      /**
+       * Seed color for dynamic
+       */
+      sourceColor?: string | null
+    }
+
+    /**
+     * Typography configurations
+     */
+    typography?: {
+      /**
+       * Define the default brand font
+       * @default `'Roboto'`
+       */
+      brandTypeface?: string
+
+      /**
+       * Define the default plain font
+       * @default `'Roboto'`
+       */
+      plainTypeface?: string
+
+      /**
+       * Define the font weight for regular
+       * @default `400`
+       */
+      regularWeight?: number
+
+      /**
+       * Define the font weight for medium
+       * @default `500`
+       */
+      mediumWeight?: number
+
+      /**
+       * Define the font weight for bold
+       * @default `700`
+       */
+      boldWeight?: number
+    }
+  }
   /**
    * Component configurations
    */
@@ -59,32 +106,26 @@ export interface ModuleOptions {
      */
     icon?: {
       /**
-       * Define the default style of Material Symbols
-       * @defaultValue `'outlined'`
-       */
-      style?: IconStyleValue
-
-      /**
        * Define the default `yuWeight`
-       * @defaultValue `400`
+       * @default `400`
        */
       weight?: number
 
       /**
        * Define the default `yuFill`
-       * @defaultValue `false`
+       * @default `false`
        */
       fill?: boolean
 
       /**
        * Define the default `yuEmphasis`
-       * @defaultValue `false`
+       * @default `false`
        */
       emphasis?: boolean
 
       /**
        * Define the default `yuSize`
-       * @defaultValue `24`
+       * @default `24`
        */
       size?: number
     }
@@ -94,13 +135,13 @@ export interface ModuleOptions {
     layout?: {
       /**
        * Define the default `yuPaneColor`
-       * @defaultValue `'md.sys.color.surface'`
+       * @default `'md.sys.color.surface'`
        */
       paneColor?: MdSysColor
 
       /**
        * Define the default `yuWindowColor`
-       * @defaultValue `'md.sys.color.surface-container'`
+       * @default `'md.sys.color.surface-container'`
        */
       windowColor?: MdSysColor
     }
@@ -110,25 +151,25 @@ export interface ModuleOptions {
     button?: {
       /**
        * Define the default `yuType`
-       * @defaultValue `false`
+       * @default `false`
        */
       checkable?: boolean
 
       /**
        * Define the default `yuSize`
-       * @defaultValue `'small'`
+       * @default `'small'`
        */
       size?: ButtonSizeValue
 
       /**
        * Define the default `yuShape`
-       * @defaultValue `'round'`
+       * @default `'round'`
        */
       shape?: ButtonShapeValue
 
       /**
        * Define the default `yuColor`
-       * @defaultValue `'filled'`
+       * @default `'filled'`
        */
       color?: ButtonColorValue
     }
@@ -138,19 +179,19 @@ export interface ModuleOptions {
     interactive?: {
       /**
        * Define the default `yuFocusRing`
-       * @defaultValue `true`
+       * @default `true`
        */
       focusRing?: boolean
 
       /**
        * Define the default `yuRipple`
-       * @defaultValue `true`
+       * @default `true`
        */
       ripple?: boolean
 
       /**
        * Define the default `yuStateLayer`
-       * @defaultValue `true`
+       * @default `true`
        */
       stateLayer?: boolean
       /**
@@ -159,43 +200,43 @@ export interface ModuleOptions {
       rippleBehavior?: {
         /**
          * Define the default ripple fade-in duration
-         * @defaultValue `'450ms'`
+         * @default `'450ms'`
          */
         fadeInDuration?: string
 
         /**
          * Define the default ripple fade-in timing function
-         * @defaultValue `'cubic-bezier(.2, 0, 0, 1)'`
+         * @default `'cubic-bezier(.2, 0, 0, 1)'`
          */
         fadeInTimingFunction?: string
 
         /**
          * Define the default ripple expand duration
-         * @defaultValue `'450ms'`
+         * @default `'450ms'`
          */
         expandDuration?: string
 
         /**
          * Define the default ripple expand timing function
-         * @defaultValue `'cubic-bezier(.2, 0, 0, 1)'`
+         * @default `'cubic-bezier(.2, 0, 0, 1)'`
          */
         expandTimingFunction?: string
 
         /**
          * Define the default ripple fade-out duration
-         * @defaultValue `'375ms'`
+         * @default `'375ms'`
          */
         fadeOutDuration?: string
 
         /**
          * Define the default ripple fade-out timing function
-         * @defaultValue `'linear'`
+         * @default `'linear'`
          */
         fadeOutTimingFunction?: string
 
         /**
          * Define the default ripple opacity
-         * @defaultValue `'var(--md-sys-state-pressed-state-layer-opacity)'`
+         * @default `'var(--md-sys-state-pressed-state-layer-opacity)'`
          */
         opacity?: string
       }
@@ -205,37 +246,37 @@ export interface ModuleOptions {
       stateLayerBehavior?: {
         /**
          * Define the default state layer fade-in duration
-         * @defaultValue `'150ms'`
+         * @default `'150ms'`
          */
         fadeInDuration: string
 
         /**
          * Define the default state layer fade-in timing function
-         * @defaultValue `'linear'`
+         * @default `'linear'`
          */
         fadeInTimingFunction: string
 
         /**
          * Define the default state layer fade-out duration
-         * @defaultValue `'150ms'`
+         * @default `'150ms'`
          */
         fadeOutDuration: string
 
         /**
          * Define the default state layer fade-out timing function
-         * @defaultValue `'linear'`
+         * @default `'linear'`
          */
         fadeOutTimingFunction: string
 
         /**
          * Define the default state layer opacity
-         * @defaultValue `'var(--md-sys-state-hover-state-layer-opacity)'`
+         * @default `'var(--md-sys-state-hover-state-layer-opacity)'`
          */
         opacity: string
 
         /**
          * Define the default focus state layer opacity
-         * @defaultValue `'var(--md-sys-state-focus-state-layer-opacity)'`
+         * @default `'var(--md-sys-state-focus-state-layer-opacity)'`
          */
         focusOpacity: string
       }
@@ -256,11 +297,12 @@ export default defineNuxtModule<ModuleOptions>({
   async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
 
-    nuxt.options.alias['@material-yu/styles'] = resolve('./runtime/assets/stylesheets')
+    nuxt.options.alias['@material-yu/typescales'] = resolve('./runtime/assets/stylesheets/typescales')
+    nuxt.options.alias['@material-yu'] = resolve('./runtime/composables')
 
     nuxt.options.css.push(resolve('./runtime/assets/stylesheets/material-tokens.scss'))
 
-    const iconStyle = options.components?.icon?.style || defaultOptions.components.icon.style
+    const iconStyle = options.iconStyle || defaultOptions.iconStyle
     const mapStyleToName = (style: string) => {
       switch (style) {
         case 'rounded': return 'Rounded'
@@ -268,13 +310,34 @@ export default defineNuxtModule<ModuleOptions>({
         default: return 'Outlined'
       }
     }
-    const iconUrl = `https://fonts.googleapis.com/css2?family=Material+Symbols+${mapStyleToName(iconStyle)}:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200`
-
     nuxt.options.app.head.link = nuxt.options.app.head.link || []
     nuxt.options.app.head.link.push({
       rel: 'stylesheet',
-      href: iconUrl,
+      href: `https://fonts.googleapis.com/css2?family=Material+Symbols+${mapStyleToName(iconStyle)}:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200`,
     })
+
+    const typography = options.reference?.typography || defaultOptions.reference.typography
+    const typefaceStyles = `
+      :root {
+        --md-ref-typeface-brand: ${typography.brandTypeface}, ${typography.plainTypeface}, sans-serif;
+        --md-ref-typeface-plain: ${typography.plainTypeface}, sans-serif;
+        --md-ref-typeface-weight-regular: ${typography.regularWeight};
+        --md-ref-typeface-weight-medium: ${typography.mediumWeight};
+        --md-ref-typeface-weight-bold: ${typography.boldWeight};
+      }
+    `
+    nuxt.options.app.head.style = nuxt.options.app.head.style || []
+    nuxt.options.app.head.style.push({ textContent: typefaceStyles })
+
+    if (options.reference?.color?.sourceColor) {
+      const sourceColor = argbFromHex(options.reference.color.sourceColor)
+      const theme = themeFromSourceColor(sourceColor)
+
+      if (import.meta.client) {
+        console.log(JSON.stringify(theme, null, 2))
+        applyTheme(theme)
+      }
+    }
 
     nuxt.options.runtimeConfig.public.materialYu = defu(options, defaultOptions)
 

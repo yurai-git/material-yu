@@ -140,10 +140,6 @@ onMounted(() => {
     container.style.position = 'relative'
   }
 
-  if (finalFocusRing.value) {
-    host.style.outline = 'none'
-  }
-
   /**
    * Ripple implementation
    */

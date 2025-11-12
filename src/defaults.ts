@@ -7,9 +7,21 @@ export const defaultOptions = {
   theme: 'system',
   contrast: 'system',
   motionScheme: 'expressive',
+  iconStyle: 'outlined',
+  reference: {
+    color: {
+      sourceColor: null,
+    },
+    typography: {
+      brandTypeface: 'Roboto',
+      plainTypeface: 'Roboto',
+      regularWeight: 400,
+      mediumWeight: 500,
+      boldWeight: 700,
+    },
+  },
   components: {
     icon: {
-      style: 'outlined',
       weight: 400,
       fill: false,
       emphasis: false,

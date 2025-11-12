@@ -1,18 +1,17 @@
 <template>
   <span
     class="yu-icon yu-component"
-    :aria-hidden="finalAriaHidden"
-    :aria-label="ariaLabel"
-    :role="finalRole"
+    :aria-hidden="ariaHidden"
+    :role="role"
   >
     <slot>{{ finalIconName }}</slot>
   </span>
 </template>
 
 <script lang="ts" setup>
-import { useHead, useRuntimeConfig } from '#app'
-import { computed } from 'vue'
-import type { IconStyleValue } from '../types'
+import { useRuntimeConfig } from '#app'
+import { computed, useAttrs, toRef, type Ref } from 'vue'
+import { useTheme } from '@material-yu/use-theme'
 
 /**
  * Utility functions
@@ -20,7 +19,6 @@ import type { IconStyleValue } from '../types'
 
 const clamp = (num: number, min: number, max: number) =>
   Math.min(Math.max(num, min), max)
-
 const getFontName = (style: string) => {
   switch (style) {
     case 'rounded': return 'Rounded'
@@ -29,121 +27,69 @@ const getFontName = (style: string) => {
   }
 }
 
-const buildFontUrl = (
-  styleName: string,
-  opsz: number,
-  wght: number,
-  fill: number,
-  grad: string,
-) =>
-  `https://fonts.googleapis.com/css2?family=Material+Symbols+${styleName}:opsz,wght,FILL,GRAD@${opsz},${wght},${fill},${grad}`
-
 /**
  * Properties and states
  */
 
-const defaultConfig = useRuntimeConfig().public.materialYu.components.icon
+const runtimePublic = useRuntimeConfig().public
+const materialYu = runtimePublic.materialYu
+const defaultConfig = materialYu.components.icon
 
 const props = defineProps({
-  yuStyle: {
-    type: String as () => IconStyleValue,
-    default: undefined,
-  },
-  yuWeight: {
-    type: Number,
-    default: undefined,
-  },
-  yuFill: {
-    type: Boolean,
-    default: undefined,
-  },
-  yuEmphasis: {
-    type: Boolean,
-    default: undefined,
-  },
-  yuSize: {
-    type: Number,
-    default: undefined,
-  },
   yuIconName: {
     type: String,
     default: undefined,
   },
-  ariaLabel: {
-    type: String,
+  yuStyle: {
+    type: Object as () => {
+      weight: number
+      fill: boolean
+      emphasis: boolean
+      size: number
+    },
     default: undefined,
   },
 })
 
-const finalStyle = computed(() => props.yuStyle ?? defaultConfig.style)
-const finalWeight = computed(() => props.yuWeight ?? defaultConfig.weight)
-const finalFill = computed(() => props.yuFill ?? defaultConfig.fill)
-const finalEmphasis = computed(() => props.yuEmphasis ?? defaultConfig.emphasis)
-const finalSize = computed(() => props.yuSize ?? defaultConfig.size)
+const finalWeight = computed(() => props.yuStyle?.weight ?? defaultConfig.weight)
+const finalFill = computed(() => props.yuStyle?.fill ?? defaultConfig.fill)
+const finalEmphasis = computed(() => props.yuStyle?.emphasis ?? defaultConfig.emphasis)
+const finalSize = computed(() => props.yuStyle?.size ?? defaultConfig.size)
 const finalIconName = computed(() => props.yuIconName ?? 'search')
 
 /**
  * Font variations
  */
 
+const { isLightTheme } = useTheme()
+
+const gradFallback = computed(() => isLightTheme.value ? 0 : -25)
 const opsz = computed(() => clamp(finalSize.value, 20, 48))
 const wght = computed(() => clamp(finalWeight.value, 100, 700))
 const fill = computed(() => finalFill.value ? 1 : 0)
-const gradLight = computed(() => finalEmphasis.value ? 200 : 0)
-const gradDark = computed(() => finalEmphasis.value ? 200 : -25)
-
-const fontName = computed(() => getFontName(finalStyle.value))
-const styleValue = computed(() => `'Material Symbols ${fontName.value}'`)
+const grad = computed(() => finalEmphasis.value ? 200 : gradFallback.value)
+const styleValue = computed(() => `'Material Symbols ${getFontName(materialYu.iconStyle)}'`)
 
 /**
  * WAI-ARIA attributes
  */
 
-const finalAriaHidden = computed(() => !props.ariaLabel ? 'true' : undefined)
-const finalRole = computed(() => props.ariaLabel ? 'img' : undefined)
-
-/**
- * Dynamic font loading
- */
-
-useHead(computed(() => {
-  const isAdditionalStyle = props.yuStyle && props.yuStyle !== (defaultConfig.style)
-  if (!isAdditionalStyle) {
-    return {}
-  }
-
-  const gradParam = finalEmphasis.value ? '200' : '-25..0'
-  const url = buildFontUrl(
-    fontName.value,
-    opsz.value,
-    wght.value,
-    fill.value,
-    gradParam,
-  )
-  return {
-    link: [
-      {
-        id: `material-symbols-${fontName.value}-${opsz.value}-${wght.value}-${fill.value}-${gradParam}`,
-        rel: 'stylesheet',
-        href: url,
-      },
-    ],
-  }
-}))
+const attrs = useAttrs()
+const ariaLabel = toRef(attrs, 'aria-label') as Ref<string | undefined>
+const ariaHidden = computed(() => !ariaLabel.value ? 'true' : undefined)
+const role = computed(() => ariaLabel.value ? 'img' : undefined)
 </script>
 
 <style lang="scss" scoped>
 .yu-icon {
-  --md-comp-icon-grade: v-bind(gradLight);
-
-  font-size: var(--md-comp-icon-optical-size, v-bind("finalSize + 'px'"));
+  font-size: v-bind("finalSize + 'px'");
   font-variation-settings:
-  'FILL' var(--md-comp-icon-fill, v-bind(fill)),
-  'wght' var(--md-comp-icon-weight, v-bind(wght)),
-  'GRAD' var(--md-comp-icon-grade),
-  'opsz' var(--md-comp-icon-optical-size, v-bind(opsz));
+  'FILL' v-bind(fill),
+  'wght' v-bind(wght),
+  'GRAD' v-bind(grad),
+  'opsz' v-bind(opsz);
   user-select: none;
-  font-family: var(--md-comp-icon-style, v-bind(styleValue));
+  font-family: v-bind(styleValue);
   width: 1em;
   height: 1em;
   display: inline-flex;
@@ -151,11 +97,5 @@ useHead(computed(() => {
   justify-content: center;
   overflow: hidden;
   transition: font-variation-settings var(--md-sys-motion-expressive-fast-effects);
-}
-
-@media (prefers-color-scheme: dark) {
-  .yu-icon {
-    --md-comp-icon-grade: v-bind(gradDark);
-  }
 }
 </style>

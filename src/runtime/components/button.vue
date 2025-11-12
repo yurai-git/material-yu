@@ -6,6 +6,7 @@
     :class="[
       'yu-button',
       'yu-button-type-default',
+      'yu-button-input',
       'yu-component',
       `yu-button-size-${finalSize}`,
       `yu-button-shape-${finalShape}`,
@@ -16,8 +17,8 @@
     @click="handleClick"
   >
     <YuIcon
-      v-if="props.yuIcon"
-      :yu-icon-name="props.yuIcon"
+      yu-icon-name="home"
+      :yu-fill="true"
       class="yu-button-icon"
     />
     <slot />
@@ -50,12 +51,12 @@
       :disabled="props.disabled"
       :name="props.name"
       :checked="props.checked"
-      class="yu-button-type-toggle-input"
+      class="yu-button-input"
       @change="emits('update:checked', ($event.target as HTMLInputElement).checked)"
     >
     <YuIcon
-      v-if="props.yuIcon"
-      :yu-icon-name="props.yuIcon"
+      yu-icon-name="home"
+      :yu-fill="true"
       class="yu-button-icon"
     />
     <slot />
@@ -133,7 +134,7 @@ const props = defineProps({
    */
   yuText: {
     type: String,
-    default: undefined,
+    default: 'Button',
   },
   /**
    * The icon of the button.
@@ -258,7 +259,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-@use '@material-yu/styles/typescales';
+@use '@material-yu/typescales';
 
 .yu-button {
   border: none;
@@ -274,7 +275,10 @@ onMounted(() => {
 .yu-button-disabled {
   cursor: not-allowed;
 }
-.yu-button-type-toggle-input {
+.yu-button-input {
+  outline: none;
+}
+.yu-button-type-toggle .yu-button-input {
   appearance: none;
   position: absolute;
 }

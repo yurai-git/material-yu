@@ -1,9 +1,10 @@
 import { defineNuxtPlugin } from '#app'
-import { useMaterialYu, watch } from '#imports'
+import { useTheme, useContrast, watch } from '#imports'
 
 export default defineNuxtPlugin((_nuxtApp) => {
   if (import.meta.client) {
-    const { theme, contrast } = useMaterialYu()
+    const { theme } = useTheme()
+    const { contrast } = useContrast()
 
     const updateHtmlClass = () => {
       const isDark = theme.value === 'dark' || (theme.value === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)

@@ -3,29 +3,32 @@
     <template #body>
       <YuPane>
         <h1>Material Yu playground</h1>
-        <h2>Theme</h2>
-        <p>Current theme: <strong>{{ theme }}</strong></p>
+        <h2>Appearance and accessibility</h2>
+        <h3>Theme</h3>
+        <p>Chosen theme: <strong>{{ theme }}</strong></p>
+        <p>Current theme: <strong>{{ currentTheme }}</strong></p>
         <div class="row">
           <YuButton
             yu-icon="routine"
             yu-text="System default"
-            @click="setColorScheme('system')"
+            @click="setTheme('system')"
           />
           <YuButton
             yu-color="tonal"
             yu-icon="light_mode"
             yu-text="Light"
-            @click="setColorScheme('light')"
+            @click="setTheme('light')"
           />
           <YuButton
             yu-color="tonal"
             yu-icon="dark_mode"
             yu-text="Dark"
-            @click="setColorScheme('dark')"
+            @click="setTheme('dark')"
           />
         </div>
-        <h2>Contrast</h2>
-        <p>Current contrast: <strong>{{ contrast }}</strong></p>
+        <h3>Contrast</h3>
+        <p>Chosen contrast: <strong>{{ contrast }}</strong></p>
+        <p>Current contrast: <strong>{{ currentContrast }}</strong></p>
         <div class="row">
           <YuButton
             yu-text="System default"
@@ -33,24 +36,70 @@
           />
           <YuButton
             yu-color="tonal"
+            yu-icon="contrast_rtl_off"
             yu-text="Default"
             @click="setContrast('default')"
           />
           <YuButton
             yu-color="tonal"
+            yu-icon="contrast"
             yu-text="Medium"
             @click="setContrast('medium')"
           />
           <YuButton
             yu-color="tonal"
+            yu-icon="contrast"
             yu-text="High"
             @click="setContrast('high')"
+          />
+        </div>
+        <h3>Reduced motion</h3>
+        <p>Chosen motion preference: <strong>{{ reducedMotion }}</strong></p>
+        <p>Current motion preference: <strong>{{ currentReducedMotion }}</strong></p>
+        <div class="row">
+          <YuButton
+            yu-text="System default"
+            @click="setReducedMotion('system')"
+          />
+          <YuButton
+            yu-color="tonal"
+            yu-text="Unreduced"
+            @click="setReducedMotion('unreduced')"
+          />
+          <YuButton
+            yu-color="tonal"
+            yu-text="Reduced"
+            @click="setReducedMotion('reduced')"
+          />
+        </div>
+        <h3>Reduced transparency</h3>
+        <p>Chosen transparency preference: <strong>{{ reducedTransparency }}</strong></p>
+        <p>Current transparency preference: <strong>{{ currentReducedTransparency }}</strong></p>
+        <div class="row">
+          <YuButton
+            yu-text="System default"
+            @click="setReducedTransparency('system')"
+          />
+          <YuButton
+            yu-color="tonal"
+            yu-text="Unreduced"
+            @click="setReducedTransparency('unreduced')"
+          />
+          <YuButton
+            yu-color="tonal"
+            yu-text="Reduced"
+            @click="setReducedTransparency('reduced')"
           />
         </div>
         <h2>Icons</h2>
         <div class="row">
           <!-- Using an icon name -->
-          <YuIcon yu-icon-name="home" />
+          <YuIcon
+            yu-icon-name="home"
+            :yu-style="{
+              fill: true,
+            }"
+          />
           <!-- Using a unicode code point -->
           <YuIcon yu-icon-name="&#xe8b8;" />
           <!-- Using an SVG child element -->
@@ -82,63 +131,69 @@
           <YuButton
             yu-color="elevated"
             yu-text="Round"
+            yu-icon="edit"
           />
           <YuButton
             yu-color="elevated"
             yu-checkable
             checked
-            yu-text="Checked"
+            yu-text="Selected"
           />
           <YuButton
             yu-color="elevated"
             yu-checkable
-            yu-text="Unchecked"
+            yu-text="Unselected"
           />
           <YuButton
             yu-color="elevated"
             yu-shape="square"
             yu-text="Square"
+            yu-icon="edit"
           />
           <YuButton
             yu-color="elevated"
             yu-shape="square"
             yu-checkable
             checked
-            yu-text="Checked"
+            yu-text="Selected"
           />
           <YuButton
             yu-color="elevated"
             yu-shape="square"
             yu-checkable
-            yu-text="Unchecked"
+            yu-text="Unselected"
           />
         </div>
         <h4>Filled</h4>
         <div class="button-grid">
-          <YuButton yu-text="Round" />
           <YuButton
-            yu-checkable
-            checked
-            yu-text="Checked"
+            yu-text="Round"
+            yu-icon="edit"
           />
           <YuButton
             yu-checkable
-            yu-text="Unchecked"
+            checked
+            yu-text="Selected"
+          />
+          <YuButton
+            yu-checkable
+            yu-text="Unselected"
           />
           <YuButton
             yu-shape="square"
             yu-text="Square"
+            yu-icon="edit"
           />
           <YuButton
             yu-shape="square"
             yu-checkable
             checked
-            yu-text="Checked"
+            yu-text="Selected"
           />
           <YuButton
             yu-shape="square"
             yu-checkable
-            yu-text="Unchecked"
+            yu-text="Unselected"
           />
         </div>
         <h4>Tonal</h4>
@@ -146,35 +201,37 @@
           <YuButton
             yu-color="tonal"
             yu-text="Round"
+            yu-icon="edit"
           />
           <YuButton
             yu-color="tonal"
             yu-checkable
             checked
-            yu-text="Checked"
+            yu-text="Selected"
           />
           <YuButton
             yu-color="tonal"
             yu-checkable
-            yu-text="Unchecked"
+            yu-text="Unselected"
           />
           <YuButton
             yu-color="tonal"
             yu-shape="square"
             yu-text="Square"
+            yu-icon="edit"
           />
           <YuButton
             yu-color="tonal"
             yu-shape="square"
             yu-checkable
             checked
-            yu-text="Checked"
+            yu-text="Selected"
           />
           <YuButton
             yu-color="tonal"
             yu-shape="square"
             yu-checkable
-            yu-text="Unchecked"
+            yu-text="Unselected"
           />
         </div>
         <h4>Outlined</h4>
@@ -182,35 +239,37 @@
           <YuButton
             yu-color="outlined"
             yu-text="Round"
+            yu-icon="edit"
           />
           <YuButton
             yu-color="outlined"
             yu-checkable
             checked
-            yu-text="Checked"
+            yu-text="Selected"
           />
           <YuButton
             yu-color="outlined"
             yu-checkable
-            yu-text="Unchecked"
+            yu-text="Unselected"
           />
           <YuButton
             yu-color="outlined"
             yu-shape="square"
             yu-text="Square"
+            yu-icon="edit"
           />
           <YuButton
             yu-color="outlined"
             yu-shape="square"
             yu-checkable
             checked
-            yu-text="Checked"
+            yu-text="Selected"
           />
           <YuButton
             yu-color="outlined"
             yu-shape="square"
             yu-checkable
-            yu-text="Unchecked"
+            yu-text="Unselected"
           />
         </div>
         <h4>Text</h4>
@@ -218,11 +277,13 @@
           <YuButton
             yu-color="text"
             yu-text="Round"
+            yu-icon="edit"
           />
           <YuButton
             yu-color="text"
             yu-shape="square"
             yu-text="Square"
+            yu-icon="edit"
           />
         </div>
         <h3>Sizes</h3>
@@ -246,11 +307,13 @@
           />
         </div>
         <h2>Focus rings, ripples, and state layers</h2>
-        <div
-          tabindex="0"
-          style="height: 18.75rem; width: 18.75rem; border: var(--md-sys-color-outline-variant) 1px solid;"
-        >
-          <YuInteractive />
+        <div class="row">
+          <div
+            tabindex="0"
+            class="ripple"
+          >
+            <YuInteractive />
+          </div>
         </div>
       </YuPane>
     </template>
@@ -258,17 +321,16 @@
 </template>
 
 <script setup>
-import { useMaterialYu } from '#imports'
-
-const { theme, contrast, setColorScheme, setContrast } = useMaterialYu()
+const { theme, currentTheme, setTheme } = useTheme()
+const { contrast, currentContrast, setContrast } = useContrast()
+const { reducedMotion, currentReducedMotion, setReducedMotion } = useReducedMotion()
+const { reducedTransparency, currentReducedTransparency, setReducedTransparency } = useReducedTransparency()
 </script>
 
 <style lang="scss">
-@use '@material-yu/styles/typescales';
+@use '@material-yu/typescales';
+@import 'https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght,XTRA@8..144,150,900,600&display=swap';
 
-:root {
-  --md-ref-typeface-brand: 'Roboto Flex';
-}
 .column {
   display: flex;
   flex-direction: column;
@@ -281,37 +343,59 @@ const { theme, contrast, setColorScheme, setContrast } = useMaterialYu()
   flex-direction: row;
   gap: 1rem;
   flex-wrap: wrap;
+  margin-block: 1rem;
 }
-.button-grid {
+.button-grid, .text-button-grid {
   display: grid;
   grid-template-columns: repeat(3, min-content);
   gap: 1rem;
   align-items: center;
   justify-items: center;
+  margin-block: 1rem;
+
+  &.text-button-grid {
+    grid-template-columns: min-content;
+  }
 }
-.text-button-grid {
-  display: grid;
-  grid-template-columns: min-content;
-  gap: 1rem;
+.ripple {
+  block-size: 4rem;
+  inline-size: 4rem;
+  padding: 1rem;
+  outline: 1px solid var(--md-sys-color-outline);
+  outline-offset: -1px;
+  display: flex;
   align-items: center;
-  justify-items: center;
+  justify-content: center;
+  border-radius: 1.5rem;
 }
 h1 {
   @include typescales.baseline('display', 'large');
+  margin-block: 0 1.5rem;
 }
 h2 {
   @include typescales.baseline('headline', 'large');
+  margin-block: 3.5rem 1rem;
 }
 h3 {
   @include typescales.baseline('headline', 'medium');
+  margin-block: 3.5rem 1rem;
 }
 h4 {
   @include typescales.baseline('headline', 'small');
+  margin-block: 3.5rem 1rem;
+}
+h5 {
+  margin-block: 3.5rem 1rem;
+}
+h6 {
+  margin-block: 3.5rem 1rem;
 }
 p {
   @include typescales.baseline('body', 'large');
-}
-strong {
-  font-weight: 600;
+  margin-block: 1rem;
+
+  strong {
+    @include typescales.emphasized('body', 'large');
+  }
 }
 </style>

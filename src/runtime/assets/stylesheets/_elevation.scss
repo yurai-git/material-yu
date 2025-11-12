@@ -1,5 +1,4 @@
 @use 'sass:map';
-@use 'generator';
 
 @function shadow-color($alpha) {
   @return color-mix(in srgb, var(--md-sys-color-shadow, #000) $alpha, #fff0);
