@@ -205,6 +205,9 @@ onMounted(() => {
 .yu-button-input {
   outline: none;
 }
+.yu-button-label {
+  width: max-content;
+}
 .yu-button-type-toggle .yu-button-input {
   appearance: none;
   position: absolute;

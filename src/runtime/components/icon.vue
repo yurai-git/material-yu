@@ -3,6 +3,7 @@
     class="yu-icon yu-component"
     :aria-hidden="ariaHidden"
     :role="role"
+    translate="no"
   >
     <slot>{{ finalIconName }}</slot>
   </span>
