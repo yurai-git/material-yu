@@ -18,7 +18,8 @@ import { computed } from 'vue'
 
 const { toToken } = useMaterialYu()
 
-const defaultConfig = useRuntimeConfig().public.materialYu.components.layout
+const materialYu = useRuntimeConfig().public.materialYu
+const defaultConfig = materialYu.components.layout
 
 const props = defineProps({
   yuPaneColor: {

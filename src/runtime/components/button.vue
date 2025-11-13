@@ -11,14 +11,17 @@
       `yu-button-size-${finalSize}`,
       `yu-button-shape-${finalShape}`,
       `yu-button-color-${finalColor}`,
-      { 'yu-button-disabled': props.disabled || props.softDisabled },
+      { 'yu-button-disabled': $attrs.disabled || props.softDisabled },
     ]"
-    v-bind="defaultAttrs"
+    v-bind="$attrs"
     @click="handleClick"
   >
     <YuIcon
-      yu-icon-name="home"
-      :yu-fill="true"
+      v-if="props.yuIcon"
+      :yu-icon-name="props.yuIcon"
+      :yu-style="{
+        fill: (finalColor === 'filled'),
+      }"
       class="yu-button-icon"
     />
     <slot />
@@ -27,8 +30,8 @@
       class="yu-button-label"
     >{{ props.yuText }}</span>
     <YuInteractive
-      :yu-ripple="!(props.disabled || props.softDisabled)"
-      :yu-state-layer="!(props.disabled || props.softDisabled)"
+      :yu-ripple="finalInteractive"
+      :yu-state-layer="finalInteractive"
     />
   </component>
   <label
@@ -41,22 +44,25 @@
       `yu-button-size-${finalSize}`,
       `yu-button-shape-${finalShape}`,
       `yu-button-color-${finalColor}`,
-      { 'yu-button-disabled': props.disabled || props.softDisabled },
+      { 'yu-button-disabled': $attrs.disabled || props.softDisabled },
     ]"
     @click="handleClick"
   >
     <input
-      :id="props.id"
+      :id="($attrs.id as string)"
       type="checkbox"
-      :disabled="props.disabled"
-      :name="props.name"
-      :checked="props.checked"
+      :disabled="($attrs.disabled as boolean)"
+      :name="($attrs.name as string)"
+      :checked="internalChecked"
       class="yu-button-input"
-      @change="emits('update:checked', ($event.target as HTMLInputElement).checked)"
+      @change="handleCheck"
     >
     <YuIcon
-      yu-icon-name="home"
-      :yu-fill="true"
+      v-if="props.yuIcon"
+      :yu-icon-name="props.yuIcon"
+      :yu-style="{
+        fill: internalChecked,
+      }"
       class="yu-button-icon"
     />
     <slot />
@@ -65,142 +71,64 @@
       class="yu-button-label"
     >{{ props.yuText }}</span>
     <YuInteractive
-      :yu-ripple="!(props.disabled || props.softDisabled)"
-      :yu-state-layer="!(props.disabled || props.softDisabled)"
+      :yu-ripple="finalInteractive"
+      :yu-state-layer="finalInteractive"
     />
   </label>
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref, resolveComponent, nextTick, type ComponentPublicInstance } from 'vue'
+import { computed, onMounted, ref, resolveComponent, nextTick, type ComponentPublicInstance, useAttrs, watch } from 'vue'
 import type { ButtonShapeValue, MotionSchemeValue, ButtonColorValue, ButtonSizeValue, MotionDuration, MotionTarget } from '../types'
 import { useRuntimeConfig } from '#app'
 import { useMotion } from '../composables/use-motion'
-import type { RouteLocationRaw } from 'vue-router'
 
 /**
  * Properties and states
  */
 
-const emits = defineEmits<{ (e: 'update:checked', value: boolean): void }>()
+const attrs = useAttrs()
+const emits = defineEmits(['update:checked'])
 
-const runtimePublic = useRuntimeConfig().public
-const materialYu = runtimePublic.materialYu
+const materialYu = useRuntimeConfig().public.materialYu
 const defaultConfig = materialYu.components.button
 
 const props = defineProps({
-  /**
-   * The motion scheme to use for the component.
-   * @values `'standard'`, `'expressive'`
-   */
   yuMotionScheme: {
     type: String as () => MotionSchemeValue,
     default: undefined,
   },
-  /**
-   * Whether the button is a toggle button.
-   * @values `true`, `false`
-   */
   yuCheckable: {
     type: Boolean,
     default: undefined,
   },
-  /**
-   * The size of the button.
-   * @values `'xsmall'`, `'small'`, `'medium'`, `'large'`, `'xlarge'`
-   */
   yuSize: {
     type: String as () => ButtonSizeValue,
     default: undefined,
   },
-  /**
-   * The shape of the button.
-   * @values `'round'`, `'square'`
-   */
   yuShape: {
     type: String as () => ButtonShapeValue,
     default: undefined,
   },
-  /**
-   * The color of the button.
-   * @values `'elevated'`, `'filled'`, `'tonal'`, `'outlined'`, `'text'`
-   */
   yuColor: {
     type: String as () => ButtonColorValue,
     default: undefined,
   },
-  /**
-   * The label of the button.
-   */
   yuText: {
     type: String,
     default: 'Button',
   },
-  /**
-   * The icon of the button.
-   */
   yuIcon: {
     type: String,
     default: undefined,
   },
-  /**
-   * Whether the button is disabled.
-   * @values `true`, `false`
-   */
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  /**
-   * Whether the button is soft-disabled (visually disabled but still focusable).
-   * @values `true`, `false`
-   */
   softDisabled: {
     type: Boolean,
     default: false,
   },
-  /**
-   * The name of the button, submitted with a form.
-   */
-  name: {
-    type: String,
-    default: undefined,
-  },
-  /**
-   * The ID of the button.
-   */
-  id: {
-    type: String,
-    default: undefined,
-  },
-  /**
-   * Whether the toggle button is checked.
-   * @values `true`, `false`
-   */
   checked: {
     type: Boolean,
     default: false,
-  },
-  /**
-   * If provided, the button will be rendered as a link.
-   */
-  href: {
-    type: String as () => RouteLocationRaw,
-    default: undefined,
-  },
-  /**
-   * The target attribute for the link.
-   */
-  target: {
-    type: String as () => '_blank' | '_parent' | '_self' | '_top' | (string & {}),
-    default: undefined,
-  },
-  /**
-   * The rel attribute for the link.
-   */
-  rel: {
-    type: String as () => 'noopener' | 'noreferrer' | 'nofollow' | 'sponsored' | 'ugc' | (string & {}),
-    default: undefined,
   },
 })
 
@@ -211,21 +139,20 @@ const handleClick = (event: MouseEvent) => {
   }
 }
 
-const tag = computed(() => props.href ? resolveComponent('NuxtLink') : 'button')
+const internalChecked = ref(props.checked)
+watch(() => props.checked, (newValue) => {
+  internalChecked.value = newValue
+})
 
-const defaultAttrs = computed(() => props.href
-  ? {
-      to: props.href,
-      target: props.target,
-    }
-  : {
-      id: props.id,
-      type: 'button',
-      disabled: props.disabled,
-      name: props.name,
-      rel: props.rel,
-    },
-)
+const handleCheck = (event: Event) => {
+  const newCheckedValue = (event.target as HTMLInputElement).checked
+  internalChecked.value = newCheckedValue
+  emits('update:checked', newCheckedValue)
+}
+
+const tag = computed(() => attrs.href ? resolveComponent('NuxtLink') : 'button')
+const finalDisabled = computed(() => (attrs.disabled as boolean) || props.softDisabled)
+const finalInteractive = computed(() => !finalDisabled.value)
 
 const finalMotionScheme = computed<MotionSchemeValue>(() => props.yuMotionScheme ?? (materialYu.motionScheme as MotionSchemeValue))
 const finalColor = computed(() => props.yuColor ?? defaultConfig.color)

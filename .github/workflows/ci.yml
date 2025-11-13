@@ -21,6 +21,8 @@ jobs:
 
       - run: npm i -g --force corepack@latest && corepack enable
 
+      - run: corepack prepare pnpm@latest --activate
+
       - name: Install dependencies
         run: npx nypm@latest i
 
@@ -38,6 +40,8 @@ jobs:
           node-version: 20
 
       - run: npm i -g --force corepack@latest && corepack enable
+
+      - run: corepack prepare pnpm@latest --activate
 
       - name: Install dependencies
         run: npx nypm@latest i

@@ -36,19 +36,16 @@
           />
           <YuButton
             yu-color="tonal"
-            yu-icon="contrast_rtl_off"
             yu-text="Default"
             @click="setContrast('default')"
           />
           <YuButton
             yu-color="tonal"
-            yu-icon="contrast"
             yu-text="Medium"
             @click="setContrast('medium')"
           />
           <YuButton
             yu-color="tonal"
-            yu-icon="contrast"
             yu-text="High"
             @click="setContrast('high')"
           />
@@ -138,11 +135,13 @@
             yu-checkable
             checked
             yu-text="Selected"
+            yu-icon="edit"
           />
           <YuButton
             yu-color="elevated"
             yu-checkable
             yu-text="Unselected"
+            yu-icon="edit"
           />
           <YuButton
             yu-color="elevated"
@@ -156,12 +155,14 @@
             yu-checkable
             checked
             yu-text="Selected"
+            yu-icon="edit"
           />
           <YuButton
             yu-color="elevated"
             yu-shape="square"
             yu-checkable
             yu-text="Unselected"
+            yu-icon="edit"
           />
         </div>
         <h4>Filled</h4>
@@ -174,10 +175,12 @@
             yu-checkable
             checked
             yu-text="Selected"
+            yu-icon="edit"
           />
           <YuButton
             yu-checkable
             yu-text="Unselected"
+            yu-icon="edit"
           />
           <YuButton
             yu-shape="square"
@@ -189,11 +192,13 @@
             yu-checkable
             checked
             yu-text="Selected"
+            yu-icon="edit"
           />
           <YuButton
             yu-shape="square"
             yu-checkable
             yu-text="Unselected"
+            yu-icon="edit"
           />
         </div>
         <h4>Tonal</h4>
@@ -208,11 +213,13 @@
             yu-checkable
             checked
             yu-text="Selected"
+            yu-icon="edit"
           />
           <YuButton
             yu-color="tonal"
             yu-checkable
             yu-text="Unselected"
+            yu-icon="edit"
           />
           <YuButton
             yu-color="tonal"
@@ -226,12 +233,14 @@
             yu-checkable
             checked
             yu-text="Selected"
+            yu-icon="edit"
           />
           <YuButton
             yu-color="tonal"
             yu-shape="square"
             yu-checkable
             yu-text="Unselected"
+            yu-icon="edit"
           />
         </div>
         <h4>Outlined</h4>
@@ -246,11 +255,13 @@
             yu-checkable
             checked
             yu-text="Selected"
+            yu-icon="edit"
           />
           <YuButton
             yu-color="outlined"
             yu-checkable
             yu-text="Unselected"
+            yu-icon="edit"
           />
           <YuButton
             yu-color="outlined"
@@ -264,12 +275,14 @@
             yu-checkable
             checked
             yu-text="Selected"
+            yu-icon="edit"
           />
           <YuButton
             yu-color="outlined"
             yu-shape="square"
             yu-checkable
             yu-text="Unselected"
+            yu-icon="edit"
           />
         </div>
         <h4>Text</h4>

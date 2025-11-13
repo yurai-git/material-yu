@@ -10,7 +10,7 @@
 
 <script lang="ts" setup>
 import { useRuntimeConfig } from '#app'
-import { computed, useAttrs, toRef, type Ref } from 'vue'
+import { computed, useAttrs, toRef } from 'vue'
 import { useTheme } from '@material-yu/use-theme'
 
 /**
@@ -31,8 +31,7 @@ const getFontName = (style: string) => {
  * Properties and states
  */
 
-const runtimePublic = useRuntimeConfig().public
-const materialYu = runtimePublic.materialYu
+const materialYu = useRuntimeConfig().public.materialYu
 const defaultConfig = materialYu.components.icon
 
 const props = defineProps({
@@ -41,12 +40,12 @@ const props = defineProps({
     default: undefined,
   },
   yuStyle: {
-    type: Object as () => {
-      weight: number
-      fill: boolean
-      emphasis: boolean
-      size: number
-    },
+    type: Object as import('vue').PropType<{
+      weight?: number
+      fill?: boolean
+      emphasis?: boolean
+      size?: number
+    }>,
     default: undefined,
   },
 })
@@ -75,7 +74,7 @@ const styleValue = computed(() => `'Material Symbols ${getFontName(materialYu.ic
  */
 
 const attrs = useAttrs()
-const ariaLabel = toRef(attrs, 'aria-label') as Ref<string | undefined>
+const ariaLabel = toRef(attrs, 'aria-label')
 const ariaHidden = computed(() => !ariaLabel.value ? 'true' : undefined)
 const role = computed(() => ariaLabel.value ? 'img' : undefined)
 </script>

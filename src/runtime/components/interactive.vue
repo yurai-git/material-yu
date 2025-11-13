@@ -25,8 +25,7 @@ const parseDuration = (duration: string | number): number => {
   return unit === 's' ? Number.parseInt(value as string) * 1000 : Number.parseInt(value as string)
 }
 
-const runtimePublic = useRuntimeConfig().public
-const materialYu = runtimePublic.materialYu
+const materialYu = useRuntimeConfig().public.materialYu
 const defaultConfig = materialYu.components.interactive
 
 interface RippleBehavior {
