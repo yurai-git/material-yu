@@ -47,11 +47,11 @@ Material Yu provides Material 3 components for Nuxt.
 - [ ] Toolbar
 - [ ] Tooltip
 
-* [x] Focus ring
-* [x] Icon
+* [ ] Focus ring
+* [ ] Icon
 * [ ] Layout
-* [x] Ripple
-* [x] State layer
+* [ ] Ripple
+* [ ] State layer
 
 ## Local development
 

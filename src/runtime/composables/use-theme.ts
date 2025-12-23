@@ -5,7 +5,7 @@ import type { ModuleOptions } from '../../module'
 
 export const useTheme = () => {
   const config = useRuntimeConfig().public.materialYu as ModuleOptions
-  const theme = useStorage('material-yu:theme', () => config.theme)
+  const selectedTheme = useStorage('material-yu:theme', () => config.theme)
 
   const isSystemDark = ref(false)
 
@@ -16,19 +16,19 @@ export const useTheme = () => {
   })
 
   const currentTheme = computed(() => {
-    if (theme.value === 'system') return isSystemDark.value ? 'dark' : 'light'
-    return theme.value
+    if (selectedTheme.value === 'system') return isSystemDark.value ? 'dark' : 'light'
+    return selectedTheme.value
   })
 
   const setTheme = (value: 'system' | 'light' | 'dark') => {
-    theme.value = value
+    selectedTheme.value = value
   }
 
   const isLightTheme = computed(() => currentTheme.value === 'light')
   const isDarkTheme = computed(() => currentTheme.value === 'dark')
 
   return {
-    theme,
+    selectedTheme,
     currentTheme,
     setTheme,
     isLightTheme,

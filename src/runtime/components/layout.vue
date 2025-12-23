@@ -8,38 +8,16 @@
 </template>
 
 <script lang="ts" setup>
-import { useRuntimeConfig } from '#app'
-import { useMaterialYu } from '#imports'
-import { computed } from 'vue'
+import { useToken } from '#imports'
 
 /**
  * Properties and states
  */
 
-const { toToken } = useMaterialYu()
+const { getColor } = useToken()
 
-const materialYu = useRuntimeConfig().public.materialYu
-const defaultConfig = materialYu.components.layout
-
-const props = defineProps({
-  yuPaneColor: {
-    type: String,
-    default: undefined,
-  },
-  yuWindowColor: {
-    type: String,
-    default: undefined,
-  },
-})
-
-const _finalPaneColor = computed(() => {
-  const token = props.yuPaneColor ?? defaultConfig.paneColor
-  return toToken(token)
-})
-const finalWindowColor = computed(() => {
-  const token = props.yuWindowColor ?? defaultConfig.windowColor
-  return toToken(token, 'md.comp.layout.window.container.color')
-})
+const finalWindowsContentColor = getColor('on-surface')
+const finalWindowContainerColor = getColor('surface')
 </script>
 
 <style lang="scss" scoped>
@@ -49,8 +27,9 @@ const finalWindowColor = computed(() => {
 .yu-layout {
   --md-comp-layout-spacing: 16px;
 
-  background-color: v-bind(finalWindowColor);
-  color: var(--md-comp-layout-window-content-color, var(--md-sys-color-on-surface));
+  background-color: var(--md-comp-layout-window-container-color, v-bind(finalWindowContainerColor));
+  color: var(--md-comp-layout-window-content-color, v-bind(finalWindowsContentColor));
+  fill: var(--md-comp-layout-window-content-color, v-bind(finalWindowsContentColor));
   padding: 24px;
   height: 100%;
   min-height: 100dvh;

@@ -2,7 +2,7 @@ import { useStorage } from '@vueuse/core'
 import { computed, onMounted, ref } from 'vue'
 
 export const useReducedMotion = () => {
-  const reducedMotion = useStorage('material-yu:reduced-motion', () => 'system')
+  const selectedReducedMotion = useStorage('material-yu:reduced-motion', () => 'system')
 
   const isSystemReducedMotion = ref(false)
 
@@ -13,19 +13,19 @@ export const useReducedMotion = () => {
   })
 
   const currentReducedMotion = computed(() => {
-    if (reducedMotion.value === 'system') return isSystemReducedMotion.value ? 'reduced' : 'unreduced'
-    return reducedMotion.value
+    if (selectedReducedMotion.value === 'system') return isSystemReducedMotion.value ? 'reduced' : 'unreduced'
+    return selectedReducedMotion.value
   })
 
   const setReducedMotion = (value: 'system' | 'reduced' | 'unreduced') => {
-    reducedMotion.value = value
+    selectedReducedMotion.value = value
   }
 
   const isUnreducedMotion = computed(() => currentReducedMotion.value === 'unreduced')
   const isReducedMotion = computed(() => currentReducedMotion.value === 'reduced')
 
   return {
-    reducedMotion,
+    selectedReducedMotion,
     currentReducedMotion,
     setReducedMotion,
     isUnreducedMotion,

@@ -8,6 +8,24 @@
   font-size: var(--md-sys-typescale-#{$name}-#{$size}-size);
   letter-spacing: var(--md-sys-typescale-#{$name}-#{$size}-tracking);
   line-height: var(--md-sys-typescale-#{$name}-#{$size}-line-height);
+  font-feature-settings:
+    'wght' var(--md-sys-typescale-#{$name}-#{$size}-wght),
+    'GRAD' var(--md-sys-typescale-#{$name}-#{$size}-grad),
+    'wdth' var(--md-sys-typescale-#{$name}-#{$size}-wdth),
+    'ROND' var(--md-sys-typescale-#{$name}-#{$size}-rond),
+    'opsz' var(--md-sys-typescale-#{$name}-#{$size}-opsz),
+    'CRSV' var(--md-sys-typescale-#{$name}-#{$size}-crsv),
+    'slnt' var(--md-sys-typescale-#{$name}-#{$size}-slnt),
+    'FILL' var(--md-sys-typescale-#{$name}-#{$size}-fill),
+    'HEXP' var(--md-sys-typescale-#{$name}-#{$size}-hexp),
+    'XOPQ' var(--md-sys-typescale-#{$name}-#{$size}-xopq),
+    'XTRA' var(--md-sys-typescale-#{$name}-#{$size}-xtra),
+    'YOPQ' var(--md-sys-typescale-#{$name}-#{$size}-yopq),
+    'YTAS' var(--md-sys-typescale-#{$name}-#{$size}-ytas),
+    'YTDE' var(--md-sys-typescale-#{$name}-#{$size}-ytde),
+    'YTFI' var(--md-sys-typescale-#{$name}-#{$size}-ytfi),
+    'YTLC' var(--md-sys-typescale-#{$name}-#{$size}-ytlc),
+    'YTUC' var(--md-sys-typescale-#{$name}-#{$size}-ytuc);
 }
 
 @mixin emphasized($name, $size) {
@@ -16,4 +34,23 @@
   font-size: var(--md-sys-typescale-emphasized-#{$name}-#{$size}-size);
   letter-spacing: var(--md-sys-typescale-emphasized-#{$name}-#{$size}-tracking);
   line-height: var(--md-sys-typescale-emphasized-#{$name}-#{$size}-line-height);
+  font-feature-settings:
+    'wght' var(--md-sys-typescale-emphasized-#{$name}-#{$size}-wght),
+    'GRAD' var(--md-sys-typescale-emphasized-#{$name}-#{$size}-grad),
+    // 'wdth' var(--md-sys-typescale-emphasized-#{$name}-#{$size}-wdth),
+    'ROND' var(--md-sys-typescale-emphasized-#{$name}-#{$size}-rond),
+    'opsz' var(--md-sys-typescale-emphasized-#{$name}-#{$size}-opsz),
+    'CRSV' var(--md-sys-typescale-emphasized-#{$name}-#{$size}-crsv),
+    'slnt' var(--md-sys-typescale-emphasized-#{$name}-#{$size}-slnt),
+    'FILL' var(--md-sys-typescale-emphasized-#{$name}-#{$size}-fill),
+    'HEXP' var(--md-sys-typescale-emphasized-#{$name}-#{$size}-hexp),
+    'XOPQ' var(--md-sys-typescale-emphasized-#{$name}-#{$size}-xopq),
+    'XTRA' var(--md-sys-typescale-emphasized-#{$name}-#{$size}-xtra),
+    'YOPQ' var(--md-sys-typescale-emphasized-#{$name}-#{$size}-yopq),
+    'YTAS' var(--md-sys-typescale-emphasized-#{$name}-#{$size}-ytas),
+    'YTDE' var(--md-sys-typescale-emphasized-#{$name}-#{$size}-ytde),
+    'YTFI' var(--md-sys-typescale-emphasized-#{$name}-#{$size}-ytfi),
+    'YTLC' var(--md-sys-typescale-emphasized-#{$name}-#{$size}-ytlc),
+    'YTUC' var(--md-sys-typescale-emphasized-#{$name}-#{$size}-ytuc);
+  font-stretch: var(--md-sys-typescale-emphasized-#{$name}-#{$size}-wdth);
 }

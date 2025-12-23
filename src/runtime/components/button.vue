@@ -82,6 +82,7 @@ import { computed, onMounted, ref, resolveComponent, nextTick, type ComponentPub
 import type { ButtonShapeValue, MotionSchemeValue, ButtonColorValue, ButtonSizeValue, MotionDuration, MotionTarget } from '../types'
 import { useRuntimeConfig } from '#app'
 import { useMotion } from '../composables/use-motion'
+import { useToken } from '#imports'
 
 /**
  * Properties and states
@@ -159,7 +160,7 @@ const finalColor = computed(() => props.yuColor ?? defaultConfig.color)
 const finalCheckable = computed(() => {
   const checkable = props.yuCheckable ?? defaultConfig.checkable
   if (finalColor.value === 'text' && checkable === true) {
-    console.warn('[Material Yu warn]: `yuCheckable` cannot be `true` when `yuColor` is `\'text\'` on `YuButton` component. Falling back to `false`.')
+    console.warn('[Material Yu warn]: `yuCheckable` cannot be `true` when `yuColor` is `\'text\'` on `YuButton` components. Falling back to `false`.')
     return false
   }
   return checkable
@@ -183,6 +184,11 @@ onMounted(() => {
     if (!el) return
   })
 })
+
+const { getColor } = useToken()
+
+const paletteSurfaceContainerLow = getColor('surface-container-low')
+const palettePrimary = getColor('primary')
 </script>
 
 <style lang="scss" scoped>
@@ -213,9 +219,9 @@ onMounted(() => {
   position: absolute;
 }
 .yu-button-color-elevated {
-  background-color: var(--md-comp-button-elevated-container-color, var(--md-sys-color-surface-container-low));
+  background-color: var(--md-comp-button-elevated-container-color, v-bind(paletteSurfaceContainerLow));
   box-shadow: var(--md-comp-button-elevated-elevation, var(--md-sys-elevation-level1));
-  color: var(--md-comp-button-elevated-icon-label-color, var(--md-sys-color-primary));
+  color: var(--md-comp-button-elevated-icon-label-color, v-bind(palettePrimary));
 
   &.yu-button-type-toggle:not(.yu-button-disabled) {
     background-color: var(--md-comp-button-elevated-container-color-toggle-unselected, var(--md-sys-color-surface-container-low));

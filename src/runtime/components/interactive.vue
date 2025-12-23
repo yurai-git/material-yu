@@ -13,6 +13,8 @@
 <script lang="ts" setup>
 import { computed, onMounted, onUnmounted, ref, type PropType } from 'vue'
 import { useRuntimeConfig } from '#app'
+import type { ColorTokens } from '../types'
+import { useToken } from '#imports'
 
 /**
  * Properties and states
@@ -70,7 +72,7 @@ const props = defineProps({
     default: undefined,
   },
   yuLayerColor: {
-    type: String,
+    type: String as PropType<keyof ColorTokens>,
     default: undefined,
   },
 })
@@ -80,6 +82,8 @@ const root = ref<HTMLElement | null>(null)
 /**
  * Computed final values
  */
+
+const { getColor } = useToken()
 
 const finalFocusRing = computed(() => props.yuFocusRing ?? defaultConfig.focusRing)
 const finalRipple = computed(() => props.yuRipple ?? defaultConfig.ripple)
@@ -102,8 +106,7 @@ const finalStateLayerBehavior = computed(() => ({
   opacity: props.yuStateLayerBehavior?.opacity ?? defaultConfig.stateLayerBehavior.opacity,
   focusOpacity: props.yuStateLayerBehavior?.focusOpacity ?? defaultConfig.stateLayerBehavior.focusOpacity,
 }))
-const parentColor = ref('currentColor')
-const finalLayerColor = computed(() => props.yuLayerColor ?? parentColor.value)
+const finalLayerColor = computed(() => props.yuLayerColor ? getColor(props.yuLayerColor) : 'currentColor')
 
 /**
  * Lifecycle hooks and logic

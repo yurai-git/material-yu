@@ -22,14 +22,13 @@ export default defineNuxtConfig({
     },
   },
   materialYu: {
-    theme: 'system',
-    contrast: 'system',
     reference: {
       color: {
-        sourceColor: '#7f7f7f',
+        // sourceColor: '#E04443',
       },
       typography: {
-        brandTypeface: 'Roboto Flex',
+        brandTypeface: ['Google Sans Flex'],
+        plainTypeface: ['Google Sans Flex'],
       },
     },
   },

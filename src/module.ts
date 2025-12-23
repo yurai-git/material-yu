@@ -1,8 +1,8 @@
 import { defineNuxtModule, createResolver, addPlugin, addComponentsDir, addImportsDir } from '@nuxt/kit'
-import { defu } from 'defu'
+import { createDefu } from 'defu'
 import { defaultOptions } from './defaults'
 import { name, version } from '../package.json'
-import type { MotionSchemeValue, IconStyleValue, ButtonSizeValue, ButtonShapeValue, ButtonColorValue, MdSysColor } from './runtime/types'
+import type { MotionSchemeValue, IconStyleValue, ButtonSizeValue, ButtonShapeValue, ButtonColorValue, ColorTokens, StyleSets, Typescale, Corner, Motion, TypescaleTokens, TypescaleSet } from './runtime/types'
 import { argbFromHex, themeFromSourceColor, applyTheme } from '@material/material-color-utilities'
 
 type ThemeValue = 'system' | 'light' | 'dark'
@@ -11,7 +11,7 @@ type ContrastValue = 'system' | 'default' | 'medium' | 'high'
 export type DeepRequired<T> = T extends (...args: unknown[]) => unknown
   ? T
   : T extends object
-    ? { [P in keyof T]-?: DeepRequired<T[P]> }
+    ? { [P in keyof T]-?: P extends 'styleSets' ? T[P] : DeepRequired<T[P]> }
     : T
 
 export interface ModuleOptions {
@@ -59,7 +59,7 @@ export interface ModuleOptions {
       /**
        * Seed color for dynamic
        */
-      sourceColor?: string | null
+      sourceColor?: string
     }
 
     /**
@@ -68,15 +68,17 @@ export interface ModuleOptions {
     typography?: {
       /**
        * Define the default brand font
-       * @default `'Roboto'`
+       * @default `['sans-serif']`
+       * @example `['Google Sans', 'Noto Sans JP']`
        */
-      brandTypeface?: string
+      brandTypeface?: string[]
 
       /**
        * Define the default plain font
-       * @default `'Roboto'`
+       * @default `['sans-serif']`
+       * @example `['Google Sans', 'Noto Sans JP']`
        */
-      plainTypeface?: string
+      plainTypeface?: string[]
 
       /**
        * Define the font weight for regular
@@ -97,6 +99,42 @@ export interface ModuleOptions {
       boldWeight?: number
     }
   }
+  typescaleSets?: TypescaleSet[]
+  /**
+   * Define the style sets to apply to components
+   */
+  styleSets?: {
+    button?: {
+      colors?: {
+        name: string
+        identifier?: string
+        uncheckable?: boolean
+        checkable?: boolean
+        enabled: StyleSets['button']['colors']
+        disabled: StyleSets['button']['colors']
+        hovered: StyleSets['button']['colors']
+        focused: StyleSets['button']['colors']
+        pressed: StyleSets['button']['colors']
+      }[]
+      sizes?: {
+        name: string
+        identifier?: string
+        containerHeight: number
+        outlineWidth: number
+        labelSize: Typescale | keyof TypescaleTokens
+        iconSize: number
+        shapeRound: Corner
+        shapeSquare: Corner
+        leadingSpace: number
+        betweenIconLabelSpace: number
+        trailingSpace: number
+        shapePressedMorph: Corner
+        shapeAnimation: Motion
+        selectedContainerShapeRound: Corner
+        selectedContainerShapeSquare: Corner
+      }[]
+    }
+  }
   /**
    * Component configurations
    */
@@ -106,28 +144,33 @@ export interface ModuleOptions {
      */
     icon?: {
       /**
-       * Define the default `yuWeight`
-       * @default `400`
+       * Define the default `yuStyle`
        */
-      weight?: number
+      style?: {
+        /**
+         * Define the default `yuWeight`
+         * @default `400`
+         */
+        weight?: number
 
-      /**
-       * Define the default `yuFill`
-       * @default `false`
-       */
-      fill?: boolean
+        /**
+         * Define the default `yuFill`
+         * @default `false`
+         */
+        fill?: boolean
 
-      /**
-       * Define the default `yuEmphasis`
-       * @default `false`
-       */
-      emphasis?: boolean
+        /**
+         * Define the default `yuEmphasis`
+         * @default `false`
+         */
+        emphasis?: boolean
 
-      /**
-       * Define the default `yuSize`
-       * @default `24`
-       */
-      size?: number
+        /**
+         * Define the default `yuSize`
+         * @default `24`
+         */
+        size?: number
+      }
     }
     /**
      * Configurations for the `YuLayout` component
@@ -135,15 +178,15 @@ export interface ModuleOptions {
     layout?: {
       /**
        * Define the default `yuPaneColor`
-       * @default `'md.sys.color.surface'`
+       * @default `'surface'`
        */
-      paneColor?: MdSysColor
+      paneColor?: keyof ColorTokens
 
       /**
        * Define the default `yuWindowColor`
-       * @default `'md.sys.color.surface-container'`
+       * @default `'surface-container'`
        */
-      windowColor?: MdSysColor
+      windowColor?: keyof ColorTokens
     }
     /**
      * Configurations for the `YuButton` component
@@ -297,12 +340,22 @@ export default defineNuxtModule<ModuleOptions>({
   async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
 
+    const merger = createDefu((obj, key, value) => {
+      if (Array.isArray(obj[key]) && Array.isArray(value)) {
+        obj[key] = value
+        return true
+      }
+    })
+    const ModuleOptions = merger(options, defaultOptions)
+    nuxt.options.runtimeConfig.public.materialYu = ModuleOptions
+
+    const iconStyle = ModuleOptions.iconStyle
+    const typography = ModuleOptions.reference.typography
+    const sourceColor = ModuleOptions.reference.color.sourceColor
+
     nuxt.options.alias['@material-yu/typescales'] = resolve('./runtime/assets/stylesheets/typescales')
     nuxt.options.alias['@material-yu'] = resolve('./runtime/composables')
-
     nuxt.options.css.push(resolve('./runtime/assets/stylesheets/material-tokens.scss'))
-
-    const iconStyle = options.iconStyle || defaultOptions.iconStyle
     const mapStyleToName = (style: string) => {
       switch (style) {
         case 'rounded': return 'Rounded'
@@ -316,30 +369,34 @@ export default defineNuxtModule<ModuleOptions>({
       href: `https://fonts.googleapis.com/css2?family=Material+Symbols+${mapStyleToName(iconStyle)}:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200`,
     })
 
-    const typography = options.reference?.typography || defaultOptions.reference.typography
+    const minifyCss = (css: string) => {
+      return css
+        .replace(/\/\*[\s\S]*?\*\/|[\r\n\t]/g, '')
+        .replace(/ {2,}/g, ' ')
+        .replace(/\s*([:;{},])\s*/g, '$1')
+        .trim()
+    }
+    const formatTypeface = (typeface: string[]) => {
+      return typeface.map(name => `'${name}'`).join(', ')
+    }
     const typefaceStyles = `
       :root {
-        --md-ref-typeface-brand: ${typography.brandTypeface}, ${typography.plainTypeface}, sans-serif;
-        --md-ref-typeface-plain: ${typography.plainTypeface}, sans-serif;
+        --md-ref-typeface-brand: ${formatTypeface(typography.brandTypeface)};
+        --md-ref-typeface-plain: ${formatTypeface(typography.plainTypeface)};
         --md-ref-typeface-weight-regular: ${typography.regularWeight};
         --md-ref-typeface-weight-medium: ${typography.mediumWeight};
         --md-ref-typeface-weight-bold: ${typography.boldWeight};
       }
     `
     nuxt.options.app.head.style = nuxt.options.app.head.style || []
-    nuxt.options.app.head.style.push({ textContent: typefaceStyles })
+    nuxt.options.app.head.style.push({ textContent: minifyCss(typefaceStyles) })
 
-    if (options.reference?.color?.sourceColor) {
-      const sourceColor = argbFromHex(options.reference.color.sourceColor)
-      const theme = themeFromSourceColor(sourceColor)
+    const theme = themeFromSourceColor(argbFromHex(sourceColor))
 
-      if (import.meta.client) {
-        console.log(JSON.stringify(theme, null, 2))
-        applyTheme(theme)
-      }
+    if (import.meta.client) {
+      console.log(JSON.stringify(theme, null, 2))
+      applyTheme(theme)
     }
-
-    nuxt.options.runtimeConfig.public.materialYu = defu(options, defaultOptions)
 
     addPlugin(resolve('./runtime/plugin'))
     addComponentsDir({

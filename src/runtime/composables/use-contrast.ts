@@ -5,7 +5,7 @@ import type { ModuleOptions } from '../../module'
 
 export const useContrast = () => {
   const config = useRuntimeConfig().public.materialYu as ModuleOptions
-  const contrast = useStorage('material-yu:contrast', () => config.contrast)
+  const selectedContrast = useStorage('material-yu:contrast', () => config.contrast)
 
   const isSystemHighContrast = ref(false)
 
@@ -16,12 +16,12 @@ export const useContrast = () => {
   })
 
   const currentContrast = computed(() => {
-    if (contrast.value === 'system') return isSystemHighContrast.value ? 'high' : 'default'
-    return contrast.value
+    if (selectedContrast.value === 'system') return isSystemHighContrast.value ? 'high' : 'default'
+    return selectedContrast.value
   })
 
   const setContrast = (value: 'system' | 'default' | 'medium' | 'high') => {
-    contrast.value = value
+    selectedContrast.value = value
   }
 
   const isDefaultContrast = computed(() => currentContrast.value === 'default')
@@ -29,7 +29,7 @@ export const useContrast = () => {
   const isHighContrast = computed(() => currentContrast.value === 'high')
 
   return {
-    contrast,
+    selectedContrast,
     currentContrast,
     setContrast,
     isDefaultContrast,

@@ -5,7 +5,7 @@
         <h1>Material Yu playground</h1>
         <h2>Appearance and accessibility</h2>
         <h3>Theme</h3>
-        <p>Chosen theme: <strong>{{ theme }}</strong></p>
+        <p>Chosen theme: <strong>{{ selectedTheme }}</strong></p>
         <p>Current theme: <strong>{{ currentTheme }}</strong></p>
         <div class="row">
           <YuButton
@@ -27,7 +27,7 @@
           />
         </div>
         <h3>Contrast</h3>
-        <p>Chosen contrast: <strong>{{ contrast }}</strong></p>
+        <p>Chosen contrast: <strong>{{ selectedContrast }}</strong></p>
         <p>Current contrast: <strong>{{ currentContrast }}</strong></p>
         <div class="row">
           <YuButton
@@ -51,7 +51,7 @@
           />
         </div>
         <h3>Reduced motion</h3>
-        <p>Chosen motion preference: <strong>{{ reducedMotion }}</strong></p>
+        <p>Chosen motion preference: <strong>{{ selectedReducedMotion }}</strong></p>
         <p>Current motion preference: <strong>{{ currentReducedMotion }}</strong></p>
         <div class="row">
           <YuButton
@@ -70,7 +70,7 @@
           />
         </div>
         <h3>Reduced transparency</h3>
-        <p>Chosen transparency preference: <strong>{{ reducedTransparency }}</strong></p>
+        <p>Chosen transparency preference: <strong>{{ selectedReducedTransparency }}</strong></p>
         <p>Current transparency preference: <strong>{{ currentReducedTransparency }}</strong></p>
         <div class="row">
           <YuButton
@@ -91,33 +91,16 @@
         <h2>Icons</h2>
         <div class="row">
           <!-- Using an icon name -->
-          <YuIcon
-            yu-icon-name="home"
-            :yu-style="{
-              fill: true,
-            }"
-          />
+          <YuIcon yu-icon-name="settings" />
           <!-- Using a unicode code point -->
-          <YuIcon yu-icon-name="&#xe8b8;" />
+          <YuIcon yu-icon-name="&#xe834;" />
           <!-- Using an SVG child element -->
           <YuIcon>
-            <svg viewBox="0 0 24 24">
-              <path
-                fill="#4285f4"
-                d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82z"
-              />
-              <path
-                fill="#34a853"
-                d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96H1.29v3.09C3.26 21.3 7.31 24 12 24z"
-              />
-              <path
-                fill="#fbbc05"
-                d="M5.27 14.29c-.25-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.98-3.09z"
-              />
-              <path
-                fill="#ea4335"
-                d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.98 3.09c.95-2.85 3.6-4.96 6.73-4.96z"
-              />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 48 48"
+            >
+              <path d="M10 40V24H4L24 6l10 8.85V9h4v9.55L44 24h-6v16H26.5V28h-5v12Zm3-3h5.5V25h11v12H35V19.95l-11-10-11 10Zm5.5-12h11-11Zm1.25-5.5h8.5q0-1.65-1.275-2.725Q25.7 15.7 24 15.7q-1.7 0-2.975 1.075Q19.75 17.85 19.75 19.5Z" />
             </svg>
           </YuIcon>
         </div>
@@ -133,14 +116,7 @@
           <YuButton
             yu-color="elevated"
             yu-checkable
-            checked
-            yu-text="Selected"
-            yu-icon="edit"
-          />
-          <YuButton
-            yu-color="elevated"
-            yu-checkable
-            yu-text="Unselected"
+            yu-text="Toggle"
             yu-icon="edit"
           />
           <YuButton
@@ -153,15 +129,7 @@
             yu-color="elevated"
             yu-shape="square"
             yu-checkable
-            checked
-            yu-text="Selected"
-            yu-icon="edit"
-          />
-          <YuButton
-            yu-color="elevated"
-            yu-shape="square"
-            yu-checkable
-            yu-text="Unselected"
+            yu-text="Toggle"
             yu-icon="edit"
           />
         </div>
@@ -173,13 +141,7 @@
           />
           <YuButton
             yu-checkable
-            checked
-            yu-text="Selected"
-            yu-icon="edit"
-          />
-          <YuButton
-            yu-checkable
-            yu-text="Unselected"
+            yu-text="Toggle"
             yu-icon="edit"
           />
           <YuButton
@@ -190,14 +152,7 @@
           <YuButton
             yu-shape="square"
             yu-checkable
-            checked
-            yu-text="Selected"
-            yu-icon="edit"
-          />
-          <YuButton
-            yu-shape="square"
-            yu-checkable
-            yu-text="Unselected"
+            yu-text="Toggle"
             yu-icon="edit"
           />
         </div>
@@ -211,14 +166,7 @@
           <YuButton
             yu-color="tonal"
             yu-checkable
-            checked
-            yu-text="Selected"
-            yu-icon="edit"
-          />
-          <YuButton
-            yu-color="tonal"
-            yu-checkable
-            yu-text="Unselected"
+            yu-text="Toggle"
             yu-icon="edit"
           />
           <YuButton
@@ -231,15 +179,7 @@
             yu-color="tonal"
             yu-shape="square"
             yu-checkable
-            checked
-            yu-text="Selected"
-            yu-icon="edit"
-          />
-          <YuButton
-            yu-color="tonal"
-            yu-shape="square"
-            yu-checkable
-            yu-text="Unselected"
+            yu-text="Toggle"
             yu-icon="edit"
           />
         </div>
@@ -253,14 +193,7 @@
           <YuButton
             yu-color="outlined"
             yu-checkable
-            checked
-            yu-text="Selected"
-            yu-icon="edit"
-          />
-          <YuButton
-            yu-color="outlined"
-            yu-checkable
-            yu-text="Unselected"
+            yu-text="Toggle"
             yu-icon="edit"
           />
           <YuButton
@@ -273,15 +206,7 @@
             yu-color="outlined"
             yu-shape="square"
             yu-checkable
-            checked
-            yu-text="Selected"
-            yu-icon="edit"
-          />
-          <YuButton
-            yu-color="outlined"
-            yu-shape="square"
-            yu-checkable
-            yu-text="Unselected"
+            yu-text="Toggle"
             yu-icon="edit"
           />
         </div>
@@ -333,17 +258,35 @@
   </YuLayout>
 </template>
 
-<script setup>
-const { theme, currentTheme, setTheme } = useTheme()
-const { contrast, currentContrast, setContrast } = useContrast()
-const { reducedMotion, currentReducedMotion, setReducedMotion } = useReducedMotion()
-const { reducedTransparency, currentReducedTransparency, setReducedTransparency } = useReducedTransparency()
+<script setup lang="ts">
+const { selectedTheme, currentTheme, setTheme } = useTheme()
+const { selectedContrast, currentContrast, setContrast } = useContrast()
+const { selectedReducedMotion, currentReducedMotion, setReducedMotion } = useReducedMotion()
+const { selectedReducedTransparency, currentReducedTransparency, setReducedTransparency } = useReducedTransparency()
 </script>
 
 <style lang="scss">
 @use '@material-yu/typescales';
-@import 'https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght,XTRA@8..144,150,900,600&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wdth,wght@6..144,100..125,400..900&display=swap';
 
+:root {
+  $wide-weight: 900;
+  $wide-wdth: 125%;
+  --md-sys-typescale-emphasized-display-large-weight: #{$wide-weight};
+  --md-sys-typescale-emphasized-display-large-wdth: #{$wide-wdth};
+  --md-sys-typescale-emphasized-display-medium-weight: #{$wide-weight};
+  --md-sys-typescale-emphasized-display-medium-wdth: #{$wide-wdth};
+  --md-sys-typescale-emphasized-display-small-weight: #{$wide-weight};
+  --md-sys-typescale-emphasized-display-small-wdth: #{$wide-wdth};
+  --md-sys-typescale-emphasized-headline-large-weight: #{$wide-weight};
+  --md-sys-typescale-emphasized-headline-large-wdth: #{$wide-wdth};
+  --md-sys-typescale-emphasized-headline-medium-weight: #{$wide-weight};
+  --md-sys-typescale-emphasized-headline-medium-wdth: #{$wide-wdth};
+  --md-sys-typescale-emphasized-headline-small-weight: #{$wide-weight};
+  --md-sys-typescale-emphasized-headline-small-wdth: #{$wide-wdth};
+  --md-sys-typescale-emphasized-title-large-weight: #{$wide-weight};
+  --md-sys-typescale-emphasized-title-large-wdth: #{$wide-wdth};
+}
 .column {
   display: flex;
   flex-direction: column;
@@ -360,7 +303,7 @@ const { reducedTransparency, currentReducedTransparency, setReducedTransparency 
 }
 .button-grid, .text-button-grid {
   display: grid;
-  grid-template-columns: repeat(3, min-content);
+  grid-template-columns: repeat(2, min-content);
   gap: 1rem;
   align-items: center;
   justify-items: center;
@@ -382,33 +325,33 @@ const { reducedTransparency, currentReducedTransparency, setReducedTransparency 
   border-radius: 1.5rem;
 }
 h1 {
-  @include typescales.baseline('display', 'large');
-  margin-block: 0 1.5rem;
+  @include typescales.emphasized('display', 'large');
+  margin: 0;
 }
 h2 {
-  @include typescales.baseline('headline', 'large');
-  margin-block: 3.5rem 1rem;
+  @include typescales.emphasized('headline', 'large');
 }
 h3 {
-  @include typescales.baseline('headline', 'medium');
-  margin-block: 3.5rem 1rem;
+  @include typescales.emphasized('headline', 'medium');
 }
 h4 {
-  @include typescales.baseline('headline', 'small');
-  margin-block: 3.5rem 1rem;
+  @include typescales.emphasized('headline', 'small');
 }
-h5 {
-  margin-block: 3.5rem 1rem;
+h5, h6 {
+  @include typescales.emphasized('title', 'large');
 }
-h6 {
-  margin-block: 3.5rem 1rem;
+h2, h4, h5, h6 {
+  margin: 32px 0;
+}
+h3 {
+  margin: 16px 0;
 }
 p {
   @include typescales.baseline('body', 'large');
   margin-block: 1rem;
 
   strong {
-    @include typescales.emphasized('body', 'large');
+    font-weight: 600;
   }
 }
 </style>
