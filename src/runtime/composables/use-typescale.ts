@@ -1,7 +1,7 @@
 import { useRuntimeConfig } from '#app'
 import type { TypescaleTokens, TypescaleSet } from '../types'
 import type { ModuleOptions } from '../../module'
-import { defaultOptions } from '~/src/defaults'
+import { defaultOptions } from '../../defaults'
 
 export const useTypescale = (setName: string = 'baseline') => {
   const materialYu = useRuntimeConfig().public.materialYu as ModuleOptions
