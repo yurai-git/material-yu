@@ -1,35 +1,27 @@
 import { useRuntimeConfig } from '#app'
-import type { TypescaleTokens, TypescaleSet } from '../types'
-import type { ModuleOptions } from '../../module'
-import { defaultOptions } from '../../defaults'
+import type { TypescaleTokens, TypescaleSets } from '../types'
 
 export const useTypescale = (setName: string = 'baseline') => {
-  const materialYu = useRuntimeConfig().public.materialYu as ModuleOptions
+  const materialYu = useRuntimeConfig().public.materialYu
 
-  const typescaleSets = materialYu.typescaleSets || defaultOptions.typescaleSets
-
-  const selectedSet = (typescaleSets.find(set => set.name === setName) || typescaleSets.find(set => set.name === 'baseline')) as TypescaleSet
-
-  if (!selectedSet) {
-    throw new Error(`Typescale set '${setName}' not found and no baseline set available.`)
-  }
+  const typescaleSets = (materialYu.typescaleSets as TypescaleSets[]).find(set => set.name === setName)
 
   const typescales: TypescaleTokens = {
-    'display-large': selectedSet.display?.large,
-    'display-medium': selectedSet.display?.medium,
-    'display-small': selectedSet.display?.small,
-    'headline-large': selectedSet.headline?.large,
-    'headline-medium': selectedSet.headline?.medium,
-    'headline-small': selectedSet.headline?.small,
-    'title-large': selectedSet.title?.large,
-    'title-medium': selectedSet.title?.medium,
-    'title-small': selectedSet.title?.small,
-    'body-large': selectedSet.body?.large,
-    'body-medium': selectedSet.body?.medium,
-    'body-small': selectedSet.body?.small,
-    'label-large': selectedSet.label?.large,
-    'label-medium': selectedSet.label?.medium,
-    'label-small': selectedSet.label?.small,
+    'display-large': typescaleSets?.display?.large,
+    'display-medium': typescaleSets?.display?.medium,
+    'display-small': typescaleSets?.display?.small,
+    'headline-large': typescaleSets?.headline?.large,
+    'headline-medium': typescaleSets?.headline?.medium,
+    'headline-small': typescaleSets?.headline?.small,
+    'title-large': typescaleSets?.title?.large,
+    'title-medium': typescaleSets?.title?.medium,
+    'title-small': typescaleSets?.title?.small,
+    'body-large': typescaleSets?.body?.large,
+    'body-medium': typescaleSets?.body?.medium,
+    'body-small': typescaleSets?.body?.small,
+    'label-large': typescaleSets?.label?.large,
+    'label-medium': typescaleSets?.label?.medium,
+    'label-small': typescaleSets?.label?.small,
   }
 
   return { typescales }

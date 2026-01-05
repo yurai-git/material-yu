@@ -267,26 +267,8 @@ const { selectedReducedTransparency, currentReducedTransparency, setReducedTrans
 
 <style lang="scss">
 @use '@material-yu/typescales';
-@import 'https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wdth,wght@6..144,100..125,400..900&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wdth,wght@6..144,125,900&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap';
 
-:root {
-  $wide-weight: 900;
-  $wide-wdth: 125%;
-  --md-sys-typescale-emphasized-display-large-weight: #{$wide-weight};
-  --md-sys-typescale-emphasized-display-large-wdth: #{$wide-wdth};
-  --md-sys-typescale-emphasized-display-medium-weight: #{$wide-weight};
-  --md-sys-typescale-emphasized-display-medium-wdth: #{$wide-wdth};
-  --md-sys-typescale-emphasized-display-small-weight: #{$wide-weight};
-  --md-sys-typescale-emphasized-display-small-wdth: #{$wide-wdth};
-  --md-sys-typescale-emphasized-headline-large-weight: #{$wide-weight};
-  --md-sys-typescale-emphasized-headline-large-wdth: #{$wide-wdth};
-  --md-sys-typescale-emphasized-headline-medium-weight: #{$wide-weight};
-  --md-sys-typescale-emphasized-headline-medium-wdth: #{$wide-wdth};
-  --md-sys-typescale-emphasized-headline-small-weight: #{$wide-weight};
-  --md-sys-typescale-emphasized-headline-small-wdth: #{$wide-wdth};
-  --md-sys-typescale-emphasized-title-large-weight: #{$wide-weight};
-  --md-sys-typescale-emphasized-title-large-wdth: #{$wide-wdth};
-}
 .column {
   display: flex;
   flex-direction: column;

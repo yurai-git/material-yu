@@ -22,13 +22,16 @@ export default defineNuxtConfig({
     },
   },
   materialYu: {
-    reference: {
+    iconStyle: 'Material Symbols Outlined',
+    references: {
       color: {
         // sourceColor: '#E04443',
       },
       typography: {
-        brandTypeface: ['Google Sans Flex'],
-        plainTypeface: ['Google Sans Flex'],
+        typefaces: {
+          brand: ['Google Sans Flex'],
+          plain: ['Google Sans'],
+        },
       },
     },
   },

@@ -3,7 +3,7 @@ title: Icons
 description: Use Material Symbols with ease.
 ---
 
-- [Design article](https://m3.material.io/styles/icons){target="_blank"}
+- [Design guideline](https://m3.material.io/styles/icons){target="_blank"}
 
 ## Usage
 

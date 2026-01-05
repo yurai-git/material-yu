@@ -7,7 +7,7 @@ export const useColor = () => {
   const { currentTheme } = useTheme()
   const { currentContrast } = useContrast()
   const materialYu = useRuntimeConfig().public.materialYu
-  const theme = themeFromSourceColor(argbFromHex(materialYu.reference.color.sourceColor))
+  const theme = themeFromSourceColor(argbFromHex(materialYu.references.color.sourceColor))
 
   const light: ColorTokens = {
     'primary': hexFromArgb(theme.palettes.primary.tone(40)),

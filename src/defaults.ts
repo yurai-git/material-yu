@@ -6,19 +6,192 @@ export const defaultOptions = {
   theme: 'system',
   contrast: 'system',
   motionScheme: 'expressive',
-  iconStyle: 'outlined',
-  reference: {
+  iconStyle: 'Material Symbols Outlined',
+  references: {
     color: {
       sourceColor: '#6750a4',
     },
     typography: {
-      brandTypeface: ['sans-serif'],
-      plainTypeface: ['sans-serif'],
-      regularWeight: 400,
-      mediumWeight: 500,
-      boldWeight: 700,
+      typefaces: {
+        brand: ['sans-serif'],
+        plain: ['sans-serif'],
+      },
+      weights: {
+        regular: 400,
+        medium: 500,
+        bold: 700,
+      },
     },
   },
+  elevationSets: [
+    {
+      name: 'level5',
+      identifier: '037aa428-d531-4429-93e9-1a8eeaf05019',
+      length: [
+        [0, 7, 8, -4],
+        [0, 12, 17, 2],
+        [0, 5, 22, 4],
+      ],
+    },
+    {
+      name: 'level4',
+      identifier: '2f677656-3c56-4baf-9f56-2a1b8ae3f03c',
+      length: [
+        [0, 5, 5, -3],
+        [0, 8, 10, 1],
+        [0, 3, 14, 2],
+      ],
+    },
+    {
+      name: 'level3',
+      identifier: '468d8c15-eeec-41b1-8341-dacb213f6ca3',
+      length: [
+        [0, 3, 5, -1],
+        [0, 6, 10, 0],
+        [0, 1, 18, 0],
+      ],
+    },
+    {
+      name: 'level2',
+      identifier: '273961cb-cbab-41b1-bc98-cef1ea328da4',
+      length: [
+        [0, 3, 3, -2],
+        [0, 3, 4, 0],
+        [0, 1, 8, 0],
+      ],
+    },
+    {
+      name: 'level1',
+      identifier: 'f2a72dde-936d-4124-bf1a-f3c6aa74eb5b',
+      length: [
+        [0, 2, 1, -1],
+        [0, 1, 1, 0],
+        [0, 1, 3, 0],
+      ],
+    },
+    {
+      name: 'level0',
+      identifier: '06fbbfac-4703-49d2-acd8-035a9b0142e3',
+      length: [
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+      ],
+    },
+  ],
+  cornerSets: [
+    {
+      name: 'none',
+      identifier: '81d89965-7e96-4fa1-a8d9-bc1d5fe2ad8a',
+      value: 0,
+    },
+    {
+      name: 'extra-small',
+      identifier: '52feac0e-e26c-4c6f-bc0f-d8460a094ff1',
+      value: 4,
+    },
+    {
+      name: 'small',
+      identifier: 'e257d01b-b106-4d22-85cd-0d41d404456e',
+      value: 8,
+    },
+    {
+      name: 'medium',
+      identifier: 'dc325370-0f7b-48d8-93b0-78a5b8ebaff6',
+      value: 12,
+    },
+    {
+      name: 'large',
+      identifier: '5221c128-a2d5-47ee-9eeb-9af756728e69',
+      value: 16,
+    },
+    {
+      name: 'large-increased',
+      identifier: '9aa337a0-102e-4f31-a605-f4a0f052ad76',
+      value: 20,
+    },
+    {
+      name: 'extra-large',
+      identifier: '33de19d3-134b-44ba-ad0e-7ad69695c755',
+      value: 28,
+    },
+    {
+      name: 'extra-large-increased',
+      identifier: '6e6a8585-09c8-414a-afd0-0531d424d18b',
+      value: 32,
+    },
+    {
+      name: 'extra-extra-large',
+      identifier: 'a5718a67-e5df-4084-8aef-6f12bc35a2e6',
+      value: 48,
+    },
+  ],
+  motionSets: [
+    {
+      name: 'expressive',
+      identifier: 'f6d1fea2-a6c8-4ca5-9086-399b501321ff',
+      spatial: {
+        fast: {
+          duration: 350,
+          timingFunction: [0.42, 1.67, 0.21, 0.90],
+        },
+        default: {
+          duration: 500,
+          timingFunction: [0.38, 1.21, 0.22, 1.00],
+        },
+        slow: {
+          duration: 650,
+          timingFunction: [0.39, 1.29, 0.35, 0.98],
+        },
+      },
+      effects: {
+        fast: {
+          duration: 150,
+          timingFunction: [0.31, 0.94, 0.34, 1.00],
+        },
+        default: {
+          duration: 200,
+          timingFunction: [0.34, 0.80, 0.34, 1.00],
+        },
+        slow: {
+          duration: 300,
+          timingFunction: [0.34, 0.88, 0.34, 1.00],
+        },
+      },
+    },
+    {
+      name: 'standard',
+      identifier: '57dba8bc-0299-4f14-849c-fb5577058968',
+      spatial: {
+        fast: {
+          duration: 350,
+          timingFunction: [0.27, 1.06, 0.18, 1.00],
+        },
+        default: {
+          duration: 500,
+          timingFunction: [0.27, 1.06, 0.18, 1.00],
+        },
+        slow: {
+          duration: 750,
+          timingFunction: [0.27, 1.06, 0.18, 1.00],
+        },
+      },
+      effects: {
+        fast: {
+          duration: 150,
+          timingFunction: [0.31, 0.94, 0.34, 1.00],
+        },
+        default: {
+          duration: 200,
+          timingFunction: [0.34, 0.80, 0.34, 1.00],
+        },
+        slow: {
+          duration: 300,
+          timingFunction: [0.34, 0.88, 0.34, 1.00],
+        },
+      },
+    },
+  ],
   typescaleSets: [
     {
       name: 'baseline',

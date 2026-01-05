@@ -20,13 +20,6 @@ import { useTheme } from '@material-yu/use-theme'
 
 const clamp = (num: number, min: number, max: number) =>
   Math.min(Math.max(num, min), max)
-const getFontName = (style: string) => {
-  switch (style) {
-    case 'rounded': return 'Rounded'
-    case 'sharp': return 'Sharp'
-    default: return 'Outlined'
-  }
-}
 
 /**
  * Properties and states
@@ -68,7 +61,7 @@ const opsz = computed(() => clamp(finalSize.value, 20, 48))
 const wght = computed(() => clamp(finalWeight.value, 100, 700))
 const fill = computed(() => finalFill.value ? 1 : 0)
 const grad = computed(() => finalEmphasis.value ? 200 : gradFallback.value)
-const styleValue = computed(() => `'Material Symbols ${getFontName(materialYu.iconStyle)}'`)
+const styleValue = computed(() => materialYu.iconStyle)
 
 /**
  * WAI-ARIA attributes

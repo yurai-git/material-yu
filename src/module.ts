@@ -2,7 +2,7 @@ import { defineNuxtModule, createResolver, addPlugin, addComponentsDir, addImpor
 import { createDefu } from 'defu'
 import { defaultOptions } from './defaults'
 import { name, version } from '../package.json'
-import type { MotionSchemeValue, IconStyleValue, ButtonSizeValue, ButtonShapeValue, ButtonColorValue, ColorTokens, StyleSets, Typescale, Corner, Motion, TypescaleTokens, TypescaleSet } from './runtime/types'
+import type { MotionSchemeValue, ButtonSizeValue, ButtonShapeValue, ButtonColorValue, ColorTokens, StyleSets, TypescaleSets, MotionSets, ElevationSets, CornerSets } from './runtime/types'
 import { argbFromHex, themeFromSourceColor, applyTheme } from '@material/material-color-utilities'
 
 type ThemeValue = 'system' | 'light' | 'dark'
@@ -47,11 +47,11 @@ export interface ModuleOptions {
 
   /**
    * Define the style of Material Symbols
-   * @default `'outlined'`
+   * @default `'Material Symbols Outlined'`
    */
-  iconStyle?: IconStyleValue
+  iconStyle?: string
 
-  reference?: {
+  references?: {
     /**
      * Color configurations
      */
@@ -67,74 +67,68 @@ export interface ModuleOptions {
      */
     typography?: {
       /**
-       * Define the default brand font
-       * @default `['sans-serif']`
-       * @example `['Google Sans', 'Noto Sans JP']`
+       * Typefaces for typography
        */
-      brandTypeface?: string[]
+      typefaces?: {
+        /**
+         * Define the default brand font
+         * @default `['sans-serif']`
+         * @example `['Google Sans', 'Noto Sans JP']`
+         */
+        brand?: string[]
+
+        /**
+         * Define the default plain font
+         * @default `['sans-serif']`
+         * @example `['Google Sans', 'Noto Sans JP']`
+         */
+        plain?: string[]
+      }
 
       /**
-       * Define the default plain font
-       * @default `['sans-serif']`
-       * @example `['Google Sans', 'Noto Sans JP']`
+       * Weights for typefaces
        */
-      plainTypeface?: string[]
+      weights?: {
+        /**
+         * Define the font weight for regular
+         * @default `400`
+         */
+        regular?: number
 
-      /**
-       * Define the font weight for regular
-       * @default `400`
-       */
-      regularWeight?: number
+        /**
+         * Define the font weight for medium
+         * @default `500`
+         */
+        medium?: number
 
-      /**
-       * Define the font weight for medium
-       * @default `500`
-       */
-      mediumWeight?: number
-
-      /**
-       * Define the font weight for bold
-       * @default `700`
-       */
-      boldWeight?: number
+        /**
+         * Define the font weight for bold
+         * @default `700`
+         */
+        bold?: number
+      }
     }
   }
-  typescaleSets?: TypescaleSet[]
+  /**
+   * Define the corner sets
+   */
+  cornerSets?: CornerSets[]
+  /**
+   * Define the elevation sets
+   */
+  elevationSets?: ElevationSets[]
+  /**
+   * Define the motion sets
+   */
+  motionSets?: MotionSets[]
+  /**
+   * Define the typescale sets
+   */
+  typescaleSets?: TypescaleSets[]
   /**
    * Define the style sets to apply to components
    */
-  styleSets?: {
-    button?: {
-      colors?: {
-        name: string
-        identifier?: string
-        uncheckable?: boolean
-        checkable?: boolean
-        enabled: StyleSets['button']['colors']
-        disabled: StyleSets['button']['colors']
-        hovered: StyleSets['button']['colors']
-        focused: StyleSets['button']['colors']
-        pressed: StyleSets['button']['colors']
-      }[]
-      sizes?: {
-        name: string
-        identifier?: string
-        containerHeight: number
-        outlineWidth: number
-        labelSize: Typescale | keyof TypescaleTokens
-        iconSize: number
-        shapeRound: Corner
-        shapeSquare: Corner
-        leadingSpace: number
-        betweenIconLabelSpace: number
-        trailingSpace: number
-        shapePressedMorph: Corner
-        shapeAnimation: Motion
-        selectedContainerShapeRound: Corner
-        selectedContainerShapeSquare: Corner
-      }[]
-    }
-  }
+  styleSets?: StyleSets
   /**
    * Component configurations
    */
@@ -350,23 +344,20 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.runtimeConfig.public.materialYu = ModuleOptions
 
     const iconStyle = ModuleOptions.iconStyle
-    const typography = ModuleOptions.reference.typography
-    const sourceColor = ModuleOptions.reference.color.sourceColor
+    const typography = ModuleOptions.references.typography
+    const sourceColor = ModuleOptions.references.color.sourceColor
 
     nuxt.options.alias['@material-yu/typescales'] = resolve('./runtime/assets/stylesheets/typescales')
     nuxt.options.alias['@material-yu'] = resolve('./runtime/composables')
     nuxt.options.css.push(resolve('./runtime/assets/stylesheets/material-tokens.scss'))
     const mapStyleToName = (style: string) => {
-      switch (style) {
-        case 'rounded': return 'Rounded'
-        case 'sharp': return 'Sharp'
-        default: return 'Outlined'
-      }
+      // Half-width spaces to plus signs
+      return style.replace(/\s/g, '+')
     }
     nuxt.options.app.head.link = nuxt.options.app.head.link || []
     nuxt.options.app.head.link.push({
       rel: 'stylesheet',
-      href: `https://fonts.googleapis.com/css2?family=Material+Symbols+${mapStyleToName(iconStyle)}:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200`,
+      href: `https://fonts.googleapis.com/css2?family=${mapStyleToName(iconStyle)}:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200`,
     })
 
     const minifyCss = (css: string) => {
@@ -377,15 +368,15 @@ export default defineNuxtModule<ModuleOptions>({
         .trim()
     }
     const formatTypeface = (typeface: string[]) => {
-      return typeface.map(name => `'${name}'`).join(', ')
+      return typeface.map(name => name).join(', ')
     }
     const typefaceStyles = `
       :root {
-        --md-ref-typeface-brand: ${formatTypeface(typography.brandTypeface)};
-        --md-ref-typeface-plain: ${formatTypeface(typography.plainTypeface)};
-        --md-ref-typeface-weight-regular: ${typography.regularWeight};
-        --md-ref-typeface-weight-medium: ${typography.mediumWeight};
-        --md-ref-typeface-weight-bold: ${typography.boldWeight};
+        --md-ref-typeface-brand: ${formatTypeface(typography.typefaces.brand)};
+        --md-ref-typeface-plain: ${formatTypeface(typography.typefaces.plain)};
+        --md-ref-typeface-weight-regular: ${typography.weights.regular};
+        --md-ref-typeface-weight-medium: ${typography.weights.medium};
+        --md-ref-typeface-weight-bold: ${typography.weights.bold};
       }
     `
     nuxt.options.app.head.style = nuxt.options.app.head.style || []
