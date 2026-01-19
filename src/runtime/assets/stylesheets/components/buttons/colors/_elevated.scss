@@ -1,0 +1,57 @@
+.yu-button-color-elevated {
+  --container-color: var(--md-sys-color-surface-container-low);
+  --container-color-unselected: var(--md-sys-color-surface-container-low);
+  --container-color-selected: var(--md-sys-color-primary);
+  --shadow-color: var(--md-sys-color-shadow);
+  --elevation: var(--md-sys-elevation-level1);
+  --label-color: var(--md-sys-color-primary);
+  --label-color-unselected: var(--md-sys-color-primary);
+  --label-color-selected: var(--md-sys-color-on-primary);
+  --icon-color: var(--md-sys-color-primary);
+  --icon-color-unselected: var(--md-sys-color-primary);
+  --icon-color-selected: var(--md-sys-color-on-primary);
+
+  --disabled-container-color: var(--md-sys-color-on-surface);
+  --disabled-container-opacity: 0.1;
+  --disabled-elevation: var(--md-sys-elevation-level0);
+  --disabled-label-color: var(--md-sys-color-on-surface);
+  --disabled-label-opacity: 0.38;
+  --disabled-icon-color: var(--md-sys-color-on-surface);
+  --disabled-icon-opacity: 0.38;
+
+  --hovered-state-layer-color: var(--md-sys-color-primary);
+  --hovered-state-layer-color-unselected: var(--md-sys-color-primary);
+  --hovered-state-layer-color-selected: var(--md-sys-color-on-primary);
+  --hovered-state-layer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+  --hovered-elevation: var(--md-sys-elevation-level2);
+  --hovered-label-color: var(--md-sys-color-primary);
+  --hovered-label-color-unselected: var(--md-sys-color-primary);
+  --hovered-label-color-selected: var(--md-sys-color-on-primary);
+  --hovered-icon-color: var(--md-sys-color-primary);
+  --hovered-icon-color-unselected: var(--md-sys-color-primary);
+  --hovered-icon-color-selected: var(--md-sys-color-on-primary);
+
+  --focused-state-layer-color: var(--md-sys-color-primary);
+  --focused-state-layer-color-unselected: var(--md-sys-color-primary);
+  --focused-state-layer-color-selected: var(--md-sys-color-on-primary);
+  --focused-state-layer-opacity: var(--md-sys-state-focused-state-layer-opacity);
+  --focused-elevation: var(--md-sys-elevation-level1);
+  --focused-label-color: var(--md-sys-color-primary);
+  --focused-label-color-unselected: var(--md-sys-color-primary);
+  --focused-label-color-selected: var(--md-sys-color-on-primary);
+  --focused-icon-color: var(--md-sys-color-primary);
+  --focused-icon-color-unselected: var(--md-sys-color-primary);
+  --focused-icon-color-selected: var(--md-sys-color-on-primary);
+
+  --pressed-state-layer-color: var(--md-sys-color-primary);
+  --pressed-state-layer-color-unselected: var(--md-sys-color-primary);
+  --pressed-state-layer-color-selected: var(--md-sys-color-on-primary);
+  --pressed-state-layer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+  --pressed-elevation: var(--md-sys-elevation-level1);
+  --pressed-label-color: var(--md-sys-color-primary);
+  --pressed-label-color-unselected: var(--md-sys-color-primary);
+  --pressed-label-color-selected: var(--md-sys-color-on-primary);
+  --pressed-icon-color: var(--md-sys-color-primary);
+  --pressed-icon-color-unselected: var(--md-sys-color-primary);
+  --pressed-icon-color-selected: var(--md-sys-color-on-primary);
+}
