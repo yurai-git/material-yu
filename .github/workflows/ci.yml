@@ -23,10 +23,10 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm i --frozen-lockfile
 
       - name: Lint
-        run: pnpm run lint
+        run: pnpm eslint
 
   test:
     runs-on: ubuntu-latest
@@ -42,10 +42,10 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm i --frozen-lockfile
 
       - name: Playground prepare
-        run: pnpm run dev:prepare
+        run: pnpm dev:prepare
 
       - name: Test
-        run: pnpm run test
+        run: pnpm test

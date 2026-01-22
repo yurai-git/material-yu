@@ -7,38 +7,38 @@ Material Yu provides Material 3 components for Nuxt.
 - [ ] App bar
 - [ ] Badge
 - [ ] Button
-    - [ ] Button
-    - [ ] Toggle button
-    - [ ] Icon button
-    - [ ] Toggle icon button
-    - [ ] Split button
-    - [ ] Standard button group
-    - [ ] Connected button group
-    - [ ] Floating action button (FAB)
-    - [ ] Extended FAB
-    - [ ] FAB menu
+  - [ ] Button
+  - [ ] Toggle button
+  - [ ] Icon button
+  - [ ] Toggle icon button
+  - [ ] Split button
+  - [ ] Standard button group
+  - [ ] Connected button group
+  - [ ] Floating action button (FAB)
+  - [ ] Extended FAB
+  - [ ] FAB menu
 - [ ] Card
 - [ ] Carousel
 - [ ] Checkbox
 - [ ] Chip
 - [ ] Date & time picker
-    - [ ] Date picker
-    - [ ] Time picker
+  - [ ] Date picker
+  - [ ] Time picker
 - [ ] Dialog
 - [ ] Divider
 - [ ] List
 - [ ] Loading & progress
-    - [ ] Loading indicator
-    - [ ] Progress indicator
+  - [ ] Loading indicator
+  - [ ] Progress indicator
 - [ ] Menu
 - [ ] Navigation
-    - [ ] Navigation bar
-    - [ ] Navigation rail
+  - [ ] Navigation bar
+  - [ ] Navigation rail
 - [ ] Radio Button
 - [ ] Search
 - [ ] Sheet
-    - [ ] Bottom sheet
-    - [ ] Side sheet
+  - [ ] Bottom sheet
+  - [ ] Side sheet
 - [ ] Slider
 - [ ] Snackbar
 - [ ] Switch
@@ -59,24 +59,25 @@ To begin local development, follow the following steps:
 
 1. Clone the repository to your local machine:
 
-    ```bash
-    git clone https://github.com/yurai-git/material-yu.git
-    ```
+   ```bash
+   git clone https://github.com/yurai-git/material-yu.git
+   cd material-yu
+   ```
 
-1. Enable corepack:
+1. Install pnpm:
 
-    ```bash
-    corepack enable
-    ```
+   ```bash
+   npm install -g pnpm
+   ```
 
 1. Install the dependencies:
 
-    ```bash
-    pnpm install
-    ```
+   ```bash
+   pnpm install
+   ```
 
 1. Start the development server:
 
-    ```bash
-    pnpm dev
-    ```
+   ```bash
+   pnpm dev
+   ```

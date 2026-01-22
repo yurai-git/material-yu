@@ -1,4 +1,4 @@
-@use 'generator';
+@use 'helpers';
 
 $shape-corner: (
   full: 1000px,
@@ -15,7 +15,7 @@ $shape-corner: (
   none: 0,
   large-increased: 20px,
   extra-large-increased: 32px,
-  extra-extra-large: 48px
+  extra-extra-large: 48px,
 );
 
 $shape-corner-value: (
@@ -27,10 +27,10 @@ $shape-corner-value: (
   large-increased: 20px,
   extra-large: 28px,
   extra-large-increased: 32px,
-  extra-extra-large: 48px
+  extra-extra-large: 48px,
 );
 
 :root {
-  @include generator.generate-token($shape-corner, shape-corner);
-  @include generator.generate-token($shape-corner-value, shape-corner-value);
+  @include helpers.generate-token($shape-corner, shape-corner);
+  @include helpers.generate-token($shape-corner-value, shape-corner-value);
 }

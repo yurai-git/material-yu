@@ -5,90 +5,87 @@
     :role="role"
     translate="no"
   >
-    <slot>{{ finalIconName }}</slot>
+    <slot>{{ yuIconName }}</slot>
   </span>
 </template>
 
 <script lang="ts" setup>
-import { useRuntimeConfig } from '#app'
-import { computed, useAttrs, toRef } from 'vue'
-import { useTheme } from '@material-yu/use-theme'
+import { computed, useAttrs, toRef } from 'vue';
+import { useTheme } from '@material-yu/use-theme';
 
 /**
  * Utility functions
  */
 
 const clamp = (num: number, min: number, max: number) =>
-  Math.min(Math.max(num, min), max)
+  Math.min(Math.max(num, min), max);
 
 /**
  * Properties and states
  */
 
-const materialYu = useRuntimeConfig().public.materialYu
-const defaultConfig = materialYu.components.icon
-
 const props = defineProps({
   yuIconName: {
     type: String,
-    default: undefined,
+    default: 'search',
   },
   yuStyle: {
     type: Object as import('vue').PropType<{
-      weight?: number
-      fill?: boolean
-      emphasis?: boolean
-      size?: number
+      weight?: number;
+      fill?: boolean;
+      emphasis?: boolean;
+      size?: number;
     }>,
-    default: undefined,
+    default: () => ({
+      weight: 400,
+      fill: false,
+      emphasis: false,
+      size: 24,
+    }),
   },
-})
-
-const finalWeight = computed(() => props.yuStyle?.weight ?? defaultConfig.style.weight)
-const finalFill = computed(() => props.yuStyle?.fill ?? defaultConfig.style.fill)
-const finalEmphasis = computed(() => props.yuStyle?.emphasis ?? defaultConfig.style.emphasis)
-const finalSize = computed(() => props.yuStyle?.size ?? defaultConfig.style.size)
-const finalIconName = computed(() => props.yuIconName ?? 'search')
+});
 
 /**
  * Font variations
  */
 
-const { isLightTheme } = useTheme()
+const { isLightTheme } = useTheme();
 
-const gradFallback = computed(() => isLightTheme.value ? 0 : -25)
-const opsz = computed(() => clamp(finalSize.value, 20, 48))
-const wght = computed(() => clamp(finalWeight.value, 100, 700))
-const fill = computed(() => finalFill.value ? 1 : 0)
-const grad = computed(() => finalEmphasis.value ? 200 : gradFallback.value)
-const styleValue = computed(() => materialYu.iconStyle)
+const gradFallback = computed(() => (isLightTheme.value ? 0 : -25));
+const opsz = computed(() => clamp(props.yuStyle.size ?? 24, 20, 48));
+const wght = computed(() => clamp(props.yuStyle.weight ?? 400, 100, 700));
+const fill = computed(() => (props.yuStyle.fill ? 1 : 0));
+const grad = computed(() =>
+  props.yuStyle.emphasis ? 200 : gradFallback.value,
+);
 
 /**
  * WAI-ARIA attributes
  */
 
-const attributes = useAttrs()
-const ariaLabel = toRef(attributes, 'aria-label')
-const ariaHidden = computed(() => !ariaLabel.value ? 'true' : undefined)
-const role = computed(() => ariaLabel.value ? 'img' : undefined)
+const attributes = useAttrs();
+const ariaLabel = toRef(attributes, 'aria-label');
+const ariaHidden = computed(() => (!ariaLabel.value ? 'true' : undefined));
+const role = computed(() => (ariaLabel.value ? 'img' : undefined));
 </script>
 
 <style lang="scss" scoped>
 .yu-icon {
-  font-size: v-bind("finalSize + 'px'");
+  // font-size: v-bind("finalSize + 'px'");
   font-variation-settings:
     'FILL' v-bind(fill),
     'wght' v-bind(wght),
     'GRAD' v-bind(grad),
     'opsz' v-bind(opsz);
   user-select: none;
-  font-family: v-bind(styleValue);
+  // font-family: v-bind(styleValue);
   width: 1em;
   height: 1em;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  transition: font-variation-settings var(--md-sys-motion-expressive-fast-effects);
+  transition: font-variation-settings
+    var(--md-sys-motion-expressive-fast-effects);
 }
 </style>

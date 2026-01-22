@@ -34,7 +34,9 @@
   --focused-state-layer-color: var(--md-sys-color-primary);
   --focused-state-layer-color-unselected: var(--md-sys-color-primary);
   --focused-state-layer-color-selected: var(--md-sys-color-on-primary);
-  --focused-state-layer-opacity: var(--md-sys-state-focused-state-layer-opacity);
+  --focused-state-layer-opacity: var(
+    --md-sys-state-focused-state-layer-opacity
+  );
   --focused-elevation: var(--md-sys-elevation-level1);
   --focused-label-color: var(--md-sys-color-primary);
   --focused-label-color-unselected: var(--md-sys-color-primary);
@@ -46,7 +48,9 @@
   --pressed-state-layer-color: var(--md-sys-color-primary);
   --pressed-state-layer-color-unselected: var(--md-sys-color-primary);
   --pressed-state-layer-color-selected: var(--md-sys-color-on-primary);
-  --pressed-state-layer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+  --pressed-state-layer-opacity: var(
+    --md-sys-state-pressed-state-layer-opacity
+  );
   --pressed-elevation: var(--md-sys-elevation-level1);
   --pressed-label-color: var(--md-sys-color-primary);
   --pressed-label-color-unselected: var(--md-sys-color-primary);

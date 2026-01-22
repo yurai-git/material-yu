@@ -27,12 +27,6 @@ export default defineNuxtConfig({
       color: {
         // sourceColor: '#E04443',
       },
-      typography: {
-        typefaces: {
-          brand: ['Google Sans Flex'],
-          plain: ['Google Sans'],
-        },
-      },
     },
   },
-})
+});

@@ -1,0 +1,16 @@
+.yu-button-size-xsmall {
+  --container-height: 32px;
+  --outline-width: 1px;
+  --label-font: var(--md-sys-typescale-title-small);
+  --label-tracking: var(--md-sys-typescale-title-small-tracking);
+  --icon-size: 20px;
+  --shape-round: calc(var(--container-height) / 2);
+  --shape-square: var(--md-sys-shape-corner-medium);
+  --leading-space: 12px;
+  --between-icon-label-space: 8px;
+  --trailing-space: 12px;
+  --shape-pressed-morph: var(--md-sys-shape-corner-small);
+  --shape-spring-animation: var(--md-sys-motion-spring-fast-spatial);
+  --selected-container-shape-round: var(--md-sys-shape-corner-medium);
+  --selected-container-shape-square: calc(var(--container-height) / 2);
+}

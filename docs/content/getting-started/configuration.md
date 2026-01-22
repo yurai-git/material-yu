@@ -10,8 +10,8 @@ export default defineNuxtConfig({
   modules: ['@yurai/material-yu'],
   materialYu: {
     // Module options
-  }
-})
+  },
+});
 ```
 
 ## `image`

@@ -1,17 +1,13 @@
 @use 'tokens';
-@use 'typeface';
+@use 'typefaces';
 @use 'sass:map';
 
 @mixin baseline($name, $size) {
-  font-family: var(--md-sys-typescale-#{$name}-#{$size}-font);
-  font-weight: var(--md-sys-typescale-#{$name}-#{$size}-weight);
-  font-size: var(--md-sys-typescale-#{$name}-#{$size}-size);
+  font: var(--md-sys-typescale-#{$name}-#{$size});
   letter-spacing: var(--md-sys-typescale-#{$name}-#{$size}-tracking);
-  line-height: var(--md-sys-typescale-#{$name}-#{$size}-line-height);
   font-feature-settings:
     'wght' var(--md-sys-typescale-#{$name}-#{$size}-wght),
     'GRAD' var(--md-sys-typescale-#{$name}-#{$size}-grad),
-    'wdth' var(--md-sys-typescale-#{$name}-#{$size}-wdth),
     'ROND' var(--md-sys-typescale-#{$name}-#{$size}-rond),
     'opsz' var(--md-sys-typescale-#{$name}-#{$size}-opsz),
     'CRSV' var(--md-sys-typescale-#{$name}-#{$size}-crsv),
@@ -26,18 +22,15 @@
     'YTFI' var(--md-sys-typescale-#{$name}-#{$size}-ytfi),
     'YTLC' var(--md-sys-typescale-#{$name}-#{$size}-ytlc),
     'YTUC' var(--md-sys-typescale-#{$name}-#{$size}-ytuc);
+  font-stretch: var(--md-sys-typescale-#{$name}-#{$size}-wdth);
 }
 
 @mixin emphasized($name, $size) {
-  font-family: var(--md-sys-typescale-emphasized-#{$name}-#{$size}-font);
-  font-weight: var(--md-sys-typescale-emphasized-#{$name}-#{$size}-weight);
-  font-size: var(--md-sys-typescale-emphasized-#{$name}-#{$size}-size);
+  font: var(--md-sys-typescale-emphasized-#{$name}-#{$size});
   letter-spacing: var(--md-sys-typescale-emphasized-#{$name}-#{$size}-tracking);
-  line-height: var(--md-sys-typescale-emphasized-#{$name}-#{$size}-line-height);
   font-feature-settings:
     'wght' var(--md-sys-typescale-emphasized-#{$name}-#{$size}-wght),
     'GRAD' var(--md-sys-typescale-emphasized-#{$name}-#{$size}-grad),
-    // 'wdth' var(--md-sys-typescale-emphasized-#{$name}-#{$size}-wdth),
     'ROND' var(--md-sys-typescale-emphasized-#{$name}-#{$size}-rond),
     'opsz' var(--md-sys-typescale-emphasized-#{$name}-#{$size}-opsz),
     'CRSV' var(--md-sys-typescale-emphasized-#{$name}-#{$size}-crsv),

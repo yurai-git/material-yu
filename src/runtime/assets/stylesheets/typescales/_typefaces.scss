@@ -1,0 +1,19 @@
+$typeface: (
+  brand: (
+    'Google Sans',
+    sans-serif,
+  ),
+  plain: (
+    Roboto,
+    sans-serif,
+  ),
+  weight-regular: 400,
+  weight-medium: 500,
+  weight-bold: 700,
+);
+
+:root {
+  @each $key, $value in $typeface {
+    --md-ref-typeface-#{$key}: #{$value};
+  }
+}

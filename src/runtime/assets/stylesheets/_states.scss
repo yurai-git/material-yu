@@ -1,4 +1,4 @@
-@use 'generator';
+@use 'helpers';
 
 $state-tokens: (
   dragged-state-layer-opacity: 16%,
@@ -6,9 +6,9 @@ $state-tokens: (
   focus-indicator-outer-offset: 2px,
   focus-state-layer-opacity: 10%,
   hover-state-layer-opacity: 8%,
-  pressed-state-layer-opacity: 10%
+  pressed-state-layer-opacity: 10%,
 );
 
 :root {
-  @include generator.generate-token($state-tokens, state);
+  @include helpers.generate-token($state-tokens, state);
 }
