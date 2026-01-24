@@ -1,3 +1,5 @@
+@use 'helpers' as *;
+
 $typeface: (
   brand: (
     'Google Sans',
@@ -13,7 +15,5 @@ $typeface: (
 );
 
 :root {
-  @each $key, $value in $typeface {
-    --md-ref-typeface-#{$key}: #{$value};
-  }
+  @include generate-token($typeface);
 }

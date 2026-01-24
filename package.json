@@ -57,7 +57,7 @@
     "vitest": "^3.2.4",
     "vue-tsc": "^3.1.8"
   },
-  "packageManager": "pnpm@10.20.0",
+  "packageManager": "pnpm@10.28.1",
   "pnpm": {
     "overrides": {
       "magicast": "^0.3.5"

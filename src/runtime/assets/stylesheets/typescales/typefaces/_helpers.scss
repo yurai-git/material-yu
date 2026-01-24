@@ -1,0 +1,5 @@
+@mixin generate-token($map) {
+  @each $key, $value in $map {
+    --md-ref-typeface-#{$key}: #{$value};
+  }
+}

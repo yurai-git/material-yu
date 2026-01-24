@@ -1,51 +1,57 @@
-export type Theme = 'light' | 'dark' | 'system';
-export type Contrast = 'system' | 'default' | 'medium' | 'high';
-export type MotionScheme = 'standard' | 'expressive';
-export type ColorTokens = {
-  'primary': string;
-  'on-primary': string;
-  'primary-container': string;
-  'on-primary-container': string;
-  'secondary': string;
-  'on-secondary': string;
-  'secondary-container': string;
-  'on-secondary-container': string;
-  'tertiary': string;
-  'on-tertiary': string;
-  'tertiary-container': string;
-  'on-tertiary-container': string;
-  'error': string;
-  'on-error': string;
-  'error-container': string;
-  'on-error-container': string;
-  'surface': string;
-  'on-surface': string;
-  'surface-variant': string;
-  'on-surface-variant': string;
-  'surface-container-highest': string;
-  'surface-container-high': string;
-  'surface-container': string;
-  'surface-container-low': string;
-  'surface-container-lowest': string;
-  'inverse-surface': string;
-  'inverse-on-surface': string;
-  'outline': string;
-  'outline-variant': string;
-  'primary-fixed': string;
-  'on-primary-fixed': string;
-  'primary-fixed-dim': string;
-  'on-primary-fixed-variant': string;
-  'inverse-primary': string;
-  'secondary-fixed': string;
-  'on-secondary-fixed': string;
-  'secondary-fixed-dim': string;
-  'on-secondary-fixed-variant': string;
-  'tertiary-fixed': string;
-  'on-tertiary-fixed': string;
-  'tertiary-fixed-dim': string;
-  'on-tertiary-fixed-variant': string;
-  'surface-bright': string;
-  'surface-dim': string;
-  'scrim': string;
-  'shadow': string;
-};
+export type Theme = 'system' | 'light' | 'dark'
+export type Contrast = 'system' | 'default' | 'medium' | 'high'
+export type ReducedMotion = 'system' | 'reduced' | 'unreduced'
+export type ReducedTransparency = 'system' | 'reduced' | 'unreduced'
+
+export type IconStyle
+  = | 'Material Symbols Outlined'
+    | 'Material Symbols Rounded'
+    | 'Material Symbols Sharp'
+export type MotionScheme = 'standard' | 'expressive'
+export type Color
+  = | 'primary'
+    | 'on-primary'
+    | 'primary-container'
+    | 'on-primary-container'
+    | 'secondary'
+    | 'on-secondary'
+    | 'secondary-container'
+    | 'on-secondary-container'
+    | 'tertiary'
+    | 'on-tertiary'
+    | 'tertiary-container'
+    | 'on-tertiary-container'
+    | 'error'
+    | 'on-error'
+    | 'error-container'
+    | 'on-error-container'
+    | 'surface'
+    | 'on-surface'
+    | 'surface-variant'
+    | 'on-surface-variant'
+    | 'surface-container-highest'
+    | 'surface-container-high'
+    | 'surface-container'
+    | 'surface-container-low'
+    | 'surface-container-lowest'
+    | 'inverse-surface'
+    | 'inverse-on-surface'
+    | 'outline'
+    | 'outline-variant'
+    | 'primary-fixed'
+    | 'on-primary-fixed'
+    | 'primary-fixed-dim'
+    | 'on-primary-fixed-variant'
+    | 'inverse-primary'
+    | 'secondary-fixed'
+    | 'on-secondary-fixed'
+    | 'secondary-fixed-dim'
+    | 'on-secondary-fixed-variant'
+    | 'tertiary-fixed'
+    | 'on-tertiary-fixed'
+    | 'tertiary-fixed-dim'
+    | 'on-tertiary-fixed-variant'
+    | 'surface-bright'
+    | 'surface-dim'
+    | 'scrim'
+    | 'shadow'

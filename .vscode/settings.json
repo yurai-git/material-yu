@@ -1,7 +1,8 @@
 {
-  "editor.codeActionsOnSave": {
-    "source.addMissingImports.ts": "always",
-    "source.fixAll.prettier": "always",
-    "source.organizeImports": "always"
-  }
+  "editor.codeActionsOnSave": [
+    "source.addMissingImports.ts",
+    "source.fixAll.prettier",
+    "source.organizeImports",
+    "source.fixAll.eslint"
+  ]
 }

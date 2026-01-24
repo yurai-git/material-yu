@@ -1,8 +1,10 @@
 <script setup lang="ts">
-const route = useRoute();
+import { createError, useAsyncData, useRoute, useSeoMeta } from '#app'
+
+const route = useRoute()
 const { data: page } = await useAsyncData(route.path, () => {
-  return queryCollection('docs').path(route.path).first();
-});
+  return queryCollection('docs').path(route.path).first()
+})
 
 if (!page.value) {
   throw createError({
@@ -11,13 +13,13 @@ if (!page.value) {
     data: {
       path: route.fullPath,
     },
-  });
+  })
 }
 
 useSeoMeta({
   title: page.value?.title,
   description: page.value?.description,
-});
+})
 </script>
 
 <template>

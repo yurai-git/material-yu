@@ -1,49 +1,30 @@
-import { useStorage } from '@vueuse/core';
-import { computed, onMounted, ref } from 'vue';
+import { useRuntimeConfig } from '#app'
+import { useMediaQuery, useStorage } from '@vueuse/core'
+import { computed, readonly } from 'vue'
+import type { DeepRequired, ModuleOptions } from '../../module'
+import type { ReducedTransparency } from '../types'
 
 export const useReducedTransparency = () => {
-  const selectedReducedTransparency = useStorage(
+  const config = useRuntimeConfig().public
+    .materialYu as DeepRequired<ModuleOptions>
+  const reducedTransparencyPreference = useStorage<ReducedTransparency>(
     'material-yu:reduced-transparency',
-    () => 'system',
-  );
+    () => config.reducedTransparency,
+  )
+  const isSystemReducedTransparency = useMediaQuery(
+    '(prefers-reduced-transparency: reduce)',
+  )
 
-  const isSystemReducedTransparency = ref(false);
-
-  onMounted(() => {
-    const reducedTransparencyMatcher = window.matchMedia(
-      '(prefers-reduced-transparency: reduce)',
-    );
-    isSystemReducedTransparency.value = reducedTransparencyMatcher.matches;
-    reducedTransparencyMatcher.addEventListener(
-      'change',
-      (e) => (isSystemReducedTransparency.value = e.matches),
-    );
-  });
-
-  const currentReducedTransparency = computed(() => {
-    if (selectedReducedTransparency.value === 'system')
-      return isSystemReducedTransparency.value ? 'reduced' : 'unreduced';
-    return selectedReducedTransparency.value;
-  });
-
-  const setReducedTransparency = (
-    value: 'system' | 'reduced' | 'unreduced',
-  ) => {
-    selectedReducedTransparency.value = value;
-  };
-
-  const isUnreducedTransparency = computed(
-    () => currentReducedTransparency.value === 'unreduced',
-  );
-  const isReducedTransparency = computed(
-    () => currentReducedTransparency.value === 'reduced',
-  );
+  const resolvedReducedTransparency = readonly(
+    computed<Exclude<ReducedTransparency, 'system'>>(() => {
+      if (reducedTransparencyPreference.value === 'system')
+        return isSystemReducedTransparency.value ? 'reduced' : 'unreduced'
+      return reducedTransparencyPreference.value
+    }),
+  )
 
   return {
-    selectedReducedTransparency,
-    currentReducedTransparency,
-    setReducedTransparency,
-    isUnreducedTransparency,
-    isReducedTransparency,
-  };
-};
+    reducedTransparencyPreference,
+    resolvedReducedTransparency,
+  }
+}

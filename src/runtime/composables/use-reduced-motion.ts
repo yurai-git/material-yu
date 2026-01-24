@@ -1,47 +1,30 @@
-import { useStorage } from '@vueuse/core';
-import { computed, onMounted, ref } from 'vue';
+import { useRuntimeConfig } from '#app'
+import { useMediaQuery, useStorage } from '@vueuse/core'
+import { computed, readonly } from 'vue'
+import type { DeepRequired, ModuleOptions } from '../../module'
+import type { ReducedMotion } from '../types'
 
 export const useReducedMotion = () => {
-  const selectedReducedMotion = useStorage(
+  const config = useRuntimeConfig().public
+    .materialYu as DeepRequired<ModuleOptions>
+  const reducedMotionPreference = useStorage<ReducedMotion>(
     'material-yu:reduced-motion',
-    () => 'system',
-  );
+    () => config.reducedMotion,
+  )
+  const isSystemReducedMotion = useMediaQuery(
+    '(prefers-reduced-motion: reduce)',
+  )
 
-  const isSystemReducedMotion = ref(false);
-
-  onMounted(() => {
-    const reducedMotionMatcher = window.matchMedia(
-      '(prefers-reduced-motion: reduce)',
-    );
-    isSystemReducedMotion.value = reducedMotionMatcher.matches;
-    reducedMotionMatcher.addEventListener(
-      'change',
-      (e) => (isSystemReducedMotion.value = e.matches),
-    );
-  });
-
-  const currentReducedMotion = computed(() => {
-    if (selectedReducedMotion.value === 'system')
-      return isSystemReducedMotion.value ? 'reduced' : 'unreduced';
-    return selectedReducedMotion.value;
-  });
-
-  const setReducedMotion = (value: 'system' | 'reduced' | 'unreduced') => {
-    selectedReducedMotion.value = value;
-  };
-
-  const isUnreducedMotion = computed(
-    () => currentReducedMotion.value === 'unreduced',
-  );
-  const isReducedMotion = computed(
-    () => currentReducedMotion.value === 'reduced',
-  );
+  const resolvedReducedMotion = readonly(
+    computed<Exclude<ReducedMotion, 'system'>>(() => {
+      if (reducedMotionPreference.value === 'system')
+        return isSystemReducedMotion.value ? 'reduced' : 'unreduced'
+      return reducedMotionPreference.value
+    }),
+  )
 
   return {
-    selectedReducedMotion,
-    currentReducedMotion,
-    setReducedMotion,
-    isUnreducedMotion,
-    isReducedMotion,
-  };
-};
+    reducedMotionPreference,
+    resolvedReducedMotion,
+  }
+}

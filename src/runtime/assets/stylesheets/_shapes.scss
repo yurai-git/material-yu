@@ -1,4 +1,4 @@
-@use 'helpers';
+@use 'helpers' as *;
 
 $shape-corner: (
   full: 1000px,
@@ -31,6 +31,6 @@ $shape-corner-value: (
 );
 
 :root {
-  @include helpers.generate-token($shape-corner, shape-corner);
-  @include helpers.generate-token($shape-corner-value, shape-corner-value);
+  @include generate-token('sys', 'shape-corner', $shape-corner);
+  @include generate-token('sys', 'shape-corner-value', $shape-corner-value);
 }

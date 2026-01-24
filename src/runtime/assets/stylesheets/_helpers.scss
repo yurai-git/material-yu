@@ -1,5 +1,26 @@
-@mixin generate-token($map, $purpose) {
+@use 'sass:list';
+@use 'sass:meta';
+
+@function str-join($list, $separator) {
+  $result: '';
+  @for $i from 1 through list.length($list) {
+    $item: list.nth($list, $i);
+    $result: #{$result}#{$item};
+    @if $i < list.length($list) {
+      $result: #{$result}#{$separator};
+    }
+  }
+  @return $result;
+}
+
+@mixin generate-token($class, $purpose-prefix, $map, $path: ()) {
   @each $key, $value in $map {
-    --md-sys-#{$purpose}-#{$key}: #{$value};
+    $next-path: list.append($path, $key);
+
+    @if meta.type-of($value) == 'map' {
+      @include generate-token($class, $purpose-prefix, $value, $next-path);
+    } @else {
+      --md-#{$class}-#{$purpose-prefix}-#{str-join($next-path, '-')}: #{$value};
+    }
   }
 }

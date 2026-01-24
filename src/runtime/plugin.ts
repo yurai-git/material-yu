@@ -1,41 +1,49 @@
-import { defineNuxtPlugin } from '#app';
-import { useTheme, useContrast, watch } from '#imports';
+import { defineNuxtPlugin } from '#app'
+import { useContrast, useMotionScheme, useTheme, watch } from '#imports'
 
 export default defineNuxtPlugin((_nuxtApp) => {
   if (import.meta.client) {
-    const { selectedTheme } = useTheme();
-    const { selectedContrast } = useContrast();
+    const { resolvedTheme } = useTheme()
+    const { resolvedContrast } = useContrast()
+    const { motionSchemePreference } = useMotionScheme()
 
-    const updateHtmlClass = () => {
-      const isDark =
-        selectedTheme.value === 'dark' ||
-        (selectedTheme.value === 'system' &&
-          window.matchMedia('(prefers-color-scheme: dark)').matches);
-      const themeClass = isDark ? 'dark' : 'light';
+    let previousThemeContrastClass = ''
+    let previousMotionSchemeClass = ''
 
-      let contrastClass = '';
-      if (selectedContrast.value === 'system') {
-        if (window.matchMedia('(prefers-contrast: more)').matches) {
-          contrastClass = '-high-contrast';
-        }
-      } else if (selectedContrast.value === 'medium') {
-        contrastClass = '-medium-contrast';
-      } else if (selectedContrast.value === 'high') {
-        contrastClass = '-high-contrast';
+    const updateThemeContrast = () => {
+      const themeClass = resolvedTheme.value
+      let contrastClass = ''
+      if (resolvedContrast.value === 'high') {
+        contrastClass = 'high-contrast'
+      }
+      else if (resolvedContrast.value === 'medium') {
+        contrastClass = 'medium-contrast'
       }
 
-      document.documentElement.className = themeClass + contrastClass;
-    };
+      const newClass = [themeClass, contrastClass].filter(Boolean).join('-')
 
-    watch([selectedTheme, selectedContrast], updateHtmlClass, {
+      if (previousThemeContrastClass) {
+        document.documentElement.classList.remove(previousThemeContrastClass)
+      }
+      document.documentElement.classList.add(newClass)
+      previousThemeContrastClass = newClass
+    }
+
+    const updateMotionScheme = () => {
+      const newMotionSchemeClass = motionSchemePreference.value
+
+      if (previousMotionSchemeClass) {
+        document.documentElement.classList.remove(previousMotionSchemeClass)
+      }
+      document.documentElement.classList.add(newMotionSchemeClass)
+      previousMotionSchemeClass = newMotionSchemeClass
+    }
+
+    watch([resolvedTheme, resolvedContrast], updateThemeContrast, {
       immediate: true,
-    });
-
-    window
-      .matchMedia('(prefers-color-scheme: dark)')
-      .addEventListener('change', updateHtmlClass);
-    window
-      .matchMedia('(prefers-contrast: more)')
-      .addEventListener('change', updateHtmlClass);
+    })
+    watch(motionSchemePreference, updateMotionScheme, {
+      immediate: true,
+    })
   }
-});
+})

@@ -1,3 +1,4 @@
+@use 'helpers' as *;
 @use 'sass:map';
 
 @function shadow-color($alpha) {
@@ -34,7 +35,5 @@ $elevation: (
 );
 
 :root {
-  @each $name, $value in $elevation {
-    --md-sys-elevation-#{$name}: #{$value};
-  }
+  @include generate-token('sys', 'elevation', $elevation);
 }

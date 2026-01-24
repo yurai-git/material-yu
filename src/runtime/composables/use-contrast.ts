@@ -1,46 +1,28 @@
-import { useRuntimeConfig } from '#app';
-import { useStorage } from '@vueuse/core';
-import { computed, onMounted, ref } from 'vue';
-import type { ModuleOptions } from '../../module';
+import { useRuntimeConfig } from '#app'
+import { useMediaQuery, useStorage } from '@vueuse/core'
+import { computed, readonly } from 'vue'
+import type { DeepRequired, ModuleOptions } from '../../module'
+import type { Contrast } from '../types'
 
 export const useContrast = () => {
-  const config = useRuntimeConfig().public.materialYu as ModuleOptions;
-  const selectedContrast = useStorage(
+  const config = useRuntimeConfig().public
+    .materialYu as DeepRequired<ModuleOptions>
+  const contrastPreference = useStorage<Contrast>(
     'material-yu:contrast',
     () => config.contrast,
-  );
+  )
+  const isSystemHighContrast = useMediaQuery('(prefers-contrast: more)')
 
-  const isSystemHighContrast = ref(false);
-
-  onMounted(() => {
-    const contrastMatcher = window.matchMedia('(prefers-contrast: more)');
-    isSystemHighContrast.value = contrastMatcher.matches;
-    contrastMatcher.addEventListener(
-      'change',
-      (e) => (isSystemHighContrast.value = e.matches),
-    );
-  });
-
-  const currentContrast = computed(() => {
-    if (selectedContrast.value === 'system')
-      return isSystemHighContrast.value ? 'high' : 'default';
-    return selectedContrast.value;
-  });
-
-  const setContrast = (value: 'system' | 'default' | 'medium' | 'high') => {
-    selectedContrast.value = value;
-  };
-
-  const isDefaultContrast = computed(() => currentContrast.value === 'default');
-  const isMediumContrast = computed(() => currentContrast.value === 'medium');
-  const isHighContrast = computed(() => currentContrast.value === 'high');
+  const resolvedContrast = readonly(
+    computed<Exclude<Contrast, 'system'>>(() => {
+      if (contrastPreference.value === 'system')
+        return isSystemHighContrast.value ? 'high' : 'default'
+      return contrastPreference.value
+    }),
+  )
 
   return {
-    selectedContrast,
-    currentContrast,
-    setContrast,
-    isDefaultContrast,
-    isMediumContrast,
-    isHighContrast,
-  };
-};
+    contrastPreference,
+    resolvedContrast,
+  }
+}

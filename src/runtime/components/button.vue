@@ -46,7 +46,7 @@
       :checked="internalChecked"
       class="yu-button-input"
       @change="handleCheck"
-    />
+    >
     <slot />
     <span
       v-if="props.yuText"
@@ -67,14 +67,14 @@ import {
   useAttrs,
   watch,
   type ComponentPublicInstance,
-} from 'vue';
+} from 'vue'
 
 /**
  * Properties and states
  */
 
-const attrs = useAttrs();
-const emits = defineEmits(['update:checked']);
+const attrs = useAttrs()
+const emits = defineEmits(['update:checked'])
 
 const props = defineProps({
   yuTogglable: {
@@ -109,44 +109,44 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-});
+})
 
 const handleClick = (event: MouseEvent) => {
   if (props.softDisabled) {
-    event.preventDefault();
-    event.stopPropagation();
+    event.preventDefault()
+    event.stopPropagation()
   }
-};
+}
 
-const internalChecked = ref(props.checked);
+const internalChecked = ref(props.checked)
 watch(
   () => props.checked,
   (newValue) => {
-    internalChecked.value = newValue;
+    internalChecked.value = newValue
   },
-);
+)
 
 const handleCheck = (event: Event) => {
-  const newCheckedValue = (event.target as HTMLInputElement).checked;
-  internalChecked.value = newCheckedValue;
-  emits('update:checked', newCheckedValue);
-};
+  const newCheckedValue = (event.target as HTMLInputElement).checked
+  internalChecked.value = newCheckedValue
+  emits('update:checked', newCheckedValue)
+}
 
 const element = computed(() =>
   attrs.href ? resolveComponent('NuxtLink') : 'button',
-);
+)
 
-const root = ref<ComponentPublicInstance | HTMLElement | null>(null);
+const root = ref<ComponentPublicInstance | HTMLElement | null>(null)
 
 onMounted(() => {
   nextTick(() => {
-    if (!root.value) return;
+    if (!root.value) return
     const el = (
       '$el' in root.value ? root.value.$el : root.value
-    ) as HTMLElement;
-    if (!el) return;
-  });
-});
+    ) as HTMLElement
+    if (!el) return
+  })
+})
 </script>
 
 <style lang="scss" scoped>

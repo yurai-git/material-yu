@@ -1,4 +1,4 @@
-@use 'helpers';
+@use 'helpers' as *;
 
 $state-tokens: (
   dragged-state-layer-opacity: 16%,
@@ -10,5 +10,5 @@ $state-tokens: (
 );
 
 :root {
-  @include helpers.generate-token($state-tokens, state);
+  @include generate-token('sys', 'state', $state-tokens);
 }
