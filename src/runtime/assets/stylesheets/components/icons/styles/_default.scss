@@ -1,0 +1,23 @@
+@use 'sass:map';
+
+$default: (
+  size: 24px,
+  fill: 0,
+  weight: 400,
+  grade: 0,
+  optical-size: 24,
+);
+
+@mixin overrides($overrides: ()) {
+  $config: map.merge($default, $overrides);
+
+  --icon-size: #{map.get($config, 'size')};
+  --icon-fill: #{map.get($config, 'fill')};
+  --icon-weight: #{map.get($config, 'weight')};
+  --icon-grade: #{map.get($config, 'grade')};
+  --icon-optical-size: #{map.get($config, 'optical-size')};
+}
+
+.md-icon-style-default {
+  @include overrides();
+}

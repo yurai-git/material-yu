@@ -71,20 +71,10 @@ export interface ModuleOptions {
   iconStyle?: IconStyle
 
   /**
-   * References
+   * Define the seed color for color scheme generation
+   * @default `'#6750a4'`
    */
-  references?: {
-    /**
-     * Color configurations
-     */
-    color?: {
-      /**
-       * Seed color for dynamic
-       * @default `'#6750a4'`
-       */
-      sourceColor?: string
-    }
-  }
+  sourceColor?: string
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -104,9 +94,22 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.runtimeConfig.public.materialYu = ModuleOptions
 
     const iconStyle = ModuleOptions.iconStyle
-    const sourceColor = ModuleOptions.references.color.sourceColor
+    const sourceColor = ModuleOptions.sourceColor
 
-    nuxt.options.alias['@material-yu'] = resolve('./runtime/composables')
+    const aliases = {
+      '@material-yu/use-theme': './runtime/composables/use-theme.ts',
+      '@material-yu/use-contrast': './runtime/composables/use-contrast.ts',
+      '@material-yu/use-reduced-motion':
+        './runtime/composables/use-reduced-motion.ts',
+      '@material-yu/use-reduced-transparency':
+        './runtime/composables/use-reduced-transparency.ts',
+      '@material-yu/use-motion-scheme':
+        './runtime/composables/use-motion-scheme.ts',
+      '@material-yu': './runtime/assets/stylesheets',
+    }
+    for (const [alias, path] of Object.entries(aliases)) {
+      nuxt.options.alias[alias] = resolve(path)
+    }
     nuxt.options.css.push(
       resolve('./runtime/assets/stylesheets/material-tokens.scss'),
     )
@@ -129,7 +132,7 @@ export default defineNuxtModule<ModuleOptions>({
     addPlugin(resolve('./runtime/plugin'))
     addComponentsDir({
       path: resolve('./runtime/components'),
-      prefix: 'yu',
+      prefix: 'md',
       pathPrefix: false,
     })
     addImportsDir(resolve('./runtime/composables'))

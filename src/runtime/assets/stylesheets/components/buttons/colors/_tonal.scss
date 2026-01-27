@@ -1,67 +1,87 @@
-.yu-button-color-tonal {
-  --container-color: var(--md-sys-color-secondary-container);
-  --container-color-unselected: var(--md-sys-color-secondary-container);
-  --container-color-selected: var(--md-sys-color-secondary);
-  --shadow-color: var(--md-sys-color-shadow);
-  --elevation: var(--md-sys-elevation-level0);
-  --label-color: var(--md-sys-color-on-secondary-container);
-  --label-color-unselected: var(--md-sys-color-on-secondary-container);
-  --label-color-selected: var(--md-sys-color-on-secondary);
-  --icon-color: var(--md-sys-color-on-secondary-container);
-  --icon-color-unselected: var(--md-sys-color-on-secondary-container);
-  --icon-color-selected: var(--md-sys-color-on-secondary);
+.md-button-color-tonal {
+  --button-container-color: var(--md-sys-color-secondary-container);
+  --button-container-color-unselected: var(--md-sys-color-secondary-container);
+  --button-container-color-selected: var(--md-sys-color-secondary);
+  --button-shadow-color: var(--md-sys-color-shadow);
+  --button-elevation: var(--md-sys-elevation-level0);
+  --button-label-color: var(--md-sys-color-on-secondary-container);
+  --button-label-color-unselected: var(--md-sys-color-on-secondary-container);
+  --button-label-color-selected: var(--md-sys-color-on-secondary);
+  --button-icon-color: var(--md-sys-color-on-secondary-container);
+  --button-icon-color-unselected: var(--md-sys-color-on-secondary-container);
+  --button-icon-color-selected: var(--md-sys-color-on-secondary);
 
-  --disabled-container-color: var(--md-sys-color-on-surface);
-  --disabled-container-opacity: 0.1;
-  --disabled-elevation: var(--md-sys-elevation-level0);
-  --disabled-label-color: var(--md-sys-color-on-surface);
-  --disabled-label-opacity: 0.38;
-  --disabled-icon-color: var(--md-sys-color-on-surface);
-  --disabled-icon-opacity: 0.38;
+  --button-disabled-container-color: var(--md-sys-color-on-surface);
+  --button-disabled-container-opacity: 0.1;
+  --button-disabled-elevation: var(--md-sys-elevation-level0);
+  --button-disabled-label-color: var(--md-sys-color-on-surface);
+  --button-disabled-label-opacity: 0.38;
+  --button-disabled-icon-color: var(--md-sys-color-on-surface);
+  --button-disabled-icon-opacity: 0.38;
 
-  --hovered-state-layer-color: var(--md-sys-color-on-secondary-container);
-  --hovered-state-layer-color-unselected: var(
+  --button-hovered-state-layer-color: var(
     --md-sys-color-on-secondary-container
   );
-  --hovered-state-layer-color-selected: var(--md-sys-color-on-secondary);
-  --hovered-state-layer-opacity: var(--md-sys-state-hover-state-layer-opacity);
-  --hovered-elevation: var(--md-sys-elevation-level1);
-  --hovered-label-color: var(--md-sys-color-on-secondary-container);
-  --hovered-label-color-unselected: var(--md-sys-color-on-secondary-container);
-  --hovered-label-color-selected: var(--md-sys-color-on-secondary);
-  --hovered-icon-color: var(--md-sys-color-on-secondary-container);
-  --hovered-icon-color-unselected: var(--md-sys-color-on-secondary-container);
-  --hovered-icon-color-selected: var(--md-sys-color-on-secondary);
-
-  --focused-state-layer-color: var(--md-sys-color-on-secondary-container);
-  --focused-state-layer-color-unselected: var(
+  --button-hovered-state-layer-color-unselected: var(
     --md-sys-color-on-secondary-container
   );
-  --focused-state-layer-color-selected: var(--md-sys-color-on-secondary);
-  --focused-state-layer-opacity: var(
+  --button-hovered-state-layer-color-selected: var(--md-sys-color-on-secondary);
+  --button-hovered-state-layer-opacity: var(
+    --md-sys-state-hover-state-layer-opacity
+  );
+  --button-hovered-elevation: var(--md-sys-elevation-level1);
+  --button-hovered-label-color: var(--md-sys-color-on-secondary-container);
+  --button-hovered-label-color-unselected: var(
+    --md-sys-color-on-secondary-container
+  );
+  --button-hovered-label-color-selected: var(--md-sys-color-on-secondary);
+  --button-hovered-icon-color: var(--md-sys-color-on-secondary-container);
+  --button-hovered-icon-color-unselected: var(
+    --md-sys-color-on-secondary-container
+  );
+  --button-hovered-icon-color-selected: var(--md-sys-color-on-secondary);
+
+  --button-focused-state-layer-color: var(
+    --md-sys-color-on-secondary-container
+  );
+  --button-focused-state-layer-color-unselected: var(
+    --md-sys-color-on-secondary-container
+  );
+  --button-focused-state-layer-color-selected: var(--md-sys-color-on-secondary);
+  --button-focused-state-layer-opacity: var(
     --md-sys-state-focused-state-layer-opacity
   );
-  --focused-elevation: var(--md-sys-elevation-level0);
-  --focused-label-color: var(--md-sys-color-on-secondary-container);
-  --focused-label-color-unselected: var(--md-sys-color-on-secondary-container);
-  --focused-label-color-selected: var(--md-sys-color-on-secondary);
-  --focused-icon-color: var(--md-sys-color-on-secondary-container);
-  --focused-icon-color-unselected: var(--md-sys-color-on-secondary-container);
-  --focused-icon-color-selected: var(--md-sys-color-on-secondary);
-
-  --pressed-state-layer-color: var(--md-sys-color-on-secondary-container);
-  --pressed-state-layer-color-unselected: var(
+  --button-focused-elevation: var(--md-sys-elevation-level0);
+  --button-focused-label-color: var(--md-sys-color-on-secondary-container);
+  --button-focused-label-color-unselected: var(
     --md-sys-color-on-secondary-container
   );
-  --pressed-state-layer-color-selected: var(--md-sys-color-on-secondary);
-  --pressed-state-layer-opacity: var(
+  --button-focused-label-color-selected: var(--md-sys-color-on-secondary);
+  --button-focused-icon-color: var(--md-sys-color-on-secondary-container);
+  --button-focused-icon-color-unselected: var(
+    --md-sys-color-on-secondary-container
+  );
+  --button-focused-icon-color-selected: var(--md-sys-color-on-secondary);
+
+  --button-pressed-state-layer-color: var(
+    --md-sys-color-on-secondary-container
+  );
+  --button-pressed-state-layer-color-unselected: var(
+    --md-sys-color-on-secondary-container
+  );
+  --button-pressed-state-layer-color-selected: var(--md-sys-color-on-secondary);
+  --button-pressed-state-layer-opacity: var(
     --md-sys-state-pressed-state-layer-opacity
   );
-  --pressed-elevation: var(--md-sys-elevation-level0);
-  --pressed-label-color: var(--md-sys-color-on-secondary-container);
-  --pressed-label-color-unselected: var(--md-sys-color-on-secondary-container);
-  --pressed-label-color-selected: var(--md-sys-color-on-secondary);
-  --pressed-icon-color: var(--md-sys-color-on-secondary-container);
-  --pressed-icon-color-unselected: var(--md-sys-color-on-secondary-container);
-  --pressed-icon-color-selected: var(--md-sys-color-on-secondary);
+  --button-pressed-elevation: var(--md-sys-elevation-level0);
+  --button-pressed-label-color: var(--md-sys-color-on-secondary-container);
+  --button-pressed-label-color-unselected: var(
+    --md-sys-color-on-secondary-container
+  );
+  --button-pressed-label-color-selected: var(--md-sys-color-on-secondary);
+  --button-pressed-icon-color: var(--md-sys-color-on-secondary-container);
+  --button-pressed-icon-color-unselected: var(
+    --md-sys-color-on-secondary-container
+  );
+  --button-pressed-icon-color-selected: var(--md-sys-color-on-secondary);
 }

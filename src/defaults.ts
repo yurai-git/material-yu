@@ -8,9 +8,5 @@ export const defaultOptions = {
   reducedMotion: 'system',
   reducedTransparency: 'system',
   iconStyle: 'Material Symbols Outlined',
-  references: {
-    color: {
-      sourceColor: '#6750a4',
-    },
-  },
+  sourceColor: '#6750a4',
 } satisfies DeepRequired<ModuleOptions>

@@ -5,14 +5,18 @@ description: The module is configured with sensible defaults.
 
 You can customize the module by providing the `materialYu` property in your `nuxt.config.ts`.
 
+<!-- prettier-ignore-start -->
+
 ```ts [nuxt.config.ts]
 export default defineNuxtConfig({
   modules: ['@yurai/material-yu'],
   materialYu: {
     // Module options
-  },
-});
+  }
+})
 ```
+
+<!-- prettier-ignore-end -->
 
 ## `image`
 
@@ -21,9 +25,9 @@ Turn on or off the `@nuxt/image` module.
 - **Type:** `boolean`
 - **Default:** `true`
 
-## `colorScheme`
+## `theme`
 
-Define the default color scheme.
+Define the default theme.
 
 - **Type:** `'system'` | `'light'` | `'dark'`
 - **Default:** `'system'`
@@ -32,15 +36,22 @@ Define the default color scheme.
 
 Define the default contrast.
 
-- **Type:** `'standard'` | `'medium'` | `'high'`
-- **Default:** `'standard'`
+- **Type:** `'system'` | `'default'` | `'medium'` | `'high'`
+- **Default:** `'system'`
 
-## `reduceMotion`
+## `reducedMotion`
 
-Turn on or off motion reduction.
+Define the default motion reduction.
 
-- **Type:** `boolean`
-- **Default:** `false`
+- **Type:** `'system'` | `'reduced'` | `'unreduced'`
+- **Default:** `'system'`
+
+## `reducedTransparency`
+
+Define the default transparency reduction.
+
+- **Type:** `'system'` | `'reduced'` | `'unreduced'`
+- **Default:** `'system'`
 
 ## `motionScheme`
 
@@ -49,45 +60,16 @@ Define the default motion scheme.
 - **Type:** `'standard'` | `'expressive'`
 - **Default:** `'expressive'`
 
-## `components`
+## `iconStyle`
 
-Additional component configurations.
+Define the style of icons.
 
-### `YuIcon`
+- **Type:** `'Material Symbols Outlined'` | `'Material Symbols Rounded'` | `'Material Symbols Sharp'`
+- **Default:** `'Material Symbols Outlined'`
 
-Additional configurations for the `YuIcon` component.
+## `sourceColor`
 
-#### `style`
+Define the seed color for color scheme generation.
 
-Define the default `yuStyle` value.
-
-- **Type:** `'outlined'` | `'rounded'` | `'sharp'`
-- **Default:** `'outlined'`
-
-#### `weight`
-
-Define the default `yuWeight` value.
-
-- **Type:** `number`
-- **Default:** `400`
-
-#### `fill`
-
-Define the default `yuFill` value.
-
-- **Type:** `boolean`
-- **Default:** `false`
-
-#### `emphasis`
-
-Define the default `yuEmphasis` value.
-
-- **Type:** `boolean`
-- **Default:** `false`
-
-#### `size`
-
-Define the default `yuSize` value.
-
-- **Type:** `number`
-- **Default:** `24`
+- **Type:** `string`
+- **Default:** `'#6750a4'`

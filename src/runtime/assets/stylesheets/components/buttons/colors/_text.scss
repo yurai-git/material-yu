@@ -1,30 +1,32 @@
-.yu-button-color-text {
-  --label-color: var(--md-sys-color-primary);
-  --icon-color: var(--md-sys-color-primary);
+.md-button-color-text {
+  --button-label-color: var(--md-sys-color-primary);
+  --button-icon-color: var(--md-sys-color-primary);
 
-  --disabled-container-color: var(--md-sys-color-on-surface);
-  --disabled-container-opacity: 0.1;
-  --disabled-label-color: var(--md-sys-color-on-surface);
-  --disabled-label-opacity: 0.38;
-  --disabled-icon-color: var(--md-sys-color-on-surface);
-  --disabled-icon-opacity: 0.38;
+  --button-disabled-container-color: var(--md-sys-color-on-surface);
+  --button-disabled-container-opacity: 0.1;
+  --button-disabled-label-color: var(--md-sys-color-on-surface);
+  --button-disabled-label-opacity: 0.38;
+  --button-disabled-icon-color: var(--md-sys-color-on-surface);
+  --button-disabled-icon-opacity: 0.38;
 
-  --hovered-state-layer-color: var(--md-sys-color-primary);
-  --hovered-state-layer-opacity: var(--md-sys-state-hover-state-layer-opacity);
-  --hovered-label-color: var(--md-sys-color-primary);
-  --hovered-icon-color: var(--md-sys-color-primary);
+  --button-hovered-state-layer-color: var(--md-sys-color-primary);
+  --button-hovered-state-layer-opacity: var(
+    --md-sys-state-hover-state-layer-opacity
+  );
+  --button-hovered-label-color: var(--md-sys-color-primary);
+  --button-hovered-icon-color: var(--md-sys-color-primary);
 
-  --focused-state-layer-color: var(--md-sys-color-primary);
-  --focused-state-layer-opacity: var(
+  --button-focused-state-layer-color: var(--md-sys-color-primary);
+  --button-focused-state-layer-opacity: var(
     --md-sys-state-focused-state-layer-opacity
   );
-  --focused-label-color: var(--md-sys-color-primary);
-  --focused-icon-color: var(--md-sys-color-primary);
+  --button-focused-label-color: var(--md-sys-color-primary);
+  --button-focused-icon-color: var(--md-sys-color-primary);
 
-  --pressed-state-layer-color: var(--md-sys-color-primary);
-  --pressed-state-layer-opacity: var(
+  --button-pressed-state-layer-color: var(--md-sys-color-primary);
+  --button-pressed-state-layer-opacity: var(
     --md-sys-state-pressed-state-layer-opacity
   );
-  --pressed-label-color: var(--md-sys-color-primary);
-  --pressed-icon-color: var(--md-sys-color-primary);
+  --button-pressed-label-color: var(--md-sys-color-primary);
+  --button-pressed-icon-color: var(--md-sys-color-primary);
 }

@@ -2,270 +2,289 @@
   <h1>Material Yu playground</h1>
   <h2>Icons</h2>
   <div class="icon-wrapper">
-    <YuIcon yu-icon-name="menu" />
-    <YuIcon yu-icon-name="arrow_back" />
-    <YuIcon yu-icon-name="arrow_forward" />
-    <YuIcon yu-icon-name="check" />
-    <YuIcon yu-icon-name="close" />
-    <YuIcon yu-icon-name="add" />
-    <YuIcon
-      yu-icon-name="stars"
-      :yu-fill="true"
+    <MdIcon md-icon="menu" />
+    <MdIcon md-icon="arrow_back" />
+    <MdIcon md-icon="arrow_forward" />
+    <MdIcon md-icon="check" />
+    <MdIcon md-icon="close" />
+    <MdIcon md-icon="add" />
+    <MdIcon
+      md-icon="stars"
+      md-style="filled"
     />
-    <YuIcon yu-icon-name="stars" />
-    <YuIcon yu-icon-name="fast_rewind" />
-    <YuIcon yu-icon-name="skip_previous" />
-    <YuIcon yu-icon-name="play_arrow" />
-    <YuIcon yu-icon-name="fast_forward" />
-    <YuIcon yu-icon-name="skip_next" />
-    <YuIcon yu-icon-name="arrow_right" />
-    <YuIcon yu-icon-name="arrow_left" />
-    <YuIcon yu-icon-name="arrow_drop_up" />
-    <YuIcon yu-icon-name="arrow_drop_down" />
-    <YuIcon yu-icon-name="more_vert" />
-    <YuIcon yu-icon-name="directions_bus" />
-    <YuIcon yu-icon-name="directions_subway" />
-    <YuIcon yu-icon-name="directions_car" />
-    <YuIcon yu-icon-name="local_taxi" />
-    <YuIcon />
-    <YuIcon
-      yu-icon-name="check_box"
-      :yu-fill="true"
+    <MdIcon md-icon="stars" />
+    <MdIcon md-icon="fast_rewind" />
+    <MdIcon md-icon="skip_previous" />
+    <MdIcon md-icon="play_arrow" />
+    <MdIcon md-icon="fast_forward" />
+    <MdIcon md-icon="skip_next" />
+    <MdIcon md-icon="arrow_right" />
+    <MdIcon md-icon="arrow_left" />
+    <MdIcon md-icon="arrow_drop_up" />
+    <MdIcon md-icon="arrow_drop_down" />
+    <MdIcon md-icon="more_vert" />
+    <MdIcon md-icon="directions_bus" />
+    <MdIcon md-icon="directions_subway" />
+    <MdIcon md-icon="directions_car" />
+    <MdIcon md-icon="local_taxi" />
+    <MdIcon />
+    <MdIcon
+      md-icon="check_box"
+      md-style="filled"
     />
-    <YuIcon yu-icon-name="check_box" />
-    <YuIcon yu-icon-name="check_box_outline_blank" />
-    <YuIcon yu-icon-name="indeterminate_check_box" />
-    <YuIcon
-      yu-icon-name="indeterminate_check_box"
-      :yu-fill="true"
+    <MdIcon md-icon="check_box" />
+    <MdIcon md-icon="check_box_outline_blank" />
+    <MdIcon md-icon="indeterminate_check_box" />
+    <MdIcon
+      md-icon="indeterminate_check_box"
+      md-style="filled"
     />
-    <YuIcon yu-icon-name="mail" />
-    <YuIcon yu-icon-name="bookmark" />
-    <YuIcon
-      yu-icon-name="bookmark"
-      :yu-fill="true"
+    <MdIcon md-icon="mail" />
+    <MdIcon md-icon="bookmark" />
+    <MdIcon
+      md-icon="bookmark"
+      md-style="filled"
     />
-    <YuIcon
-      yu-icon-name="account_circle"
-      :yu-fill="true"
+    <MdIcon
+      md-icon="account_circle"
+      md-style="filled"
     />
-    <YuIcon yu-icon-name="person" />
-    <YuIcon
-      yu-icon-name="chat_bubble"
-      :yu-fill="true"
+    <MdIcon md-icon="person" />
+    <MdIcon
+      md-icon="chat_bubble"
+      md-style="filled"
     />
-    <YuIcon yu-icon-name="chat_bubble" />
-    <YuIcon yu-icon-name="light_mode" />
-    <YuIcon yu-icon-name="dark_mode" />
-    <YuIcon yu-icon-name="delete" />
-    <YuIcon yu-icon-name="radio_button_checked" />
-    <YuIcon yu-icon-name="radio_button_unchecked" />
-    <YuIcon
-      yu-icon-name="star"
-      :yu-fill="true"
+    <MdIcon md-icon="chat_bubble" />
+    <MdIcon md-icon="light_mode" />
+    <MdIcon md-icon="dark_mode" />
+    <MdIcon md-icon="delete" />
+    <MdIcon md-icon="radio_button_checked" />
+    <MdIcon md-icon="radio_button_unchecked" />
+    <MdIcon
+      md-icon="star"
+      md-style="filled"
     />
-    <YuIcon yu-icon-name="star" />
-    <YuIcon yu-icon-name="folder" />
-    <YuIcon
-      yu-icon-name="folder"
-      :yu-fill="true"
+    <MdIcon md-icon="star" />
+    <MdIcon md-icon="folder" />
+    <MdIcon
+      md-icon="folder"
+      md-style="filled"
     />
-    <YuIcon yu-icon-name="chevron_backward" />
-    <YuIcon yu-icon-name="chevron_forward" />
-    <YuIcon yu-icon-name="upload" />
-    <YuIcon yu-icon-name="download" />
-    <YuIcon yu-icon-name="mobile_check" />
-    <YuIcon yu-icon-name="attach_file" />
-    <YuIcon
-      yu-icon-name="today"
-      :yu-fill="true"
+    <MdIcon md-icon="chevron_backward" />
+    <MdIcon md-icon="chevron_forward" />
+    <MdIcon md-icon="upload" />
+    <MdIcon md-icon="download" />
+    <MdIcon md-icon="mobile_check" />
+    <MdIcon md-icon="attach_file" />
+    <MdIcon
+      md-icon="today"
+      md-style="filled"
     />
-    <YuIcon yu-icon-name="edit" />
-    <YuIcon
-      yu-icon-name="edit"
-      :yu-fill="true"
+    <MdIcon md-icon="edit" />
+    <MdIcon
+      md-icon="edit"
+      md-style="filled"
     />
-    <YuIcon yu-icon-name="cancel" />
-    <YuIcon yu-icon-name="keyboard" />
-    <YuIcon
-      yu-icon-name="error"
-      :yu-fill="true"
+    <MdIcon md-icon="cancel" />
+    <MdIcon md-icon="keyboard" />
+    <MdIcon
+      md-icon="error"
+      md-style="filled"
     />
-    <YuIcon yu-icon-name="settings" />
-    <YuIcon
-      yu-icon-name="settings"
-      :yu-fill="true"
+    <MdIcon md-icon="settings" />
+    <MdIcon
+      md-icon="settings"
+      md-style="filled"
     />
-    <YuIcon yu-icon-name="check_small" />
-    <YuIcon yu-icon-name="check_indeterminate_small" />
-    <YuIcon yu-icon-name="schedule" />
-    <YuIcon yu-icon-name="keyboard_return" />
-    <YuIcon yu-icon-name="sticker" />
-    <YuIcon
-      yu-icon-name="mic_off"
-      :yu-fill="true"
+    <MdIcon md-icon="check_small" />
+    <MdIcon md-icon="check_indeterminate_small" />
+    <MdIcon md-icon="schedule" />
+    <MdIcon md-icon="keyboard_return" />
+    <MdIcon md-icon="sticker" />
+    <MdIcon
+      md-icon="mic_off"
+      md-style="filled"
     />
-    <YuIcon
-      yu-icon-name="mic"
-      :yu-fill="true"
+    <MdIcon
+      md-icon="mic"
+      md-style="filled"
     />
-    <YuIcon yu-icon-name="mic" />
-    <YuIcon yu-icon-name="language" />
-    <YuIcon yu-icon-name="g_translate" />
-    <YuIcon yu-icon-name="archive" />
-    <YuIcon
-      yu-icon-name="archive"
-      :yu-fill="true"
+    <MdIcon md-icon="mic" />
+    <MdIcon md-icon="language" />
+    <MdIcon md-icon="g_translate" />
+    <MdIcon md-icon="archive" />
+    <MdIcon
+      md-icon="archive"
+      md-style="filled"
     />
-    <YuIcon yu-icon-name="notifications" />
-    <YuIcon yu-icon-name="location_on" />
-    <YuIcon
-      yu-icon-name="location_on"
-      :yu-fill="true"
+    <MdIcon md-icon="notifications" />
+    <MdIcon md-icon="location_on" />
+    <MdIcon
+      md-icon="location_on"
+      md-style="filled"
     />
-    <YuIcon yu-icon-name="add_circle" />
-    <YuIcon yu-icon-name="commute" />
-    <YuIcon yu-icon-name="outbox" />
-    <YuIcon yu-icon-name="inbox" />
-    <YuIcon
-      yu-icon-name="inbox"
-      :yu-fill="true"
+    <MdIcon md-icon="add_circle" />
+    <MdIcon md-icon="commute" />
+    <MdIcon md-icon="outbox" />
+    <MdIcon md-icon="inbox" />
+    <MdIcon
+      md-icon="inbox"
+      md-style="filled"
     />
-    <YuIcon yu-icon-name="favorite" />
-    <YuIcon yu-icon-name="send" />
-    <YuIcon yu-icon-name="groups" />
-    <YuIcon yu-icon-name="videocam" />
-    <YuIcon yu-icon-name="videocam_off" />
-    <YuIcon yu-icon-name="music_note" />
-    <YuIcon yu-icon-name="photo" />
-    <YuIcon
-      yu-icon-name="image"
-      :yu-fill="true"
+    <MdIcon md-icon="favorite" />
+    <MdIcon md-icon="send" />
+    <MdIcon md-icon="groups" />
+    <MdIcon md-icon="videocam" />
+    <MdIcon md-icon="videocam_off" />
+    <MdIcon md-icon="music_note" />
+    <MdIcon md-icon="photo" />
+    <MdIcon
+      md-icon="image"
+      md-style="filled"
     />
-    <YuIcon yu-icon-name="list" />
-    <YuIcon
-      yu-icon-name="play_arrow"
-      :yu-fill="true"
+    <MdIcon md-icon="list" />
+    <MdIcon
+      md-icon="play_arrow"
+      md-style="filled"
     />
-    <YuIcon
-      yu-icon-name="fast_rewind"
-      :yu-fill="true"
+    <MdIcon
+      md-icon="fast_rewind"
+      md-style="filled"
     />
-    <YuIcon
-      yu-icon-name="skip_previous"
-      :yu-fill="true"
+    <MdIcon
+      md-icon="skip_previous"
+      md-style="filled"
     />
-    <YuIcon
-      yu-icon-name="skip_next"
-      :yu-fill="true"
+    <MdIcon
+      md-icon="skip_next"
+      md-style="filled"
     />
-    <YuIcon
-      yu-icon-name="fast_forward"
-      :yu-fill="true"
+    <MdIcon
+      md-icon="fast_forward"
+      md-style="filled"
     />
-    <YuIcon
-      yu-icon-name="pause"
-      :yu-fill="true"
+    <MdIcon
+      md-icon="pause"
+      md-style="filled"
     />
-    <YuIcon yu-icon-name="text_fields" />
-    <YuIcon yu-icon-name="mood" />
-    <YuIcon yu-icon-name="directions_walk" />
-    <YuIcon yu-icon-name="keyboard_arrow_down" />
-    <YuIcon yu-icon-name="keyboard_arrow_up" />
-    <YuIcon yu-icon-name="bluetooth" />
-    <YuIcon yu-icon-name="do_not_disturb_on" />
-    <YuIcon yu-icon-name="flashlight_on" />
-    <YuIcon yu-icon-name="wifi" />
-    <YuIcon yu-icon-name="alarm" />
-    <YuIcon
-      yu-icon-name="alarm"
-      :yu-fill="true"
+    <MdIcon md-icon="text_fields" />
+    <MdIcon md-icon="mood" />
+    <MdIcon md-icon="directions_walk" />
+    <MdIcon md-icon="keyboard_arrow_down" />
+    <MdIcon md-icon="keyboard_arrow_up" />
+    <MdIcon md-icon="bluetooth" />
+    <MdIcon md-icon="do_not_disturb_on" />
+    <MdIcon md-icon="flashlight_on" />
+    <MdIcon md-icon="wifi" />
+    <MdIcon md-icon="alarm" />
+    <MdIcon
+      md-icon="alarm"
+      md-style="filled"
     />
-    <YuIcon yu-icon-name="accessibility" />
-    <YuIcon yu-icon-name="link" />
-    <YuIcon yu-icon-name="link_off" />
-    <YuIcon yu-icon-name="content_cut" />
-    <YuIcon yu-icon-name="front_hand" />
-    <YuIcon yu-icon-name="call_end" />
-    <YuIcon
-      yu-icon-name="call_end"
-      :yu-fill="true"
+    <MdIcon md-icon="accessibility" />
+    <MdIcon md-icon="link" />
+    <MdIcon md-icon="link_off" />
+    <MdIcon md-icon="content_cut" />
+    <MdIcon md-icon="front_hand" />
+    <MdIcon md-icon="call_end" />
+    <MdIcon
+      md-icon="call_end"
+      md-style="filled"
     />
-    <YuIcon yu-icon-name="more_horiz" />
-    <YuIcon
-      yu-icon-name="videocam_off"
-      :yu-fill="true"
+    <MdIcon md-icon="more_horiz" />
+    <MdIcon
+      md-icon="videocam_off"
+      md-style="filled"
     />
-    <YuIcon yu-icon-name="volume_up" />
-    <YuIcon yu-icon-name="menu_open" />
-    <YuIcon yu-icon-name="share" />
-    <YuIcon
-      yu-icon-name="share"
-      :yu-fill="true"
+    <MdIcon md-icon="volume_up" />
+    <MdIcon md-icon="menu_open" />
+    <MdIcon md-icon="share" />
+    <MdIcon
+      md-icon="share"
+      md-style="filled"
     />
-    <YuIcon
-      yu-icon-name="comment"
-      :yu-fill="true"
+    <MdIcon
+      md-icon="comment"
+      md-style="filled"
     />
-    <YuIcon yu-icon-name="gif" />
-    <YuIcon
-      yu-icon-name="mail"
-      :yu-fill="true"
+    <MdIcon md-icon="gif" />
+    <MdIcon
+      md-icon="mail"
+      md-style="filled"
     />
-    <YuIcon yu-icon-name="forward" />
-    <YuIcon
-      yu-icon-name="delete"
-      :yu-fill="true"
+    <MdIcon md-icon="forward" />
+    <MdIcon
+      md-icon="delete"
+      md-style="filled"
     />
-    <YuIcon
-      yu-icon-name="mark_email_unread"
-      :yu-fill="true"
+    <MdIcon
+      md-icon="mark_email_unread"
+      md-style="filled"
     />
-    <YuIcon
-      yu-icon-name="snooze"
-      :yu-fill="true"
+    <MdIcon
+      md-icon="snooze"
+      md-style="filled"
     />
-    <YuIcon
-      yu-icon-name="front_hand"
-      :yu-fill="true"
+    <MdIcon
+      md-icon="front_hand"
+      md-style="filled"
     />
-    <YuIcon yu-icon-name="format_bold" />
-    <YuIcon yu-icon-name="format_italic" />
-    <YuIcon yu-icon-name="format_underlined" />
-    <YuIcon yu-icon-name="format_color_fill" />
-    <YuIcon yu-icon-name="tab" />
-    <YuIcon yu-icon-name="undo" />
-    <YuIcon yu-icon-name="redo" />
-    <YuIcon yu-icon-name="format_color_text" />
-    <YuIcon yu-icon-name="comment" />
-    <YuIcon yu-icon-name="reply" />
-    <YuIcon yu-icon-name="swap_horiz" />
-    <YuIcon yu-icon-name="swap_vert" />
-    <YuIcon
-      yu-icon-name="keyboard"
-      :yu-fill="true"
+    <MdIcon md-icon="format_bold" />
+    <MdIcon md-icon="format_italic" />
+    <MdIcon md-icon="format_underlined" />
+    <MdIcon md-icon="format_color_fill" />
+    <MdIcon md-icon="tab" />
+    <MdIcon md-icon="undo" />
+    <MdIcon md-icon="redo" />
+    <MdIcon md-icon="format_color_text" />
+    <MdIcon md-icon="comment" />
+    <MdIcon md-icon="reply" />
+    <MdIcon md-icon="swap_horiz" />
+    <MdIcon md-icon="swap_vert" />
+    <MdIcon
+      md-icon="keyboard"
+      md-style="filled"
     />
-    <YuIcon
-      yu-icon-name="schedule"
-      :yu-fill="true"
+    <MdIcon
+      md-icon="schedule"
+      md-style="filled"
     />
-    <YuIcon yu-icon-name="move_item" />
-    <YuIcon yu-icon-name="drag_handle" />
+    <MdIcon md-icon="move_item" />
+    <MdIcon md-icon="drag_handle" />
+  </div>
+  <div class="icon-wrapper">
+    <MdIcon>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M13.464 19.83h8.922c.283 0 .562-.073.807-.21a1.6 1.6 0 0 0 .591-.574a1.53 1.53 0 0 0 .216-.783a1.53 1.53 0 0 0-.217-.782L17.792 7.414a1.6 1.6 0 0 0-.591-.573a1.65 1.65 0 0 0-.807-.21c-.283 0-.562.073-.807.21a1.6 1.6 0 0 0-.59.573L13.463 9.99L10.47 4.953a1.6 1.6 0 0 0-.591-.573a1.65 1.65 0 0 0-.807-.21c-.284 0-.562.073-.807.21a1.6 1.6 0 0 0-.591.573L.216 17.481a1.53 1.53 0 0 0-.217.782c0 .275.074.545.216.783a1.6 1.6 0 0 0 .59.574c.246.137.525.21.808.21h5.6c2.22 0 3.856-.946 4.982-2.79l2.733-4.593l1.464-2.457l4.395 7.382h-5.859Zm-6.341-2.46l-3.908-.002l5.858-9.842l2.923 4.921l-1.957 3.29c-.748 1.196-1.597 1.632-2.916 1.632"
+        />
+      </svg>
+    </MdIcon>
   </div>
   <h2>Buttons</h2>
-  <YuButton
-    yu-color="elevated"
-    yu-text="Round"
-    yu-icon="edit"
+  <MdButton
+    md-color="elevated"
+    md-text="Round"
+    md-icon="edit"
   />
 </template>
 
 <script setup lang="ts"></script>
 
 <style lang="scss">
-:root {
-  // --
+@use '@material-yu/components/icons/styles/default' as icon-style-default;
+
+.md-icon-style-filled {
+  @include icon-style-default.overrides(
+    (
+      fill: 1,
+    )
+  );
 }
+
 h1 {
   font: var(--md-sys-typescale-emphasized-display-large);
   letter-spacing: var(--md-sys-typescale-emphasized-display-large-tracking);

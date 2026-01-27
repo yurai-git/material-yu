@@ -1,16 +1,20 @@
-.yu-button-size-xlarge {
-  --container-height: 136px;
-  --outline-width: 3px;
-  --label-font: var(--md-sys-typescale-headline-large);
-  --label-tracking: var(--md-sys-typescale-headline-large-tracking);
-  --icon-size: 40px;
-  --shape-round: calc(var(--container-height) / 2);
-  --shape-square: var(--md-sys-shape-corner-extra-large);
-  --leading-space: 64px;
-  --between-icon-label-space: 16px;
-  --trailing-space: 64px;
-  --shape-pressed-morph: var(--md-sys-shape-corner-large);
-  --shape-spring-animation: var(--md-sys-motion-spring-fast-spatial);
-  --selected-container-shape-round: var(--md-sys-shape-corner-extra-large);
-  --selected-container-shape-square: calc(var(--container-height) / 2);
+.md-button-size-xlarge {
+  --button-container-height: 136px;
+  --button-outline-width: 3px;
+  --button-label-font: var(--md-sys-typescale-headline-large);
+  --button-label-tracking: var(--md-sys-typescale-headline-large-tracking);
+  --button-icon-size: 40px;
+  --button-shape-round: calc(var(--button-container-height) / 2);
+  --button-shape-square: var(--md-sys-shape-corner-extra-large);
+  --button-leading-space: 64px;
+  --button-between-icon-label-space: 16px;
+  --button-trailing-space: 64px;
+  --button-shape-pressed-morph: var(--md-sys-shape-corner-large);
+  --button-shape-spring-animation: var(--md-sys-motion-spring-fast-spatial);
+  --button-selected-container-shape-round: var(
+    --md-sys-shape-corner-extra-large
+  );
+  --button-selected-container-shape-square: calc(
+    var(--button-container-height) / 2
+  );
 }

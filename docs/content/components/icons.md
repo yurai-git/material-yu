@@ -5,52 +5,83 @@ description: Use Material Symbols with ease.
 
 - [Design guideline](https://m3.material.io/styles/icons){target="\_blank"}
 
-## Usage
+## Interactive demo
 
-To display an icon, provide an icon name or a unicode code point in the `yu-icon-name` property, or an `<svg>` child element within the element's content.
+::InteractiveDemosIcons
+::
+
+<!-- prettier-ignore-start -->
 
 ```vue
-<!-- Using an icon name -->
-<YuIcon yu-icon-name="settings" />
-<!-- Using a unicode code point -->
-<YuIcon yu-icon-name="&#xe834;" />
-<!-- Using an SVG child element -->
-<YuIcon>
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 48 48"
-  >
-    <path d="M10 40V24H4L24 6l10 8.85V9h4v9.55L44 24h-6v16H26.5V28h-5v12Zm3-3h5.5V25h11v12H35V19.95l-11-10-11 10Zm5.5-12h11-11Zm1.25-5.5h8.5q0-1.65-1.275-2.725Q25.7 15.7 24 15.7q-1.7 0-2.975 1.075Q19.75 17.85 19.75 19.5Z" />
-  </svg>
-</YuIcon>
+<template>
+  <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+    <MdIcon md-icon="search" />
+    <MdIcon md-icon="&#xe88a;" />
+    <MdIcon>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M13.464 19.83h8.922c.283 0 .562-.073.807-.21a1.6 1.6 0 0 0 .591-.574a1.53 1.53 0 0 0 .216-.783a1.53 1.53 0 0 0-.217-.782L17.792 7.414a1.6 1.6 0 0 0-.591-.573a1.65 1.65 0 0 0-.807-.21c-.283 0-.562.073-.807.21a1.6 1.6 0 0 0-.59.573L13.463 9.99L10.47 4.953a1.6 1.6 0 0 0-.591-.573a1.65 1.65 0 0 0-.807-.21c-.284 0-.562.073-.807.21a1.6 1.6 0 0 0-.591.573L.216 17.481a1.53 1.53 0 0 0-.217.782c0 .275.074.545.216.783a1.6 1.6 0 0 0 .59.574c.246.137.525.21.808.21h5.6c2.22 0 3.856-.946 4.982-2.79l2.733-4.593l1.464-2.457l4.395 7.382h-5.859Zm-6.341-2.46l-3.908-.002l5.858-9.842l2.923 4.921l-1.957 3.29c-.748 1.196-1.597 1.632-2.916 1.632" />
+      </svg>
+    </MdIcon>
+  </div>
+</template>
 ```
+
+<!-- prettier-ignore-end -->
+
+## Usage
+
+To display an icon, provide an icon name or a code point in the `md-icon` property, or an `<svg>` child element within the component's content.
+
+<!-- prettier-ignore-start -->
+
+```vue
+<template>
+  <!-- Using an icon name -->
+  <MdIcon md-icon="search" />
+
+  <!-- Using a code point -->
+  <MdIcon md-icon="&#xe88a;" />
+
+  <!-- Using an SVG child element -->
+  <MdIcon>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M13.464 19.83h8.922c.283 0 .562-.073.807-.21a1.6 1.6 0 0 0 .591-.574a1.53 1.53 0 0 0 .216-.783a1.53 1.53 0 0 0-.217-.782L17.792 7.414a1.6 1.6 0 0 0-.591-.573a1.65 1.65 0 0 0-.807-.21c-.283 0-.562.073-.807.21a1.6 1.6 0 0 0-.59.573L13.463 9.99L10.47 4.953a1.6 1.6 0 0 0-.591-.573a1.65 1.65 0 0 0-.807-.21c-.284 0-.562.073-.807.21a1.6 1.6 0 0 0-.591.573L.216 17.481a1.53 1.53 0 0 0-.217.782c0 .275.074.545.216.783a1.6 1.6 0 0 0 .59.574c.246.137.525.21.808.21h5.6c2.22 0 3.856-.946 4.982-2.79l2.733-4.593l1.464-2.457l4.395 7.382h-5.859Zm-6.341-2.46l-3.908-.002l5.858-9.842l2.923 4.921l-1.957 3.29c-.748 1.196-1.597 1.632-2.916 1.632" />
+    </svg>
+  </MdIcon>
+</template>
+```
+
+<!-- prettier-ignore-end -->
 
 ## Properties
 
 This component accepts the following properties.
 
-| Property     | Attribute      | Type                                    | Default      | Description                                                                                                                |
-| :----------- | :------------- | :-------------------------------------- | :----------- | :------------------------------------------------------------------------------------------------------------------------- |
-| `yuIconName` | `yu-icon-name` | `string`                                | `'search'`   | The name or code point of the Material Symbol to display.                                                                  |
-| `yuStyle`    | `yu-style`     | `'outlined'`, `'rounded'`, or `'sharp'` | `'outlined'` | The style of the icon.                                                                                                     |
-| `yuWeight`   | `yu-weight`    | `number`                                | `400`        | The font weight of the icon, ranging from 100 to 700.                                                                      |
-| `yuFill`     | `yu-fill`      | `boolean`                               | `false`      | If set to `true`, the icon will be filled.                                                                                 |
-| `yuEmphasis` | `yu-emphasis`  | `boolean`                               | `false`      | If set to `true`, the icon will have a higher emphasis.                                                                    |
-| `yuSize`     | `yu-size`      | `number`                                | `24`         | The size of the icon in `px`.                                                                                              |
-| `ariaLabel`  | `aria-label`   | `string`                                | `undefined`  | The ARIA label for the icon. If provided, the component will have `role="img"`. If not, it will have `aria-hidden="true"`. |
+| Property  | Attribute  | Type     | Default     | Description                                                     |
+| :-------- | :--------- | :------- | :---------- | :-------------------------------------------------------------- |
+| `mdIcon`  | `md-icon`  | `string` | `'search'`  | The name or code point of the Material Symbols icon to display. |
+| `mdStyle` | `md-style` | `string` | `'default'` | The style of the icon.                                          |
 
 ## Accessibility
 
-If used on their own, Icons should be given an accessible name if they are focusable.
+If the component does not have an `aria-label` attribute, the component will automatically add the `aria-hidden="true"` attribute. If it does, the component will automatically add the `role="img"` attribute.
 
-```vue
-<template>
-  <YuIcon
-    yu-icon-name="menu"
-    tabindex="-1"
-    aria-label="Open navigation drawer"
-  />
-</template>
-```
+<!-- prettier-ignore-start -->
 
-If the icon is purely decorative, omit the `aria-label` prop, and the component will automatically add `aria-hidden="true"`.
+- **Example input:**
+
+  ```vue
+  <template>
+    <MdIcon md-icon="menu" />
+    <MdIcon md-icon="menu" aria-label="Open navigation drawer" />
+  </template>
+  ```
+
+- **Example output:**
+
+  ```html
+  <span aria-hidden="true">menu</span>
+  <span role="img" aria-label="Open navigation drawer">menu</span>
+  ```
+
+<!-- prettier-ignore-end -->

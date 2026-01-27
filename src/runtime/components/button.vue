@@ -1,40 +1,40 @@
 <template>
   <component
     :is="element"
-    v-if="yuTogglable == false"
+    v-if="mdTogglable == false"
     ref="root"
     :class="[
-      'yu-component',
-      'yu-button',
-      'yu-button-type-default',
-      `yu-button-size-${yuSize}`,
-      `yu-button-shape-${yuShape}`,
-      `yu-button-color-${yuColor}`,
-      'yu-button-input',
-      { 'yu-button-disabled': $attrs.disabled || props.softDisabled },
+      'md-component',
+      'md-button',
+      'md-button-type-default',
+      `md-button-size-${mdSize}`,
+      `md-button-shape-${mdShape}`,
+      `md-button-color-${mdColor}`,
+      'md-button-input',
+      { 'md-button-disabled': $attrs.disabled || props.softDisabled },
     ]"
     v-bind="$attrs"
     @click="handleClick"
   >
     <slot />
     <span
-      v-if="props.yuText"
-      class="yu-button-label"
+      v-if="props.mdText"
+      class="md-button-label"
     >
-      {{ props.yuText }}
+      {{ props.mdText }}
     </span>
   </component>
   <label
-    v-else-if="yuTogglable == true"
+    v-else
     ref="root"
     :class="[
-      'yu-component',
-      'yu-button',
-      'yu-button-type-toggle',
-      `yu-button-size-${yuSize}`,
-      `yu-button-shape-${yuShape}`,
-      `yu-button-color-${yuColor}`,
-      { 'yu-button-disabled': $attrs.disabled || props.softDisabled },
+      'md-component',
+      'md-button',
+      'md-button-type-toggle',
+      `md-button-size-${mdSize}`,
+      `md-button-shape-${mdShape}`,
+      `md-button-color-${mdColor}`,
+      { 'md-button-disabled': $attrs.disabled || props.softDisabled },
     ]"
     @click="handleClick"
   >
@@ -44,15 +44,15 @@
       :disabled="$attrs.disabled as boolean"
       :name="$attrs.name as string"
       :checked="internalChecked"
-      class="yu-button-input"
+      :class="['md-button-input']"
       @change="handleCheck"
     >
     <slot />
     <span
-      v-if="props.yuText"
-      class="yu-button-label"
+      v-if="props.mdText"
+      :class="['md-button-label']"
     >
-      {{ props.yuText }}
+      {{ props.mdText }}
     </span>
   </label>
 </template>
@@ -73,31 +73,31 @@ import {
  * Properties and states
  */
 
-const attrs = useAttrs()
+const attributes = useAttrs()
 const emits = defineEmits(['update:checked'])
 
 const props = defineProps({
-  yuTogglable: {
+  mdTogglable: {
     type: Boolean,
     default: false,
   },
-  yuSize: {
+  mdSize: {
     type: String,
     default: 'small',
   },
-  yuShape: {
+  mdShape: {
     type: String as () => 'round' | 'square',
     default: 'round',
   },
-  yuColor: {
+  mdColor: {
     type: String,
     default: 'filled',
   },
-  yuText: {
+  mdText: {
     type: String,
     default: 'Button',
   },
-  yuIcon: {
+  mdIcon: {
     type: String,
     default: undefined,
   },
@@ -133,7 +133,7 @@ const handleCheck = (event: Event) => {
 }
 
 const element = computed(() =>
-  attrs.href ? resolveComponent('NuxtLink') : 'button',
+  attributes.href ? resolveComponent('NuxtLink') : 'button',
 )
 
 const root = ref<ComponentPublicInstance | HTMLElement | null>(null)
@@ -150,7 +150,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.yu-button {
+.md-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -159,17 +159,21 @@ onMounted(() => {
   text-decoration: none;
   width: fit-content;
   -webkit-tap-highlight-color: #fff0;
+
+  .md-icon {
+    --icon-size: var(--button-icon-size);
+  }
 }
-.yu-button-disabled {
+.md-button-disabled {
   cursor: not-allowed;
 }
-.yu-button-input {
+.md-button-input {
   outline: none;
 }
-.yu-button-label {
+.md-button-label {
   width: max-content;
 }
-.yu-button-type-toggle .yu-button-input {
+.md-button-type-toggle .md-button-input {
   appearance: none;
   position: absolute;
 }

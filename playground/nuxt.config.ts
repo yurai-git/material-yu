@@ -23,10 +23,6 @@ export default defineNuxtConfig({
   },
   materialYu: {
     iconStyle: 'Material Symbols Outlined',
-    references: {
-      color: {
-        // sourceColor: '#E04443',
-      },
-    },
+    // sourceColor: '#e04443',
   },
 })
