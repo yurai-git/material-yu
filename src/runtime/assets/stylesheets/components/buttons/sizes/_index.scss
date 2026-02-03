@@ -1,5 +1,5 @@
-@use 'xsmall';
-@use 'small';
-@use 'medium';
-@use 'large';
-@use 'xlarge';
+@forward 'xsmall' hide $default;
+@forward 'small';
+@forward 'medium';
+@forward 'large';
+@forward 'xlarge';

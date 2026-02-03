@@ -1,5 +1,6 @@
 @use 'sass:list';
 @use 'sass:meta';
+@use 'sass:map';
 
 @function str-join($list, $separator) {
   $result: '';
@@ -13,14 +14,63 @@
   @return $result;
 }
 
-@mixin generate-token($class, $purpose-prefix, $map, $path: ()) {
-  @each $key, $value in $map {
-    $next-path: list.append($path, $key);
+@mixin generate-declarations($prefix, $map, $exclude: (), $path: ()) {
+  @each $key, $valueue in $map {
+    @if not list.index($exclude, $key) {
+      $next-path: list.append($path, $key);
 
-    @if meta.type-of($value) == 'map' {
-      @include generate-token($class, $purpose-prefix, $value, $next-path);
-    } @else {
-      --md-#{$class}-#{$purpose-prefix}-#{str-join($next-path, '-')}: #{$value};
+      @if meta.type-of($valueue) == 'map' {
+        @include generate-declarations($prefix, $valueue, $exclude, $next-path);
+      } @else {
+        #{$prefix}#{str-join($next-path, '-')}: #{$valueue};
+      }
     }
   }
 }
+
+@function map-deep-merge($a, $b) {
+  $result: ();
+  @each $key, $value in $a {
+    @if map.has-key($b, $key) {
+      $b-value: map.get($b, $key);
+      @if meta.type-of($value) == 'map' and meta.type-of($b-value) == 'map' {
+        $result: map.merge(
+          $result,
+          (
+            $key: map-deep-merge($value, $b-value),
+          )
+        );
+      } @else {
+        $result: map.merge(
+          $result,
+          (
+            $key: $b-value,
+          )
+        );
+      }
+    } @else {
+      @if meta.type-of($value) != 'map' {
+        $result: map.merge(
+          $result,
+          (
+            $key: $value,
+          )
+        );
+      }
+    }
+  }
+  @each $key, $value in $b {
+    @if not map.has-key($a, $key) {
+      $result: map.merge(
+        $result,
+        (
+          $key: $value,
+        )
+      );
+    }
+  }
+  @return $result;
+}
+
+$light: ':is(.light, .light-medium-contrast, .light-high-contrast)';
+$dark: ':is(.dark, .dark-medium-contrast, .dark-high-contrast)';

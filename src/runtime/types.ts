@@ -1,12 +1,7 @@
 export type Theme = 'system' | 'light' | 'dark'
 export type Contrast = 'system' | 'default' | 'medium' | 'high'
-export type ReducedMotion = 'system' | 'reduced' | 'unreduced'
-export type ReducedTransparency = 'system' | 'reduced' | 'unreduced'
-
-export type IconStyle
-  = | 'Material Symbols Outlined'
-    | 'Material Symbols Rounded'
-    | 'Material Symbols Sharp'
+export type ReducedMotion = 'system' | 'reduced' | 'no-preference'
+export type ReducedTransparency = 'system' | 'reduced' | 'no-preference'
 export type MotionScheme = 'standard' | 'expressive'
 export type Color
   = | 'primary'

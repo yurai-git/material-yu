@@ -2,7 +2,7 @@
 
 Material Yu provides Material 3 components for Nuxt.
 
-**Note:** This project is not officially affiliated with Google or the Material Design team.
+**Note:** Material Yu is an independent project and is not affiliated with Google or the Material Design team.
 
 ## To do
 

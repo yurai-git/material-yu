@@ -1,1 +1,16 @@
-@use 'default';
+@use 'sass:map';
+@use '../../../helpers' as *;
+@use 'configs';
+
+@mixin icon-style($variant, $overrides: ()) {
+  $config: map.get(configs.$configs, $variant);
+  $final-config: map-deep-merge($config, $overrides);
+
+  @include generate-declarations('--icon-', $final-config);
+}
+
+@each $variant, $values in configs.$configs {
+  .md-icon-style-#{$variant} {
+    @include icon-style($variant);
+  }
+}

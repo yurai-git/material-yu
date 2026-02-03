@@ -1,40 +1,21 @@
 @use 'sass:map';
-@use 'styles';
+@use '../../helpers' as *;
+@use 'configs';
+@forward 'styles';
 
-$default: (
-  font-size: var(--icon-size, 24px),
-  font-variation-settings: (
-    "'FILL'" var(--icon-fill, 0),
-    "'wght'" var(--icon-weight, 400),
-    "'GRAD'" var(--icon-grade, 0),
-    "'opsz'" var(--icon-optical-size, 24),
-  ),
-  user-select: none,
-  font-family: var(--icon-style, 'Material Symbols Outlined'),
-  width: 1em,
-  height: 1em,
-  display: flex,
-  align-items: center,
-  justify-content: center,
-  transition: font-variation-settings
-    var(--icon-axes-spring-animation, var(--md-sys-motion-spring-fast-effects)),
-);
+@mixin icon($overrides: ()) {
+  $config: map-deep-merge(configs.$default, $overrides);
 
-@mixin overrides($overrides: ()) {
-  $config: map.merge($default, $overrides);
+  @include generate-declarations('', $config, ('grade-light', 'grade-dark'));
 
-  font-size: #{map.get($config, 'font-size')};
-  font-variation-settings: #{map.get($config, 'font-variation-settings')};
-  user-select: #{map.get($config, 'user-select')};
-  font-family: #{map.get($config, 'font-family')};
-  width: #{map.get($config, 'width')};
-  height: #{map.get($config, 'height')};
-  display: #{map.get($config, 'display')};
-  align-items: #{map.get($config, 'align-items')};
-  justify-content: #{map.get($config, 'justify-content')};
-  transition: #{map.get($config, 'transition')};
+  :root#{$light} & {
+    --icon-grade: #{map.get($config, 'grade-light')};
+  }
+  :root#{$dark} & {
+    --icon-grade: #{map.get($config, 'grade-dark')};
+  }
 }
 
 .md-icon {
-  @include overrides();
+  @include icon();
 }

@@ -7,6 +7,5 @@ export const defaultOptions = {
   motionScheme: 'expressive',
   reducedMotion: 'system',
   reducedTransparency: 'system',
-  iconStyle: 'Material Symbols Outlined',
   sourceColor: '#6750a4',
 } satisfies DeepRequired<ModuleOptions>

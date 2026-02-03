@@ -1,0 +1,7 @@
+@use 'default';
+@use 'revert';
+
+$configs: (
+  default: default.$config,
+  revert: revert.$config,
+);

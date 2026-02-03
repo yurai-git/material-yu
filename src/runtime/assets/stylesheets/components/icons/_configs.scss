@@ -1,0 +1,20 @@
+$default: (
+  font-size: var(--icon-size),
+  font-variation-settings: (
+    "'FILL'" var(--icon-fill),
+    "'wght'" var(--icon-weight),
+    "'GRAD'" var(--icon-grade),
+    "'opsz'" var(--icon-optical-size),
+  ),
+  grade-light: var(--icon-grade-light),
+  grade-dark: var(--icon-grade-dark),
+  user-select: none,
+  font-family: var(--icon-style),
+  inline-size: 1em,
+  block-size: 1em,
+  display: flex,
+  align-items: center,
+  justify-content: center,
+  transition: font-variation-settings var(--icon-axes-spring-animation),
+  fill: currentColor,
+);

@@ -10,8 +10,8 @@
       `md-button-size-${mdSize}`,
       `md-button-shape-${mdShape}`,
       `md-button-color-${mdColor}`,
-      'md-button-input',
-      { 'md-button-disabled': $attrs.disabled || props.softDisabled },
+      'md-button__input',
+      { 'md-button-state-disabled': $attrs.disabled || props.softDisabled },
     ]"
     v-bind="$attrs"
     @click="handleClick"
@@ -19,10 +19,8 @@
     <slot />
     <span
       v-if="props.mdText"
-      class="md-button-label"
-    >
-      {{ props.mdText }}
-    </span>
+      :class="['md-button__label']"
+    >{{ props.mdText }}</span>
   </component>
   <label
     v-else
@@ -34,7 +32,7 @@
       `md-button-size-${mdSize}`,
       `md-button-shape-${mdShape}`,
       `md-button-color-${mdColor}`,
-      { 'md-button-disabled': $attrs.disabled || props.softDisabled },
+      { 'md-button-state-disabled': $attrs.disabled || props.softDisabled },
     ]"
     @click="handleClick"
   >
@@ -44,16 +42,14 @@
       :disabled="$attrs.disabled as boolean"
       :name="$attrs.name as string"
       :checked="internalChecked"
-      :class="['md-button-input']"
+      :class="['md-button__input']"
       @change="handleCheck"
     >
     <slot />
     <span
       v-if="props.mdText"
-      :class="['md-button-label']"
-    >
-      {{ props.mdText }}
-    </span>
+      :class="['md-button__label']"
+    >{{ props.mdText }}</span>
   </label>
 </template>
 
@@ -148,33 +144,3 @@ onMounted(() => {
   })
 })
 </script>
-
-<style lang="scss" scoped>
-.md-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  user-select: none;
-  text-decoration: none;
-  width: fit-content;
-  -webkit-tap-highlight-color: #fff0;
-
-  .md-icon {
-    --icon-size: var(--button-icon-size);
-  }
-}
-.md-button-disabled {
-  cursor: not-allowed;
-}
-.md-button-input {
-  outline: none;
-}
-.md-button-label {
-  width: max-content;
-}
-.md-button-type-toggle .md-button-input {
-  appearance: none;
-  position: absolute;
-}
-</style>

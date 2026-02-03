@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref, toRef, useAttrs } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, toRef, useAttrs } from 'vue'
 
 const root = ref<HTMLElement | null>()
 const attributes = useAttrs()
@@ -38,13 +38,26 @@ const props = defineProps({
 
 onMounted(() => {
   const el = root.value
-  if (el) {
-    const fs = getComputedStyle(el).getPropertyValue('--icon-size').trim()
-    if (fs) {
-      const num = Number.parseFloat(fs)
-      el.style.setProperty('--icon-optical-size', num.toString())
+  if (!el) return
+
+  const resizeObserver = new ResizeObserver((entries) => {
+    for (const entry of entries) {
+      const fs = getComputedStyle(entry.target)
+        .getPropertyValue('--icon-size')
+        .trim()
+      if (fs) {
+        const num = Number.parseFloat(fs)
+        const clamped = Math.max(20, Math.min(48, num))
+        ;(entry.target as HTMLElement).style.setProperty(
+          '--icon-optical-size',
+          clamped.toString(),
+        )
+      }
     }
-  }
+  })
+
+  resizeObserver.observe(el)
+  onBeforeUnmount(() => resizeObserver.disconnect())
 })
 
 /**

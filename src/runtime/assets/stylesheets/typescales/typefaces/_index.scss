@@ -1,19 +1,13 @@
-@use 'helpers' as *;
+@use 'sass:map';
+@use '../../helpers' as *;
+@use 'config';
 
-$typeface: (
-  brand: (
-    'Google Sans',
-    sans-serif,
-  ),
-  plain: (
-    Roboto,
-    sans-serif,
-  ),
-  weight-regular: 400,
-  weight-medium: 500,
-  weight-bold: 700,
-);
+@mixin typeface($overrides: ()) {
+  $config: map-deep-merge(config.$default, $overrides);
+
+  @include generate-declarations('--md-ref-typeface-', $config);
+}
 
 :root {
-  @include generate-token($typeface);
+  @include typeface();
 }

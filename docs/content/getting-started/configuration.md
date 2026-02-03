@@ -1,11 +1,9 @@
 ---
 title: Configuration
-description: The module is configured with sensible defaults.
+description: Customize Material Yu to fit your application's personality.
 ---
 
 You can customize the module by providing the `materialYu` property in your `nuxt.config.ts`.
-
-<!-- prettier-ignore-start -->
 
 ```ts [nuxt.config.ts]
 export default defineNuxtConfig({
@@ -16,11 +14,9 @@ export default defineNuxtConfig({
 })
 ```
 
-<!-- prettier-ignore-end -->
-
 ## `image`
 
-Turn on or off the `@nuxt/image` module.
+Choose whether to use the `@nuxt/image` module.
 
 - **Type:** `boolean`
 - **Default:** `true`
@@ -29,43 +25,36 @@ Turn on or off the `@nuxt/image` module.
 
 Define the default theme.
 
-- **Type:** `'system'` | `'light'` | `'dark'`
+- **Type:** `'system' | 'light' | 'dark'`
 - **Default:** `'system'`
 
 ## `contrast`
 
 Define the default contrast.
 
-- **Type:** `'system'` | `'default'` | `'medium'` | `'high'`
+- **Type:** `'system' | 'default' | 'medium' | 'high'`
 - **Default:** `'system'`
 
 ## `reducedMotion`
 
 Define the default motion reduction.
 
-- **Type:** `'system'` | `'reduced'` | `'unreduced'`
+- **Type:** `'system' | 'reduced' | 'no-preference'`
 - **Default:** `'system'`
 
 ## `reducedTransparency`
 
 Define the default transparency reduction.
 
-- **Type:** `'system'` | `'reduced'` | `'unreduced'`
+- **Type:** `'system' | 'reduced' | 'no-preference'`
 - **Default:** `'system'`
 
 ## `motionScheme`
 
 Define the default motion scheme.
 
-- **Type:** `'standard'` | `'expressive'`
+- **Type:** `'standard' | 'expressive'`
 - **Default:** `'expressive'`
-
-## `iconStyle`
-
-Define the style of icons.
-
-- **Type:** `'Material Symbols Outlined'` | `'Material Symbols Rounded'` | `'Material Symbols Sharp'`
-- **Default:** `'Material Symbols Outlined'`
 
 ## `sourceColor`
 

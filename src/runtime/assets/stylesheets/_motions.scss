@@ -30,8 +30,11 @@ $standard-motions: (
 );
 
 :root.expressive {
-  @include generate-token('sys', 'motion-spring', $expressive-motions);
+  @include generate-declarations(
+    '--md-sys-motion-spring-',
+    $expressive-motions
+  );
 }
 :root.standard {
-  @include generate-token('sys', 'motion-spring', $standard-motions);
+  @include generate-declarations('--md-sys-motion-spring-', $standard-motions);
 }

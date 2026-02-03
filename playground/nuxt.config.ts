@@ -22,7 +22,6 @@ export default defineNuxtConfig({
     },
   },
   materialYu: {
-    iconStyle: 'Material Symbols Outlined',
     // sourceColor: '#e04443',
   },
 })

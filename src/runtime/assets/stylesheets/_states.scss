@@ -10,5 +10,5 @@ $state-tokens: (
 );
 
 :root {
-  @include generate-token('sys', 'state', $state-tokens);
+  @include generate-declarations('--md-sys-state-', $state-tokens);
 }

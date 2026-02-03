@@ -18,7 +18,7 @@ export const useReducedMotion = () => {
   const resolvedReducedMotion = readonly(
     computed<Exclude<ReducedMotion, 'system'>>(() => {
       if (reducedMotionPreference.value === 'system')
-        return isSystemReducedMotion.value ? 'reduced' : 'unreduced'
+        return isSystemReducedMotion.value ? 'reduced' : 'no-preference'
       return reducedMotionPreference.value
     }),
   )

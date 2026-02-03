@@ -18,7 +18,7 @@ export const useReducedTransparency = () => {
   const resolvedReducedTransparency = readonly(
     computed<Exclude<ReducedTransparency, 'system'>>(() => {
       if (reducedTransparencyPreference.value === 'system')
-        return isSystemReducedTransparency.value ? 'reduced' : 'unreduced'
+        return isSystemReducedTransparency.value ? 'reduced' : 'no-preference'
       return reducedTransparencyPreference.value
     }),
   )

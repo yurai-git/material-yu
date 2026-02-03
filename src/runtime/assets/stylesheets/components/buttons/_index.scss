@@ -1,2 +1,30 @@
-@use 'colors';
-@use 'sizes';
+@forward 'colors';
+@forward 'sizes';
+
+.md-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  width: fit-content;
+  -webkit-tap-highlight-color: #fff0;
+
+  .md-icon {
+    --icon-size: var(--button-icon-size);
+  }
+}
+.md-button-state-disabled {
+  cursor: not-allowed;
+}
+.md-button__input {
+  outline: none;
+}
+.md-button__label {
+  width: max-content;
+}
+.md-button-type-toggle > .md-button__input {
+  appearance: none;
+  position: absolute;
+}

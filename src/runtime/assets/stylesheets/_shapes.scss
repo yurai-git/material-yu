@@ -31,6 +31,9 @@ $shape-corner-value: (
 );
 
 :root {
-  @include generate-token('sys', 'shape-corner', $shape-corner);
-  @include generate-token('sys', 'shape-corner-value', $shape-corner-value);
+  @include generate-declarations('--md-sys-shape-corner-', $shape-corner);
+  @include generate-declarations(
+    '--md-sys-shape-corner-value-',
+    $shape-corner-value
+  );
 }

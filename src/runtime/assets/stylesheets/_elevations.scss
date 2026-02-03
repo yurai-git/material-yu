@@ -35,5 +35,5 @@ $elevation: (
 );
 
 :root {
-  @include generate-token('sys', 'elevation', $elevation);
+  @include generate-declarations('--md-sys-elevation-', $elevation);
 }

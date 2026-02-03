@@ -2,6 +2,7 @@
 @use 'elevations';
 @use 'motions';
 @use 'shapes';
-@use 'typescales';
+@forward 'typescales';
 @use 'states';
-@use 'components';
+@forward 'components';
+@forward 'helpers';

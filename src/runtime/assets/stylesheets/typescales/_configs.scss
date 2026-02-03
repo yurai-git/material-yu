@@ -1,0 +1,7 @@
+@use 'baseline';
+@use 'emphasized';
+
+$configs: (
+  baseline: baseline.$config,
+  emphasized: emphasized.$config,
+);
