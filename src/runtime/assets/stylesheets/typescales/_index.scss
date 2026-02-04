@@ -14,34 +14,34 @@
     sass($variant != 'baseline'): '#{$variant}-' ; else: '',
   );
   @include generate-declarations('--md-sys-typescale-#{$prefix}', $overrides);
-  @each $style, $sizes in $overrides {
-    @each $size, $_ in $sizes {
-      --md-sys-typescale-#{$prefix}#{$style}-#{$size}: var(
-          --md-sys-typescale-#{$prefix}#{$style}-#{$size}-weight
+  @each $style, $scales in $overrides {
+    @each $scale, $_ in $scales {
+      --md-sys-typescale-#{$prefix}#{$style}-#{$scale}: var(
+          --md-sys-typescale-#{$prefix}#{$style}-#{$scale}-weight
         )
-        var(--md-sys-typescale-#{$prefix}#{$style}-#{$size}-size) /
-        var(--md-sys-typescale-#{$prefix}#{$style}-#{$size}-line-height)
-        var(--md-sys-typescale-#{$prefix}#{$style}-#{$size}-font);
+        var(--md-sys-typescale-#{$prefix}#{$style}-#{$scale}-size) /
+        var(--md-sys-typescale-#{$prefix}#{$style}-#{$scale}-line-height)
+        var(--md-sys-typescale-#{$prefix}#{$style}-#{$scale}-font);
     }
   }
 }
 
-@mixin get-typescale($variant, $style-size) {
+@mixin get-typescale($variant, $style-scale) {
   $prefix: if(
     sass($variant != 'baseline'): '#{$variant}-' ; else: '',
   );
-  font: var(--md-sys-typescale-#{$prefix}#{$style-size});
-  letter-spacing: var(--md-sys-typescale-#{$prefix}#{$style-size}-tracking);
-  font-stretch: var(--md-sys-typescale-#{$prefix}#{$style-size}-wdth);
+  font: var(--md-sys-typescale-#{$prefix}#{$style-scale});
+  letter-spacing: var(--md-sys-typescale-#{$prefix}#{$style-scale}-tracking);
+  font-stretch: var(--md-sys-typescale-#{$prefix}#{$style-scale}-wdth);
   font-variation-settings:
-    'wght' var(--md-sys-typescale-#{$prefix}#{$style-size}-wght),
-    'GRAD' var(--md-sys-typescale-#{$prefix}#{$style-size}-grad),
-    'ROND' var(--md-sys-typescale-#{$prefix}#{$style-size}-rond),
-    'opsz' var(--md-sys-typescale-#{$prefix}#{$style-size}-opsz),
-    'CRSV' var(--md-sys-typescale-#{$prefix}#{$style-size}-crsv),
-    'slnt' var(--md-sys-typescale-#{$prefix}#{$style-size}-slnt),
-    'FILL' var(--md-sys-typescale-#{$prefix}#{$style-size}-fill),
-    'HEXP' var(--md-sys-typescale-#{$prefix}#{$style-size}-hexp);
+    'wght' var(--md-sys-typescale-#{$prefix}#{$style-scale}-wght),
+    'GRAD' var(--md-sys-typescale-#{$prefix}#{$style-scale}-grad),
+    'ROND' var(--md-sys-typescale-#{$prefix}#{$style-scale}-rond),
+    'opsz' var(--md-sys-typescale-#{$prefix}#{$style-scale}-opsz),
+    'CRSV' var(--md-sys-typescale-#{$prefix}#{$style-scale}-crsv),
+    'slnt' var(--md-sys-typescale-#{$prefix}#{$style-scale}-slnt),
+    'FILL' var(--md-sys-typescale-#{$prefix}#{$style-scale}-fill),
+    'HEXP' var(--md-sys-typescale-#{$prefix}#{$style-scale}-hexp);
 }
 
 @each $variant, $values in configs.$configs {

@@ -49,14 +49,12 @@
         );
       }
     } @else {
-      @if meta.type-of($value) != 'map' {
-        $result: map.merge(
-          $result,
-          (
-            $key: $value,
-          )
-        );
-      }
+      $result: map.merge(
+        $result,
+        (
+          $key: $value,
+        )
+      );
     }
   }
   @each $key, $value in $b {

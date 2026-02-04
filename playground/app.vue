@@ -277,7 +277,7 @@
 <style lang="scss">
 @use '@yurai/material-yu';
 @import 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,-25..0';
-@import 'https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Roboto:ital,wght@0,400..700;1,400..700&family=Roboto+Flex:opsz,wdth,wght,GRAD,XOPQ,XTRA,YOPQ,YTDE,YTFI,YTLC,YTUC@8..144,150,900,-200..150,96,468,79,-203,738,514,712&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Roboto:ital,wght@0,400..700;1,400..700&family=Roboto+Flex:opsz,wdth,wght,GRAD,XOPQ,XTRA,YOPQ,YTDE,YTFI,YTLC,YTUC@8..144,150,900,0,96,468,79,-203,738,514,712&display=swap';
 
 :root {
   $typescale-wide-light: material-yu.typestyle(
@@ -291,6 +291,7 @@
           ),
           weight: 900,
           wdth: 150%,
+          wght: 900,
         ),
       ),
       headline: (
@@ -301,6 +302,7 @@
           ),
           weight: 900,
           wdth: 150%,
+          wght: 900,
         ),
         medium: (
           font: (
@@ -309,6 +311,7 @@
           ),
           weight: 900,
           wdth: 150%,
+          wght: 900,
         ),
         small: (
           font: (
@@ -317,6 +320,7 @@
           ),
           weight: 900,
           wdth: 150%,
+          wght: 900,
         ),
       ),
       title: (
@@ -327,6 +331,7 @@
           ),
           weight: 900,
           wdth: 150%,
+          wght: 900,
         ),
         medium: (
           font: (
@@ -335,6 +340,7 @@
           ),
           weight: 900,
           wdth: 150%,
+          wght: 900,
         ),
       ),
     )

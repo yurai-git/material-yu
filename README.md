@@ -1,6 +1,6 @@
 # Material Yu
 
-Material Yu provides Material 3 components for Nuxt.
+Material 3 components for Nuxt with flexible SCSS-based theming.
 
 **Note:** Material Yu is an independent project and is not affiliated with Google or the Material Design team.
 

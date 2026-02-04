@@ -7,7 +7,7 @@ description: Use Material Symbols icons easily.
 
 ## Interactive demo
 
-::InteractiveDemosIcons
+::IconsDemo
 ::
 
 ```vue
@@ -53,7 +53,7 @@ Provide an icon name or a code point in the `md-icon` property, or an `<svg>` ch
 
 ### Translation
 
-To prevent icons from being translated by machine translation and breaking their appearance, the component automatically adds the `translate="no"` attribute to itself.
+The component automatically adds the `translate="no"` attribute to itself. This prevents icons from being translated by machine translation and breaking their appearance.
 
 **Example input:**
 
@@ -71,7 +71,7 @@ To prevent icons from being translated by machine translation and breaking their
 
 ## Properties
 
-This component accepts the following properties.
+The component accepts the following properties.
 
 | Property  | Attribute  | Type     | Default     | Description                                                                               |
 | :-------- | :--------- | :------- | :---------- | :---------------------------------------------------------------------------------------- |
@@ -82,9 +82,11 @@ This component accepts the following properties.
 
 If you use the components by itself, you should give it an accessible name if it is focusable.
 
+**Example:**
+
 ```vue
 <template>
-  <MdIcon md-icon="menu" aria-label="Open navigation drawer" />
+  <MdIcon md-icon="menu" tabindex="-1" aria-label="Open navigation drawer" />
 </template>
 ```
 
@@ -103,12 +105,12 @@ If the component does not have an `aria-label` attribute, the component will aut
 
 ```html
 <span aria-hidden="true">menu</span>
-<span role="img" aria-label="Open navigation drawer">menu</span>
+<span aria-label="Open navigation drawer" role="img">menu</span>
 ```
 
 ## Theming
 
-You can theme the component using the `icon-style` mixin.
+You can theme the component using the `icon-style` and `icon` mixins.
 
 ### `icon-style`
 
@@ -120,7 +122,7 @@ You can theme the component using the `icon-style` mixin.
 // Override the default style for icons
 .md-icon-style-default {
   @include material-yu.icon-style('default', (
-    size: 48px,
+    style: "'Material Symbols Rounded'",
   ));
 }
 // Define a filled style for icons based on the default style
@@ -150,7 +152,7 @@ You can theme the component using the `icon-style` mixin.
 | `weight`                | `400`                                      |
 | `grade-light`           | `0`                                        |
 | `grade-dark`            | `-25`                                      |
-| `style`                 | `'Material Symbols Outlined'`              |
+| `style`                 | `"'Material Symbols Outlined'"`            |
 | `axes-spring-animation` | `var(--md-sys-motion-spring-fast-effects)` |
 
 ### `icon`
@@ -163,23 +165,23 @@ You can theme the component using the `icon-style` mixin.
 // Override CSS declarations for icons
 .md-icon {
   @include material-yu.icon((
-    font-size: 24px,
+    font-family: "'Material Symbols Rounded'",
   ));
 }
 ```
 
-| Key                       | Type                        | Default                                                                                                                                                                                                           | Description                              |
-| :------------------------ | :-------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------- |
-| `font-size`               | `<font-size>`               | `var(--icon-size)`                                                                                                                                                                                                | The size of the icon.                    |
-| `font-variation-settings` | `<font-variation-settings>` | <pre><code>(<br>&nbsp;&nbsp;"'FILL'" var(--icon-fill),<br>&nbsp;&nbsp;"'wght'" var(--icon-weight),<br>&nbsp;&nbsp;"'GRAD'" var(--icon-grade),<br>&nbsp;&nbsp;"'opsz'" var(--icon-optical-size),<br>)</code></pre> | The font variation settings of the icon. |
-| `grade-light`             | `<number [-50,200]>`        | `var(--icon-grade-light)`                                                                                                                                                                                         | The grade of the icon for light mode.    |
-| `grade-dark`              | `<number [-50,200]>`        | `var(--icon-grade-dark)`                                                                                                                                                                                          | The grade of the icon for dark mode.     |
-| `user-select`             | `<user-select>`             | `none`                                                                                                                                                                                                            | The user select of the icon.             |
-| `font-family`             | `<font-family>`             | `var(--icon-style)`                                                                                                                                                                                               | The font family of the icon.             |
-| `inline-size`             | `<inline-size>`             | `1em`                                                                                                                                                                                                             | The inline size of the icon.             |
-| `block-size`              | `<block-size>`              | `1em`                                                                                                                                                                                                             | The block size of the icon.              |
-| `display`                 | `<display>`                 | `flex`                                                                                                                                                                                                            | The display of the icon.                 |
-| `align-items`             | `<align-items>`             | `center`                                                                                                                                                                                                          | The align items of the icon.             |
-| `justify-content`         | `<justify-content>`         | `center`                                                                                                                                                                                                          | The justify content of the icon.         |
-| `transition`              | `<transition>`              | `font-variation-settings var(--icon-axes-spring-animation)`                                                                                                                                                       | The transition of the icon.              |
-| `fill`                    | `<fill>`                    | `currentColor`                                                                                                                                                                                                    | The fill of the icon.                    |
+| Key                       | Type                        | Default                                                                                                                                                                                                           | Description                                                                             |
+| :------------------------ | :-------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------- |
+| `font-size`               | `<font-size>`               | `var(--icon-size)`                                                                                                                                                                                                | The `font-size` property of the icon.                                                   |
+| `font-variation-settings` | `<font-variation-settings>` | <pre><code>(<br>&nbsp;&nbsp;"'FILL'" var(--icon-fill),<br>&nbsp;&nbsp;"'wght'" var(--icon-weight),<br>&nbsp;&nbsp;"'GRAD'" var(--icon-grade),<br>&nbsp;&nbsp;"'opsz'" var(--icon-optical-size),<br>)</code></pre> | The `font-variation-settings` property of the icon.                                     |
+| `grade-light`             | `<number [-50,200]>`        | `var(--icon-grade-light)`                                                                                                                                                                                         | The `'GRAD'` axis in the `font-variation-settings` property of the icon for light mode. |
+| `grade-dark`              | `<number [-50,200]>`        | `var(--icon-grade-dark)`                                                                                                                                                                                          | The `'GRAD'` axis in the `font-variation-settings` property of the icon for dark mode.  |
+| `user-select`             | `<user-select>`             | `none`                                                                                                                                                                                                            | The `user-select` property of the icon.                                                 |
+| `font-family`             | `<font-family>`             | `var(--icon-style)`                                                                                                                                                                                               | The `font-family` property of the icon.                                                 |
+| `inline-size`             | `<inline-size>`             | `1em`                                                                                                                                                                                                             | The `inline-size` property of the icon.                                                 |
+| `block-size`              | `<block-size>`              | `1em`                                                                                                                                                                                                             | The `block-size` property of the icon.                                                  |
+| `display`                 | `<display>`                 | `flex`                                                                                                                                                                                                            | The `display` property of the icon.                                                     |
+| `align-items`             | `<align-items>`             | `center`                                                                                                                                                                                                          | The `align-items` property of the icon.                                                 |
+| `justify-content`         | `<justify-content>`         | `center`                                                                                                                                                                                                          | The `justify-content` property of the icon.                                             |
+| `transition`              | `<transition>`              | `font-variation-settings var(--icon-axes-spring-animation)`                                                                                                                                                       | The `transition` property of the icon.                                                  |
+| `fill`                    | `<fill>`                    | `currentColor`                                                                                                                                                                                                    | The `fill` property of the icon.                                                        |
