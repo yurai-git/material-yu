@@ -80,7 +80,7 @@ The component accepts the following properties.
 
 ## Accessibility
 
-If you use the components by itself, you should give it an accessible name if it is focusable.
+If you use the component by itself, you should give it an accessible name if it is focusable.
 
 **Example:**
 
@@ -90,7 +90,7 @@ If you use the components by itself, you should give it an accessible name if it
 </template>
 ```
 
-If the component does not have an `aria-label` attribute, the component will automatically add the `aria-hidden="true"` attribute to itself. If it does, the component will automatically add the `role="img"` attribute to itself.
+If the component does not have the `aria-label` attribute, the component will automatically add the `aria-hidden="true"` attribute to itself. If it does, the component will automatically add the `role="img"` attribute to itself.
 
 **Example input:**
 
@@ -113,6 +113,8 @@ If the component does not have an `aria-label` attribute, the component will aut
 You can theme the component using the `icon-style` and `icon` mixins.
 
 ### `icon-style`
+
+Override existing styles and define new styles based on existing styles.
 
 **Example:**
 
@@ -156,6 +158,8 @@ You can theme the component using the `icon-style` and `icon` mixins.
 | `axes-spring-animation` | `var(--md-sys-motion-spring-fast-effects)` |
 
 ### `icon`
+
+Override global style declarations for icons.
 
 **Example:**
 
